@@ -8,7 +8,6 @@ package Controllers;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,7 +16,6 @@ import jakarta.servlet.http.HttpServletResponse;
  *
  * @author hp
  */
-@WebServlet(name="LoginController", urlPatterns={"/login"})
 public class LoginController extends HttpServlet {
    
     /** 
@@ -55,7 +53,9 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-request.getRequestDispatcher("Login.jsp").forward(request, response);    } 
+//        processRequest(request, response);
+        request.getRequestDispatcher(request.getContextPath()+"/login/Login.jsp").forward(request, response);
+    } 
 
     /** 
      * Handles the HTTP <code>POST</code> method.
@@ -67,9 +67,7 @@ request.getRequestDispatcher("Login.jsp").forward(request, response);    }
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
     throws ServletException, IOException {
-        String u = request.getParameter("user");
-        String p = request.getParameter("pass");
-        
+        processRequest(request, response);
     }
 
     /** 
