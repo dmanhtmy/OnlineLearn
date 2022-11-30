@@ -555,24 +555,23 @@
                         <form action="login" autocomplete="off" class="sign-in-form" method="post">
                             <div class="logo">
                                  <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668565240/Home/logo/logo_ocndyv.png" alt="easyclass" />&emsp;
-                                <h4 style="color: #ff6600;">FPT &nbsp;<span style="color: #000;">Accommodation</span></h4>
                             </div>
 
                             <div class="heading">
-                                <h2>Welcome Back</h2>
+                                <h2>Login</h2>
                                 <h6>Not registred yet?</h6>
                                 <a href="#" class="toggle">Sign up</a>
                             </div>
 
                             <div class="actual-form">
                                 <div class="input-wrap">
-                                    <input type="text" minlength="4" class="input-field" name="username" autocomplete="off" required/>
-                                    <label>Name</label>
+                                    <input type="text" minlength="4" class="input-field" name="username" autocomplete="off" required placeholder="Name" />
+                                 
                                 </div>
 
                                 <div class="input-wrap">
-                                    <input type="password" minlength="4" class="input-field" name="password" autocomplete="off" required/>
-                                    <label>Password</label>
+                                    <input type="password" minlength="4" class="input-field" name="password" autocomplete="off" required placeholder="Password" />
+                                   
                                 </div>
 
                                 <input type="submit" value="Sign In" class="sign-btn" />
@@ -593,45 +592,9 @@
                             </div>
                         </form>
 
-                        <form action="regiter" autocomplete="off" class="sign-up-form" method="post">
-                            <div class="logo">
-                                <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668565240/Home/logo/logo_ocndyv.png" alt="easyclass" />&emsp;
-                                <h4 style="color: #ff6600;">FPT &nbsp;<span style="color: #000;">Accommodation</span></h4>
-                            </div>
-
-                            <div class="heading">
-                                <h2>Get Started</h2>
-                                <h6>Already have an account?</h6>
-                                <a href="#" class="toggle">Sign in</a>
-                            </div>
-
-                            <div class="actual-form">
-                                <div class="input-wrap">
-                                    <input type="text" minlength="4" class="input-field" name="username" autocomplete="off" required/>
-                                    <label>Name</label>
-                                </div>
-
-                                <div class="input-wrap">
-                                    <input type="email" class="input-field" name="email" autocomplete="off" required />
-                                    <label>Email</label>
-                                </div>
-
-                                <div class="input-wrap">
-                                    <input type="password" minlength="4" class="input-field" name="password" autocomplete="off" required />
-                                    <label>Password</label>
-                                </div>
-
-                                <input type="submit" value="Sign Up" class="sign-btn" />
-
-                                <p class="text">
-                                    By signing up, I agree to the
-                                    <a href="#">Terms of Services</a> and
-                                    <a href="#">Privacy Policy</a>
-                                </p>
-                            </div>
-                        </form>
+                     
                     </div>
-                    <script type="text/javascript">
+<!--                    <script type="text/javascript">
                         var counter = 1;
                         setInterval(function () {
                             document.getElementById('radio' + counter).checked = true;
@@ -640,29 +603,16 @@
                                 counter = 1;
                             }
                         }, 5000);
-                    </script>
+                    </script>-->
                     <div class="carousel">
                         <!--image slider start-->
                         <div class="slider">
                             <div class="slides">
                                 <!--radio buttons start-->
-                                <input type="radio" name="radio-btn" id="radio1">
-                                <input type="radio" name="radio-btn" id="radio2">
-                                <input type="radio" name="radio-btn" id="radio3">
-                                <input type="radio" name="radio-btn" id="radio4">
                                 <!--radio buttons end-->
                                 <!--slide images start-->
                                 <div class="slide first">
                                     <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668544609/Home/homepage/dhfpt_tkbry2.jpg" alt="">
-                                </div>
-                                <div class="slide">
-                                    <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668565410/Home/homepage/fpt-uni_eeqgh8.jpg" alt="">
-                                </div>
-                                <div class="slide">
-                                    <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668565332/Home/homepage/fu_vj7koe.jpg" alt="">
-                                </div>
-                                <div class="slide">
-                                    <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668565331/Home/homepage/fu_3_peez8o.jpg" alt="">
                                 </div>
                                 <!--slide images end-->
                             </div>
@@ -675,7 +625,7 @@
 
         <!-- Javascript file -->
 
-        <script>
+<!--        <script>
             const inputs = document.querySelectorAll(".input-field");
             const toggle_btn = document.querySelectorAll(".toggle");
             const main = document.querySelector("main");
@@ -698,7 +648,7 @@
                     main.classList.toggle("sign-up-mode");
                 });
             });
-        </script>
+        </script>-->
 
     </body>
 </html>
