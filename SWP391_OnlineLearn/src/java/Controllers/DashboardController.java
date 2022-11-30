@@ -4,7 +4,6 @@
  */
 package Controllers;
 
-import DAO.Impl.LoginDAOImpl;
 import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,9 +15,9 @@ import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author hp
+ * @author Mr Tuan
  */
-public class LoginController extends HttpServlet {
+public class DashboardController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +36,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet DashboardController</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DashboardController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +57,8 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(request.getContextPath() + "/login/Login.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath() + "/admin/dashboard/dashboard.jsp").forward(request, response);
+
     }
 
     /**
@@ -72,27 +72,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("username");
-        String pass = request.getParameter("password");
-        LoginDAOImpl login = new LoginDAOImpl();
-        User userRole = login.getUser(user, pass);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", userRole);
-        if (userRole == null) {
-            request.getRequestDispatcher(request.getContextPath() + "/login").forward(request, response);
-        } else {
-            int role = userRole.getRole().getRole_id();
-            switch (role) {
-                case 1:
-                    response.sendRedirect(request.getContextPath() + "/admin");
-                    break;
-                case 2:
-                    request.getRequestDispatcher(request.getContextPath() + "/homePage").forward(request, response);
-                    break;
-            }
-
-        }
-
+        processRequest(request, response);
     }
 
     /**
