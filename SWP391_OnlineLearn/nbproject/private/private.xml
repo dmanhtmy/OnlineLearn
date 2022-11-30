@@ -3,9 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/web/index.html</file>
-            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/src/java/Context/DBContext.java</file>
-            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/web/client/Login.jsp</file>
+            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/LoginDAOImpl.java</file>
+            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/test.java</file>
+            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/web/login/Login.jsp</file>
+            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/nbproject/build-impl.xml</file>
+            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/src/java/Models/Role.java</file>
+            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
+            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/web/admin/test.jsp</file>
+            <file>file:/D:/clone/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/LoginController.java</file>
         </group>
     </open-files>
 </project-private>
