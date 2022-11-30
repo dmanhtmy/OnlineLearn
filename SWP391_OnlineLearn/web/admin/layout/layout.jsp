@@ -617,7 +617,7 @@
         <section id="sidebar">
             <a href="#" class="brand">
                 <i class='bx bxs-smile'></i>
-                <span class="text">AdminHub</span>
+                <span class="text">${sessionScope.user.getEmail()}</span>
             </a>
             <ul class="side-menu top">
                 <li class="active">
@@ -659,7 +659,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="#" class="logout">
+                    <a href="<%= request.getContextPath()%>/login" class="logout">
                         <i class='bx bxs-log-out-circle' ></i>
                         <span class="text">Logout</span>
                     </a>

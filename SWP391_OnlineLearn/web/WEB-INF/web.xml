@@ -5,6 +5,10 @@
         <servlet-class>Controllers.LoginController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>DashboardController</servlet-name>
+        <servlet-class>Controllers.DashboardController</servlet-class>
+        </servlet>
+        <servlet>
         <servlet-name>SignupController</servlet-name>
         <servlet-class>Controllers.SignupController</servlet-class>
     </servlet>
@@ -13,6 +17,10 @@
         <url-pattern>/login</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>DashboardController</servlet-name>
+        <url-pattern>/admin</url-pattern>
+        </servlet-mapping>
+        <servlet-mapping>
         <servlet-name>SignupController</servlet-name>
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>

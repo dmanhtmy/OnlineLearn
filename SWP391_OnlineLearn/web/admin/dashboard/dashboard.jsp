@@ -17,7 +17,8 @@
             <i class='bx bxs-group' ></i>
             <span class="text">
                 <h3>2834</h3>
-                <p>Categories</p>
+                <p>Categories 
+                </p>
             </span>
         </li>
         <li>
