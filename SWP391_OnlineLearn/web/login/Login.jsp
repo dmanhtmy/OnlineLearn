@@ -553,9 +553,7 @@
                 <div class="inner-box">
                     <div class="forms-wrap">
                         <form action="login" autocomplete="off" class="sign-in-form" method="post">
-                            <div class="logo">
-                                 <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668565240/Home/logo/logo_ocndyv.png" alt="easyclass" />&emsp;
-                            </div>
+                   
 
                             <div class="heading">
                                 <h2>Login</h2>
