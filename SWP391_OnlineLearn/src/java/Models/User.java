@@ -3,11 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Model;
+package Models;
 
 
-import java.util.ArrayList;
-import javax.transaction.Transaction;
 
 
 public class User {
@@ -24,7 +22,6 @@ public class User {
     private Role role;
     private String avatar;
 
-    private ArrayList<Transaction> transactions = new ArrayList<>();
 
     public User() {
     }
@@ -144,18 +141,9 @@ public class User {
         this.avatar = avatar;
     }
 
-    public ArrayList<Transaction> getTransactions() {
-        return transactions;
-    }
 
-    public void setTransactions(ArrayList<Transaction> transactions) {
-        this.transactions = transactions;
-    }
-
-    @Override
-    public String toString() {
-        return "User{" + "id=" + id + ", username=" + username + ", password=" + password + ", fullname=" + fullname + ", gender=" + gender + ", address=" + address + ", email=" + email + ", phonenumber=" + phonenumber + ", status=" + status + ", role=" + role + ", transactions=" + transactions + '}';
-    }
     
+
+  
 
 }

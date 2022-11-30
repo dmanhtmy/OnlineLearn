@@ -7,38 +7,80 @@ package context;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+    /*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+
+
 
 /**
  *
- * @author Quang
+ * @author s
  */
 public class DBContext {
+    private final String serverName = "localhost";
+    private final String dbName = "onlinelearn";
+    private final String portNumber = "3306";
+    private final String userID = "root";
+    private final String password = "long0611";
 
-    public Connection connection;
+    public Connection getConnection() {
 
-    public DBContext() {
+        Connection connection = null;
         try {
-            String user = "root";
-            String pass = "vanh1108";
-            String url = "jdbc:mysql://localhost:3306/onlinelearn?allowPublicKeyRetrieval=true&useSSL=false";
             Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url, user, pass);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (SQLException ex) {
-            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, ex);
+            String url = "jdbc:mysql://" + serverName + ":" + portNumber + "/" + dbName+"?allowPublicKeyRetrieval=true&useSSL=false";
+            return DriverManager.getConnection(url, userID, password);
+        } catch (ClassNotFoundException | SQLException e) {
+            Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return connection;
+    }
+
+    public void closeConnection(Connection connection, PreparedStatement preparedStatement, ResultSet resultSet) {
+        if (resultSet != null) {
+            try {
+                resultSet.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+    }
+    public void closeConnection(Connection connection, PreparedStatement preparedStatement) {
+        if (preparedStatement != null) {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
+        }
+        if (connection != null) {
+            try {
+                connection.close();
+            } catch (SQLException e) {
+                Logger.getLogger(DBContext.class.getName()).log(Level.SEVERE, null, e);
+            }
         }
     }
 
-    public static void main(String[] args) {
-        DBContext dBContext = new DBContext();
-        if (dBContext.connection != null) {
-            System.out.println("Successful");
-        } else {
-            System.out.println("Fail");
-        }
-    }
 }
