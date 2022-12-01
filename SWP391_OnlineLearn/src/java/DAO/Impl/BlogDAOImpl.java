@@ -11,6 +11,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,7 +29,26 @@ public class BlogDAOImpl implements BlogDAO {
 
     @Override
     public List<BlogList> getAll() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DBContext dbContext = new DBContext();
+        List<BlogList> listBlog = new ArrayList<>();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "SELECT b.id, b.title,b.brief_info,b.postdate FROM onlinelearn.blog_list as b;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                BlogList blogs=new BlogList();
+                blogs.setId(rs.getInt("id"));
+                blogs.setTitle(rs.getString("title"));
+                blogs.setBrief_info(rs.getString("brief_info"));
+                blogs.setPostdate(rs.getDate("postdate"));
+                listBlog.add(blogs);
+            }
+            dbContext.closeConnection(connection, stm, rs);
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listBlog;
     }
 
     @Override
@@ -61,6 +81,14 @@ public class BlogDAOImpl implements BlogDAO {
             Logger.getLogger(BlogList.class.getName()).log(Level.SEVERE, null, ex);
         }
         return 0;
+    }
+    
+    public static void main(String[] args) {
+        BlogDAOImpl db= new BlogDAOImpl();
+        List<BlogList> list=db.getAll();
+        for (BlogList blogList : list) {
+            System.out.println(blogList.getId());
+        }
     }
 
 }
