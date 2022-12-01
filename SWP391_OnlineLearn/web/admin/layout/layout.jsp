@@ -84,9 +84,6 @@
             overflow-x: hidden;
             scrollbar-width: none;
         }
-        #sidebar::--webkit-scrollbar {
-            display: none;
-        }
         #sidebar.hide {
             width: 60px;
         }
