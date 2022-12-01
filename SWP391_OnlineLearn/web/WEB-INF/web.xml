@@ -13,7 +13,7 @@
         <servlet-class>Controllers.SignupController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SignupController</servlet-name>
+        <servlet-name>HomeController</servlet-name>
         <servlet-class>Controllers.HomeController</servlet-class>
     </servlet>
     <servlet-mapping>
@@ -38,6 +38,6 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>login</welcome-file>
+        <welcome-file>home</welcome-file>
     </welcome-file-list>
 </web-app>

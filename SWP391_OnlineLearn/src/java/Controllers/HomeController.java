@@ -33,7 +33,7 @@ public class HomeController extends HttpServlet {
      */
     protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
         String login_href_value = "";
-        String logout_href = "";
+        String logout_href = "home";
         if (request.getSession().getAttribute("user") == null) {
             return;
         } else {

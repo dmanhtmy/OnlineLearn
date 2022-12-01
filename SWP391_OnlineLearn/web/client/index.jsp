@@ -124,7 +124,7 @@
                                     </div>
                                 </c:when>
                                 <c:otherwise>
-                                    <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="register">Join Now</a>
+                                    <a class="btn btn-primary py-2 px-4 ml-auto d-none d-lg-block" href="login">Join Now</a>
                                 </c:otherwise>
                             </c:choose>
                         </div>
@@ -261,7 +261,7 @@
                     <div class="input-group">
                         <input type="text" class="form-control border-light" style="padding: 30px;" placeholder="Your Email Address">
                         <div class="input-group-append">
-                            <button class="btn btn-primary px-4"><a href="../register">Sign Up</a></button>
+                            <button class="btn btn-primary px-4"><a href="../signup">Sign Up</a></button>
                         </div>
                     </div>
                 </div>
