@@ -667,9 +667,6 @@
             </ul>
         </section>
         <!-- SIDEBAR -->
-
-
-
         <!-- CONTENT -->
         <section id="content">
             <!-- NAVBAR -->
@@ -694,12 +691,11 @@
             <!-- NAVBAR -->
 
             <!-- MAIN -->
-            <main>
-            </main>
+
             <!-- MAIN -->
-        </section>
-        <!-- CONTENT -->
-    </body>
+<!--        </section>
+         CONTENT 
+    </body>-->
     <script>
         /* 
          * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
@@ -725,16 +721,6 @@
 
 // TOGGLE SIDEBAR
         const menuBar = document.querySelector('#content nav .bx.bx-menu');
-        const sidebar = document.getElementById('sidebar');
-
-        menuBar.addEventListener('click', function () {
-            sidebar.classList.toggle('hide');
-        })
-
-
-
-
-
 
 
         const searchButton = document.querySelector('#content nav form .form-input button');
