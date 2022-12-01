@@ -547,7 +547,6 @@
         </style>
     </head>
     <body>
-
         <main>
             <div class="box">
                 <div class="inner-box">
@@ -587,8 +586,6 @@
                                 </p>
                             </div>
                         </form>
-
-                     
                     </div>
                     <div class="carousel">
                         <div class="slider">
