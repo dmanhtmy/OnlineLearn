@@ -645,9 +645,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<%= request.getContextPath()%>/admin/posts">
+                    <a href="<%= request.getContextPath()%>/admin/blogs">
                         <i class='bx bxl-blogger' ></i>
-                        <span class="text">Posts</span>
+                        <span class="text">Blogs</span>
                     </a>
                 </li>
             </ul>

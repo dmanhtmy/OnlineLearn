@@ -36,7 +36,8 @@ public class BlogController extends HttpServlet {
         BlogDAOImpl blogDAO = new BlogDAOImpl();
         List<BlogList> listBlogs = blogDAO.getAll();
         request.setAttribute("getAll", listBlogs);
-        request.getRequestDispatcher(request.getContextPath()+"/admin/blog/blog.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath()+"/admin/blog/blogs.jsp").forward(request, response);
+//        request.getRequestDispatcher(request.getContextPath()+"/admin/blog/test.jsp").forward(request, response);
     }
 
     /**
