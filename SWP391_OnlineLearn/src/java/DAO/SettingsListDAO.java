@@ -10,6 +10,6 @@ import Models.Setting;
  *
  * @author windc
  */
-public interface SettingsListDBContext extends BaseDAO<Setting>{
+public interface SettingsListDAO extends BaseDAO<Setting>{
     
 }

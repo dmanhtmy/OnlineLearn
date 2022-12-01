@@ -4,7 +4,6 @@
  */
 package DAO.Impl;
 
-import DAO.SettingsListDBContext;
 import Models.Setting;
 import Models.SettingStatus;
 import Models.SettingType;
@@ -17,14 +16,34 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import DAO.SettingsListDAO;
 
 /**
  *
  * @author windc
  */
-public class SettingsListDBContextImpl implements SettingsListDBContext{
-    public DBContext dbContext=new DBContext();
-public ArrayList<Setting> list() {
+public class SettingsListDAOImpl implements SettingsListDAO {
+
+    public DBContext dbContext = new DBContext();
+    public ArrayList<SettingType> listType(){
+           ArrayList<SettingType> listType = new ArrayList<>();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "SELECT * FROM onlinelearn.settingslist_type;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                SettingType s = new SettingType();
+                s.setSetting_type_id(rs.getInt("type_id"));
+                s.setSetting_type_name(rs.getString("type_name"));
+                listType.add(s);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return listType;
+    }
+    public ArrayList<Setting> list() {
         ArrayList<Setting> list = new ArrayList<>();
         try {
             Connection connection = dbContext.getConnection();
@@ -49,7 +68,7 @@ public ArrayList<Setting> list() {
                 list.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -69,7 +88,7 @@ public ArrayList<Setting> list() {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -89,7 +108,7 @@ public ArrayList<Setting> list() {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
@@ -97,7 +116,7 @@ public ArrayList<Setting> list() {
     public ArrayList<Setting> getListSettingBySearch(int indexPage, int type, int status, String setting_value) {
         ArrayList<Setting> list = new ArrayList<>();
         try {
-                        Connection connection = dbContext.getConnection();
+            Connection connection = dbContext.getConnection();
             String sql = "SELECT * FROM onlinelearn.settingslist s \n"
                     + "INNER JOIN onlinelearn.settingslist_type st ON s.type = st.type_id \n"
                     + "LEFT JOIN onlinelearn.settingslist_status ss ON s.status = ss.status_id \n"
@@ -132,14 +151,14 @@ public ArrayList<Setting> list() {
                 list.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return list;
     }
 
     public boolean activeSetting(int id) {
         try {
-                                    Connection connection = dbContext.getConnection();
+            Connection connection = dbContext.getConnection();
 
             String sql = "UPDATE `onlinelearn`.`settingslist`\n"
                     + "SET\n"
@@ -150,7 +169,7 @@ public ArrayList<Setting> list() {
             stm.setInt(2, id);
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
         return true;
@@ -168,7 +187,7 @@ public ArrayList<Setting> list() {
             stm.setInt(2, id);
             stm.executeUpdate();
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
             return false;
         }
         return true;
@@ -196,7 +215,7 @@ public ArrayList<Setting> list() {
                 return rs.getInt("total");
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
 
         }
         return 0;
@@ -222,7 +241,7 @@ public ArrayList<Setting> list() {
             ps.executeUpdate();
 
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -245,7 +264,7 @@ public ArrayList<Setting> list() {
                         rs.getInt(6));
             }
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
     }
@@ -272,11 +291,10 @@ public ArrayList<Setting> list() {
             ps.executeUpdate();
 
         } catch (SQLException ex) {
-            Logger.getLogger(SettingsListDBContext.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(SettingsListDAO.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println(ex.getMessage());
         }
     }
-
 
     @Override
     public Setting get(int id) {
@@ -302,12 +320,10 @@ public ArrayList<Setting> list() {
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public static void main(String[] args) {
-        SettingsListDBContextImpl db = new SettingsListDBContextImpl();
-        ArrayList<Setting> list = db.list();
-        for (Setting setting : list) {
-            System.out.println("abc "+ setting);
-        }
+        SettingsListDAOImpl db = new SettingsListDAOImpl();
+        Setting list =   db.getSettingById("4748");
+        System.out.println("a" + list );
     }
 }

@@ -4,8 +4,10 @@
  */
 package Controllers;
 
-import DAO.Impl.SettingsListDBContextImpl;
+import DAO.Impl.SettingsListDAOImpl;
 import Models.Setting;
+import Models.SettingStatus;
+import Models.SettingType;
 //import Models.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -32,13 +34,52 @@ public class SettingsListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        SettingsListDBContextImpl sldbc = new SettingsListDBContextImpl();
-        ArrayList<Setting> listBySearch = sldbc.list();
-        
-        request.setAttribute("listBySearch", listBySearch);        
-        request.getRequestDispatcher(request.getContextPath()+"/admin/setting/test.jsp").forward(request, response);
+        String raw_type = request.getParameter("type");
+        String raw_status = request.getParameter("status");
+        String raw_setting_value = request.getParameter("setting_value");
+        String setting_value;
+        if (raw_setting_value != null) {
+            setting_value = raw_setting_value;
+        } else {
+            setting_value = null;
+        }
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "0";
+        }
+        int index = Integer.parseInt(indexPage);
+        if (raw_type == null || raw_type.length() == 0) {
+            raw_type = "-1";
+        }
+        if (raw_status == null || raw_status.length() == 0) {
+            raw_status = "-1";
+        }
+        int type = Integer.parseInt(raw_type);
+        int status = Integer.parseInt(raw_status);
 
+        SettingsListDAOImpl sldbc = new SettingsListDAOImpl();
+
+        int count = sldbc.getTotalSettings(type, status, setting_value);
+        int endPage = count / 5;
+        if (count % 5 != 0) {
+            endPage++;
+        }
+        request.setAttribute("current_index", index);
+        request.setAttribute("endPage", endPage);
+
+        ArrayList<SettingType> settingTypes = sldbc.listType();
+        request.setAttribute("settingTypesList", settingTypes);
+
+        ArrayList<SettingStatus> settingStatus = sldbc.listSettingStatus();
+        request.setAttribute("settingStatusList", settingStatus);
+
+        request.setAttribute("type_id", type);
+        request.setAttribute("status_id", status);
+
+        ArrayList<Setting> listBySearch = sldbc.getListSettingBySearch(index, type, status, setting_value);
+        request.setAttribute("listBySearch", listBySearch);
+
+        request.getRequestDispatcher(request.getContextPath() + "/admin/setting/settingslist.jsp").forward(request, response);
     }
 
     /**
@@ -52,7 +93,52 @@ public class SettingsListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
+        String raw_type = request.getParameter("type");
+        String raw_status = request.getParameter("status");
+        String raw_setting_value = request.getParameter("setting_value");
+        String setting_value;
+        if (raw_setting_value != null) {
+            setting_value = raw_setting_value;
+        } else {
+            setting_value = null;
+        }
+        String indexPage = request.getParameter("index");
+        if (indexPage == null) {
+            indexPage = "0";
+        }
+        int index = Integer.parseInt(indexPage);
+        if (raw_type == null || raw_type.length() == 0) {
+            raw_type = "-1";
+        }
+        if (raw_status == null || raw_status.length() == 0) {
+            raw_status = "-1";
+        }
+        int type = Integer.parseInt(raw_type);
+        int status = Integer.parseInt(raw_status);
+
+        SettingsListDAOImpl sldbc = new SettingsListDAOImpl();
+
+        int count = sldbc.getTotalSettings(type, status, setting_value);
+        int endPage = count / 5;
+        if (count % 5 != 0) {
+            endPage++;
+        }
+        request.setAttribute("current_index", index);
+        request.setAttribute("endPage", endPage);
+
+        ArrayList<SettingType> settingTypes = sldbc.listType();
+        request.setAttribute("settingTypesList", settingTypes);
+
+        ArrayList<SettingStatus> settingStatus = sldbc.listSettingStatus();
+        request.setAttribute("settingStatusList", settingStatus);
+
+        request.setAttribute("type_id", type);
+        request.setAttribute("status_id", status);
+
+        ArrayList<Setting> listBySearch = sldbc.getListSettingBySearch(index, type, status, setting_value);
+        request.setAttribute("listBySearch", listBySearch);
+
+        request.getRequestDispatcher(request.getContextPath() + "/admin/setting/settingslist.jsp").forward(request, response);
     }
 
     /**

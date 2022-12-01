@@ -6,6 +6,7 @@
 
         <!-- Boxicons -->
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <title>AdminHub</title>
     </head>
     <style>
@@ -65,6 +66,33 @@
             background: var(--grey);
             overflow-x: hidden;
         }
+
+
+
+        /*Setting*/
+    .table-responsive-stack tr {
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-orient: horizontal;
+        -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+        flex-direction: row;
+    }
+
+
+    .table-responsive-stack td,
+    .table-responsive-stack th {
+        display:block;
+        /*      
+           flex-grow | flex-shrink | flex-basis   */
+        -ms-flex: 1 1 auto;
+        flex: 1 1 auto;
+    }
+
+    .table-responsive-stack .table-responsive-stack-thead {
+        font-weight: bold;
+    }
 
 
 
@@ -697,9 +725,9 @@
             <main>
             </main>
             <!-- MAIN -->
-        </section>
-        <!-- CONTENT -->
-    </body>
+<!--        </section>
+         CONTENT 
+    </body>-->
     <script>
         /* 
          * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
