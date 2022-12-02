@@ -46,6 +46,6 @@
 </style>
 <script>
     function getDetail(id) {
-        window.location.href = "<%=request.getContextPath()%>/admin/blog/" + id;
+        window.location.href = "<%=request.getContextPath()%>/admin/blog/blogdetail?id=" + id;
     }
 </script>
