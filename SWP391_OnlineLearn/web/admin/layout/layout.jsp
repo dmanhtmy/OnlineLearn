@@ -639,9 +639,9 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<%= request.getContextPath()%>/admin/categories">
-                        <i class='bx bxs-message-dots' ></i>
-                        <span class="text">Categories</span>
+                    <a href="<%= request.getContextPath()%>/admin/sliders">
+                        <i class='bx bxs-smile' ></i>
+                        <span class="text">Sliders</span>
                     </a>
                 </li>
                 <li>
