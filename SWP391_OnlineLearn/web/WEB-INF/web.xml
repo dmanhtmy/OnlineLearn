@@ -23,6 +23,17 @@
     <servlet>
         <servlet-name>BlogDetailController</servlet-name>
         <servlet-class>Controllers.BlogDetailController</servlet-class>
+
+        <servlet-name>SliderListController</servlet-name>
+        <servlet-class>Controllers.SliderListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserListController</servlet-name>
+        <servlet-class>Controllers.UserListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserDetailController</servlet-name>
+        <servlet-class>Controllers.UserDetailController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -47,6 +58,17 @@
     <servlet-mapping>
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/home/blog/detail</url-pattern>
+
+        <servlet-name>SliderListController</servlet-name>
+        <url-pattern>/admin/sliders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserListController</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailController</servlet-name>
+        <url-pattern>/admin/userdetail</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

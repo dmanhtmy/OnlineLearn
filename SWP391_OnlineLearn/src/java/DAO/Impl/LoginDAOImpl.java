@@ -83,6 +83,6 @@ public class LoginDAOImpl implements LoginDAO {
 
     public static void main(String[] args) {
         LoginDAOImpl db = new LoginDAOImpl();
-        System.out.println(db.getUser("Admin", "admin").getEmail());
+        System.out.println(db.getUser("Adminâ", "admin").getEmail());
     }
 }
