@@ -10,7 +10,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Home</title>
 
         <!-- Favicon -->
         <link href="img/favicon.ico" rel="icon">
@@ -103,10 +103,10 @@
                         </button>
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav py-0">
-                                <a href="home" class="nav-item nav-link">Home</a>
-                                <a href="about" class="nav-item nav-link">About</a>
-                                <a href="course" class="nav-item nav-link">Courses</a>
-                                <a href="blog" class="nav-item nav-link">Blog</a>
+                                <a href="<%= request.getContextPath()%>/home" class="nav-item nav-link">Home</a>
+                                <a href="<%= request.getContextPath()%>/home/about" class="nav-item nav-link">About</a>
+                                <a href="<%= request.getContextPath()%>/home/course" class="nav-item nav-link">Courses</a>
+                                <a href="<%= request.getContextPath()%>/home/blog" class="nav-item nav-link">Blog</a>
                             </div>
                             <c:choose>
                                 <c:when test="${sessionScope.user!=null}">
@@ -119,7 +119,7 @@
                                             <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                 Edit your profile
                                             </a>
-                                            <a class="dropdown-item" href="logout">Logout</a>
+                                            <a class="dropdown-item" href="<%= request.getContextPath()%>/login">Logout</a>
                                         </div>
                                     </div>
                                 </c:when>
@@ -128,11 +128,10 @@
                                 </c:otherwise>
                             </c:choose>
                         </div>
-                </div>
                 </nav>
+                </div>
             </div>
         </div>
-    </div>
     <!-- Navbar End -->
 
     <!-- Button trigger modal -->
@@ -302,13 +301,13 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.js"></script>
-<!-- JavaScript Bundle with Popper -->
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-<!-- Contact Javascript File -->
-<script src="client/mail/jqBootstrapValidation.min.js"></script>
+ JavaScript Bundle with Popper 
+<!--<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>-->
+ Contact Javascript File 
+<!--<script src="client/mail/jqBootstrapValidation.min.js"></script>
 <script src="client/mail/contact.js"></script>
 
-<!-- Template Javascript -->
-<script src="client/js/main.js"></script>
+ Template Javascript 
+<script src="client/js/main.js"></script>-->
 </body>
 </html>

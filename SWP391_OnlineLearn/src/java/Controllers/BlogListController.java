@@ -4,12 +4,12 @@
  */
 package Controllers;
 
-import DAO.BlogDAO;
+import DAO.Impl.BlogDAOImpl;
 import Models.BlogList;
 import Models.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -17,10 +17,9 @@ import java.util.List;
 
 /**
  *
- * @author HP
+ * @author MrTuan
  */
-@WebServlet (name="HomeController",urlPatterns={"/home"})
-public class HomeController extends HttpServlet {
+public class BlogListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,8 +27,6 @@ public class HomeController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
         String login_href_value = "";
@@ -42,17 +39,6 @@ public class HomeController extends HttpServlet {
         }
         request.setAttribute("login_href_value", login_href_value);
         request.setAttribute("logout_href", logout_href);
-    }
-    
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-        loadHeaderAndAsideRight(request, response);
-        User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("user", user);
-        String title_value = "ECOURSE - Online Course";
-        request.setAttribute("title_value", title_value);
-        request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
-        request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -67,7 +53,13 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        loadHeaderAndAsideRight(request, response);
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        User user = (User) request.getSession().getAttribute("user");
+        List<BlogList> listBlogs = blogDAO.getAll();
+        request.setAttribute("user", user);
+        request.setAttribute("getAll", listBlogs);
+        request.getRequestDispatcher(request.getContextPath() + "/client/blog/blog.jsp").forward(request, response);
     }
 
     /**
@@ -81,7 +73,11 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        BlogList getDetail = blogDAO.get(id);
+        request.setAttribute("getdetail", getDetail);
+
     }
 
     /**

@@ -6,12 +6,11 @@
 package Models;
 
 
-import java.sql.Blob;
 import java.sql.Date;
 
 /**
  *
- * @author Duy Hiep
+ * @author Mr Tuan
  */
 public class BlogList {
     private int id;
@@ -22,18 +21,22 @@ public class BlogList {
     private String thumbnail;
     private boolean feature;
     private boolean  status;
-    private BlogDetail blogdetail;
+    private String blogdetail;
 
-
-    public BlogDetail getBlogdetail() {
-        return blogdetail;
+    public BlogList() {
     }
 
-    public void setBlogdetail(BlogDetail blogdetail) {
+    public BlogList(int id, String title, BlogCategory category_id, Date postdate, String brief_info, String thumbnail, boolean feature, boolean status, String blogdetail) {
+        this.id = id;
+        this.title = title;
+        this.category_id = category_id;
+        this.postdate = postdate;
+        this.brief_info = brief_info;
+        this.thumbnail = thumbnail;
+        this.feature = feature;
+        this.status = status;
         this.blogdetail = blogdetail;
     }
-    
-   
 
     public int getId() {
         return id;
@@ -99,13 +102,11 @@ public class BlogList {
         this.status = status;
     }
 
-    
-
-    @Override
-    public String toString() {
-        return "BlogList{" + "id=" + id + ", title=" + title + ", category_id=" + category_id + ", postdate=" + postdate + ", brief_info=" + brief_info + ", thumbnail=" + thumbnail + ", feature=" + feature + ", status=" + status + '}';
+    public String getBlogdetail() {
+        return blogdetail;
     }
 
-
-    
+    public void setBlogdetail(String blogdetail) {
+        this.blogdetail = blogdetail;
+    }
 }
