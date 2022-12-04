@@ -98,6 +98,7 @@
                 text-decoration: none;
                 border-radius: .8rem;
                 background: linear-gradient(to right, #FF6600 0%, #04a6bd 100%);
+                cursor: pointer;
             }
 
             .blog-post_cta:hover {
@@ -110,8 +111,8 @@
                     max-width: 80rem;
                 }
                 .blog-post_img {
-                    min-width: 30rem;
-                    max-width: 30rem;
+                    min-width: 20rem;
+                    max-width: 20rem;
                 }
                 .container h2 {
                     margin-top: 120px;
@@ -168,7 +169,7 @@
                             <span>${blog.getPostdate()}</span>
                         </div>
                         <p class="blog-post_text">${blog.getBrief_info()}</p>
-                        <a href="" onclick="blogDetail(${blog.getId()})" class="blog-post_cta">Read More</a>
+                        <a onclick="blogDetail(${blog.getId()})"  class="blog-post_cta">Read More</a>
                     </div>
                 </div>
             </c:forEach>
@@ -178,7 +179,7 @@
 </html>
 <script>
     function blogDetail(id) {
-        window.location.href = "<%= request.getContextPath()%>/home/blog?id=" + id;
+        window.location.href = "<%= request.getContextPath()%>/home/blog/detail?id=" + id;
     }
 </script>
 
