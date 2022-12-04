@@ -5,20 +5,18 @@
 package Controllers;
 
 import DAO.Impl.BlogDAOImpl;
-import Models.BlogList;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
  * @author MrTuan
  */
-public class AdminBlogListController extends HttpServlet {
+public class AdminBlogDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +35,10 @@ public class AdminBlogListController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminBlogListController</title>");
+            out.println("<title>Servlet AdminBlogDeleteController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminBlogListController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminBlogDeleteController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,51 +56,7 @@ public class AdminBlogListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        BlogDAOImpl blogDAO = new BlogDAOImpl();
-        String indexpasge = request.getParameter("page");
-        String search = request.getParameter("search");
-        String status = request.getParameter("status");
-        if (indexpasge == null) {
-            indexpasge = "1";
-            int page = Integer.parseInt(indexpasge);
-            if (search != null) {
-                List<BlogList> listBlogs = blogDAO.search(search);
-                request.setAttribute("blogs", listBlogs);
-                request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
-            } else {
-                List<BlogList> listBlogs = blogDAO.getAll(page);
-            }
-            int count = blogDAO.getTotalBlog();
-            int endpage = count / 5;
-            if (count % 5 != 0) {
-                endpage++;
-            }
-            List<BlogList> listBlogs = blogDAO.getAll(page);
-            request.setAttribute("endpage", endpage);
-            request.setAttribute("blogs", listBlogs);
-            request.setAttribute("status", status);
-            request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
-        }else{
-            int page = Integer.parseInt(indexpasge);
-            if (search != null) {
-                List<BlogList> listBlogs = blogDAO.search(search);
-                request.setAttribute("search", search);
-                request.setAttribute("blogs", listBlogs);
-                request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
-            } else {
-                List<BlogList> listBlogs = blogDAO.getAll(page);
-            }
-            int count = blogDAO.getTotalBlog();
-            int endpage = count / 5;
-            if (count % 5 != 0) {
-                endpage++;
-            }
-            List<BlogList> listBlogs = blogDAO.getAll(page);
-            request.setAttribute("endpage", endpage);
-            request.setAttribute("blogs", listBlogs);
-            request.setAttribute("status", status);
-            request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -116,7 +70,15 @@ public class AdminBlogListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        BlogDAOImpl db = new BlogDAOImpl();
+        int id = Integer.parseInt(request.getParameter("id"));
+        boolean status=db.delete(id);
+        if(status==true){
+            
+        }else{
+            
+        }
     }
 
     /**

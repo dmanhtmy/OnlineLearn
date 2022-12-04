@@ -15,6 +15,12 @@ crossorigin="anonymous"></script>
     <ul class="box-info-blog">
         <table class="table">
             <button type="button" class="btn btn-primary" style="background-color: #3C91E6;" onclick="createBlog()">Create Blog</button>
+            <form id="form" action="blogs" method="GET">
+                <div class="form-input">
+                    <input name="search" type="text" placeholder="Search...">
+                    <button type="submit" class="search-btn"><i class='bx bx-search'></i></button>
+                </div>
+            </form>
             <thead>
                 <tr>
                     <th scope="col">#</th>
@@ -24,7 +30,7 @@ crossorigin="anonymous"></script>
             </thead>
             <tbody>
                 <c:set var="i" value="0"></c:set>
-                <c:forEach items="${requestScope.blog}" var="blog">
+                <c:forEach items="${requestScope.blogs}" var="blog">
                     <c:set var="i" value="${i+1}"></c:set>
                         <tr>
                             <th scope="row">${i}</th>
@@ -38,7 +44,7 @@ crossorigin="anonymous"></script>
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h5 class="modal-title"  id="exampleModalLabel">Delete Category</h5>
+                                <h5 class="modal-title"  id="exampleModalLabel">Delete Blog</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
@@ -55,10 +61,48 @@ crossorigin="anonymous"></script>
             </tbody>
         </table>
     </ul>
+    <div class="paging">
+        <ul class="pagination justify-content-center">
+            <c:forEach begin="1" end="${endpage}" var="p">
+                <li class="page-item"><a class="page-link" href="<%= request.getContextPath()%>/admin/blogs?page=${p}">${p}</a></li>
+                </c:forEach>
+        </ul>
+    </div>
 </main>
 </section>
 </body>
 <style>
+    .form-input {
+        transform: translateY(-2.2rem);
+        margin-left: 500px;
+        display: flex;
+        text-align: right;
+        height: 36px;
+    }
+    .form-input input {
+        padding: 0 16px;
+        height: 100%;
+        border: none;
+        background: var(--light);
+        border-radius: 36px 0 0 36px;
+        outline: none;
+        width: 30%;
+        color: var(--dark);
+    }
+    .form-input button {
+        width: 36px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: var(--blue);
+        color: var(--light);
+        font-size: 18px;
+        border: none;
+        outline: none;
+        border-radius: 0 36px 36px 0;
+        cursor: pointer;
+    }
     .box-info-blog{
         display: block;
         margin-top: 30px;
