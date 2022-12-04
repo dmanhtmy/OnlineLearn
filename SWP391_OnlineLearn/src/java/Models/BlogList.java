@@ -15,7 +15,7 @@ import java.sql.Date;
 public class BlogList {
     private int id;
     private String title;
-    private BlogCategory category_id;
+    private int category_id;
     private Date postdate;
     private String brief_info;
     private String thumbnail;
@@ -26,7 +26,7 @@ public class BlogList {
     public BlogList() {
     }
 
-    public BlogList(int id, String title, BlogCategory category_id, Date postdate, String brief_info, String thumbnail, boolean feature, boolean status, String blogdetail) {
+    public BlogList(int id, String title, int category_id, Date postdate, String brief_info, String thumbnail, boolean feature, boolean status, String blogdetail) {
         this.id = id;
         this.title = title;
         this.category_id = category_id;
@@ -54,11 +54,11 @@ public class BlogList {
         this.title = title;
     }
 
-    public BlogCategory getCategory_id() {
+    public int getCategory_id() {
         return category_id;
     }
 
-    public void setCategory_id(BlogCategory category_id) {
+    public void setCategory_id(int category_id) {
         this.category_id = category_id;
     }
 

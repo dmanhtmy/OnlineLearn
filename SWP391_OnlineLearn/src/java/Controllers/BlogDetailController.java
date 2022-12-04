@@ -13,21 +13,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
 
 /**
  *
  * @author MrTuan
  */
-public class BlogListController extends HttpServlet {
+public class BlogDetailController extends HttpServlet {
 
-    /**
-     * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
-     * methods.
-     *
-     * @param request servlet request
-     * @param response servlet response
-     */
     protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
         String login_href_value = "";
         String logout_href = "home";
@@ -56,10 +48,11 @@ public class BlogListController extends HttpServlet {
         loadHeaderAndAsideRight(request, response);
         BlogDAOImpl blogDAO = new BlogDAOImpl();
         User user = (User) request.getSession().getAttribute("user");
-        List<BlogList> listBlogs = blogDAO.getAll();
+        int id = Integer.parseInt(request.getParameter("id"));
         request.setAttribute("user", user);
-        request.setAttribute("getAll", listBlogs);
-        request.getRequestDispatcher(request.getContextPath() + "/client/blog/blog.jsp").forward(request, response);
+        BlogList getDetail = blogDAO.get(id);
+        request.setAttribute("getdetail", getDetail);
+        request.getRequestDispatcher(request.getContextPath() + "/client/blog/blogDetail.jsp").forward(request, response);
     }
 
     /**
@@ -73,18 +66,7 @@ public class BlogListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        search blog-to do
-
+//        processRequest(request, response);
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Short description";
-    }// </editor-fold>
 
 }
