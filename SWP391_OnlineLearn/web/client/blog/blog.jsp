@@ -12,7 +12,7 @@
                 box-sizing: border-box;
             }
             .container {
-                margin-top: 150px;
+                margin-top: 100px;
             }
 
             .container h2 {
@@ -43,6 +43,9 @@
             }
 
             .blog-post_img {
+                min-width: 20rem;
+                max-width: 20rem;
+                height: 15rem;
                 transform: translateX(-8rem);
                 position: relative;
             }
@@ -77,7 +80,7 @@
                 font-size: 2.5rem;
                 margin: 1.5rem 0 2rem;
                 text-transform: uppercase;
-                color: #4facfe;
+                color: #FF6600;
             }
 
             .blog-post_text {
@@ -94,11 +97,12 @@
                 color: #fff;
                 text-decoration: none;
                 border-radius: .8rem;
-                background: linear-gradient(to right, #c945cf 0%, #04a6bd 100%);
+                background: linear-gradient(to right, #FF6600 0%, #04a6bd 100%);
             }
 
             .blog-post_cta:hover {
-                background: linear-gradient(to right, #04a6bd 0%, #c945cf 100%);
+                color: #FF6600;
+                background: linear-gradient(to right, #04a6bd 0%, #FF6600 100%);
             }
 
             @media screen and (max-width: 1068px) {
