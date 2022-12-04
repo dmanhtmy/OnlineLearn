@@ -4,6 +4,8 @@
  */
 package Controllers;
 
+import DAO.Impl.BlogDAOImpl;
+import Models.BlogList;
 import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +13,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -24,8 +27,6 @@ public class BlogListController extends HttpServlet {
      *
      * @param request servlet request
      * @param response servlet response
-     * @throws ServletException if a servlet-specific error occurs
-     * @throws IOException if an I/O error occurs
      */
     protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
         String login_href_value = "";
@@ -53,8 +54,11 @@ public class BlogListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         loadHeaderAndAsideRight(request, response);
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
         User user = (User) request.getSession().getAttribute("user");
+        List<BlogList> listBlogs = blogDAO.getAll();
         request.setAttribute("user", user);
+        request.setAttribute("getAll", listBlogs);
         request.getRequestDispatcher(request.getContextPath() + "/client/blog/blog.jsp").forward(request, response);
     }
 
@@ -69,7 +73,11 @@ public class BlogListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
+        int id = Integer.parseInt(request.getParameter("id"));
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        BlogList getDetail = blogDAO.get(id);
+        request.setAttribute("getdetail", getDetail);
+
     }
 
     /**

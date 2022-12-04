@@ -86,8 +86,8 @@ public class LoginController extends HttpServlet {
                 case 1:
                     response.sendRedirect(request.getContextPath() + "/admin");
                     break;
-                case 2:
-                    request.getRequestDispatcher(request.getContextPath() + "/homePage").forward(request, response);
+                case 4:
+                    request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
                     break;
             }
 

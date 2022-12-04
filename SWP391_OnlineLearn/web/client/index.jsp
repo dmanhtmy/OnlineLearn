@@ -119,7 +119,7 @@
                                             <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                 Edit your profile
                                             </a>
-                                            <a class="dropdown-item" href="logout">Logout</a>
+                                            <a class="dropdown-item" href="<%= request.getContextPath()%>/login">Logout</a>
                                         </div>
                                     </div>
                                 </c:when>

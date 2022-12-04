@@ -152,50 +152,30 @@
     <%@include file="../components/header.jsp" %>
     <body>
         <div class="container">
-            <div class="blog-post">
-                <div class="blog-post_img">
-                    <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTU3fHx0ZWNobm9sb2d5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                         alt="">
-                </div>
-                <div class="blog-post_info">
-                    <h1 class="blog-post_title">Lorem ipsum dolor sit amet.</h1>
-                    <div class="blog-post_date">
-                        <span>Nov 12 2021</span>
+            <c:forEach items="${requestScope.getAll}" var="blog">
+                <div class="blog-post">
+                    <div class="blog-post_img">
+                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTU3fHx0ZWNobm9sb2d5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
+                             alt="">
                     </div>
-                    <p class="blog-post_text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a, tempore veniam quasi sint fugiat
-                        facilis, facere, amet magnam optio velit. Laudantium et temporibus soluta, esse cupiditate aliquid
-                        dicta
-                        accusantium.
-                    </p>
-                    <a href="#" class="blog-post_cta">Read More</a>
-                </div>
-            </div>
-
-            <div class="blog-post">
-                <div class="blog-post_img">
-                    <img src="https://images.unsplash.com/photo-1562813733-b31f71025d54?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29kaW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                         alt="">
-                </div>
-                <div class="blog-post_info">
-                    <div class="blog-post_date">
-                        <span>Sagar Developer</span>
-                        <span>Dec 25 2021</span>
+                    <div class="blog-post_info">
+                        <h1 class="blog-post_title">${blog.getTitle()}</h1>
+                        <div class="blog-post_date">
+                            <span>${blog.getPostdate()}</span>
+                        </div>
+                        <p class="blog-post_text">${blog.getBrief_info()}</p>
+                        <a href="" onclick="blogDetail(${blog.getId()})" class="blog-post_cta">Read More</a>
                     </div>
-                    <h1 class="blog-post_title">Lorem ipsum dolor sit amet.</h1>
-                    <p class="blog-post_text">
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores a, tempore veniam quasi sint fugiat
-                        facilis, facere, amet magnam optio velit. Laudantium et temporibus soluta, esse cupiditate aliquid
-                        dicta
-                        accusantium.
-                    </p>
-                    <a href="#" class="blog-post_cta">Read More</a>
                 </div>
-            </div>
-
+            </c:forEach>
         </div>
     </body>
-    
+    <%@include file="../components/footer.jsp" %>
 </html>
-<%@include file="../components/footer.jsp" %>
+<script>
+    function blogDetail(id) {
+        window.location.href = "<%= request.getContextPath()%>/home/blog?id=" + id;
+    }
+</script>
+
 
