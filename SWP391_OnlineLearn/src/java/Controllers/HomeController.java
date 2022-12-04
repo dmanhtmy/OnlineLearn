@@ -4,21 +4,23 @@
  */
 package Controllers;
 
-import DAO.Impl.LoginDAOImpl;
+import DAO.BlogDAO;
+import Models.BlogList;
 import Models.User;
 import java.io.IOException;
-import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  *
- * @author hp
+ * @author HP
  */
-public class LoginController extends HttpServlet {
+@WebServlet (name="HomeController",urlPatterns={"/home"})
+public class HomeController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -29,21 +31,28 @@ public class LoginController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
+    protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
+        String login_href_value = "";
+        String logout_href = "home";
+        if (request.getSession().getAttribute("user") == null) {
+            return;
+        } else {
+            User user = (User) request.getSession().getAttribute("user");
+            login_href_value += user.getFullname();
+        }
+        request.setAttribute("login_href_value", login_href_value);
+        request.setAttribute("logout_href", logout_href);
+    }
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        }
+        loadHeaderAndAsideRight(request, response);
+        User user = (User) request.getSession().getAttribute("user");
+        request.setAttribute("user", user);
+        String title_value = "ECOURSE - Online Course";
+        request.setAttribute("title_value", title_value);
+        request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
+        request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -58,7 +67,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(request.getContextPath() + "/login/Login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -72,29 +81,7 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("username");
-        String pass = request.getParameter("password");
-        LoginDAOImpl login = new LoginDAOImpl();
-        User userRole = login.getUser(user, pass);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", userRole);
-        if (userRole == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-        } else {
-            int role = userRole.getRole().getRole_id();
-            switch (role) {
-                case 1:
-                    response.sendRedirect(request.getContextPath() + "/admin");
-                    break;
-                case 4:
-                    request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
-                case 5:
-                    response.sendRedirect(request.getContextPath() + "/home");
-                    break;
-            }
-
-        }
-
+        processRequest(request, response);
     }
 
     /**

@@ -1,3 +1,9 @@
+<%-- 
+    Document   : signup
+    Created on : Nov 30, 2022, 10:17:02 PM
+    Author     : Mr Tuan
+--%>
+
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -14,14 +20,6 @@
                 integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
         crossorigin="anonymous"></script>
         <style>
-            /*
-        Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-        Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
-            */
-            /* 
-                Created on : Nov 30, 2022, 10:44:08 AM
-                Author     : hp
-            */
             @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700;800&display=swap");
 
             *,
@@ -96,10 +94,10 @@
                 transition: opacity 0.02s 0.4s;
             }
 
-            form.sign-up-form {
+/*            form.sign-up-form {
                 opacity: 0;
                 pointer-events: none;
-            }
+            }*/
 
             .logo {
                 display: flex;
@@ -500,22 +498,6 @@
                 margin-right: 40px;
             }
 
-            #radio1:checked ~ .navigation-auto .auto-btn1{
-                background: #40D3DC;
-            }
-
-            #radio2:checked ~ .navigation-auto .auto-btn2{
-                background: #40D3DC;
-            }
-
-            #radio3:checked ~ .navigation-auto .auto-btn3{
-                background: #40D3DC;
-            }
-
-            #radio4:checked ~ .navigation-auto .auto-btn4{
-                background: #40D3DC;
-            }
-
             /*CSS login google*/
             .login-google{
                 text-align: center;
@@ -552,38 +534,40 @@
             <div class="box">
                 <div class="inner-box">
                     <div class="forms-wrap">
-                        <form action="login" autocomplete="off" class="sign-in-form" method="post">
+                        <form action="signup" autocomplete="off" class="sign-up-form" method="post">
+                            <div class="logo">
+                                <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668565240/Home/logo/logo_ocndyv.png" alt="easyclass" />&emsp;
+                                <h4 style="color: #ff6600;">FPT &nbsp;<span style="color: #000;">Courses</span></h4>
+                            </div>
+
                             <div class="heading">
-                                <h2>Login</h2>
-                                <h6>Not registred yet?</h6>
-                                <a href="signup" class="toggle">Sign up</a>
+                                <h2>Get Started</h2>
+                                <h6>Already have an account?</h6>
+                                <a href="login" class="toggle">Sign in</a>
                             </div>
 
                             <div class="actual-form">
                                 <div class="input-wrap">
-                                    <input type="text" minlength="4" class="input-field" name="username" autocomplete="off" required placeholder="Name" />
-                                 
+                                    <input type="text" minlength="4" class="input-field" name="username" autocomplete="off" required/>
+                                    <label>Name</label>
                                 </div>
 
                                 <div class="input-wrap">
-                                    <input type="password" minlength="4" class="input-field" name="password" autocomplete="off" required placeholder="Password" />
-                                   
+                                    <input type="email" class="input-field" name="email" autocomplete="off" required />
+                                    <label>Email</label>
                                 </div>
 
-                                <input type="submit" value="Sign In" class="sign-btn" />
-                                <div class="login-google">
-                                    <div class="or-container">
-                                        <div class="line-separator"></div>
-                                        <div class="or-label">or</div>
-                                        <div class="line-separator"></div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-md-12"> <a class="btn btn-lg btn-google btn-block btn-outline" href="https://accounts.google.com/o/oauth2/auth?scope=email&redirect_uri=http://localhost:9999/SWP391-SE1623-JS-G6/logingoogle&response_type=code&client_id=1086381055681-0upu0i0nmp2v352u8b46hplsd8hpicc8.apps.googleusercontent.com&approval_prompt=force"><img src="https://img.icons8.com/color/20/000000/google-logo.png"> Sign In With Google</a> </div>
-                                    </div> <br>
+                                <div class="input-wrap">
+                                    <input type="password" minlength="4" class="input-field" name="password" autocomplete="off" required />
+                                    <label>Password</label>
                                 </div>
+
+                                <input type="submit" value="Sign Up" class="sign-btn" />
+
                                 <p class="text">
-                                    Forgotten your password or you login datails?
-                                    <a href="#">Get help</a> signing in
+                                    By signing up, I agree to the
+                                    <a href="#">Terms of Services</a> and
+                                    <a href="#">Privacy Policy</a>
                                 </p>
                             </div>
                         </form>
@@ -598,6 +582,7 @@
                                 </div>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -605,13 +590,8 @@
 
         <!-- Javascript file -->
 
-<!--        <script>
+        <script>
             const inputs = document.querySelectorAll(".input-field");
-            const toggle_btn = document.querySelectorAll(".toggle");
-            const main = document.querySelector("main");
-            const bullets = document.querySelectorAll(".bullets span");
-            const images = document.querySelectorAll(".image");
-
             inputs.forEach((inp) => {
                 inp.addEventListener("focus", () => {
                     inp.classList.add("active");
@@ -622,14 +602,9 @@
                     inp.classList.remove("active");
                 });
             });
-
-            toggle_btn.forEach((btn) => {
-                btn.addEventListener("click", () => {
-                    main.classList.toggle("sign-up-mode");
-                });
-            });
-        </script>-->
+        </script>
 
     </body>
 </html>
+
 

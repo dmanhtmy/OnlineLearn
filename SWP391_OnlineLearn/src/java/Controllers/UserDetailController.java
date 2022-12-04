@@ -4,7 +4,7 @@
  */
 package Controllers;
 
-import DAO.Impl.LoginDAOImpl;
+import DAO.Impl.UserDAOImpl;
 import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,13 +12,12 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author hp
  */
-public class LoginController extends HttpServlet {
+public class UserDetailController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +36,10 @@ public class LoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginController</title>");
+            out.println("<title>Servlet UserDetailController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet UserDetailController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,7 +57,12 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(request.getContextPath() + "/login/Login.jsp").forward(request, response);
+        String idRaw = request.getParameter("id");
+        int id = Integer.parseInt(idRaw);
+        UserDAOImpl u = new UserDAOImpl();
+        User user = u.get(id);
+        request.setAttribute("user", user);
+        request.getRequestDispatcher(request.getContextPath() + "/admin/user/userdetail.jsp").forward(request, response);
     }
 
     /**
@@ -72,29 +76,17 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("username");
-        String pass = request.getParameter("password");
-        LoginDAOImpl login = new LoginDAOImpl();
-        User userRole = login.getUser(user, pass);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", userRole);
-        if (userRole == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-        } else {
-            int role = userRole.getRole().getRole_id();
-            switch (role) {
-                case 1:
-                    response.sendRedirect(request.getContextPath() + "/admin");
-                    break;
-                case 4:
-                    request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
-                case 5:
-                    response.sendRedirect(request.getContextPath() + "/home");
-                    break;
-            }
-
-        }
-
+        UserDAOImpl u = new UserDAOImpl();
+        String idraw = (String) request.getParameter("id");
+        int id = Integer.parseInt(idraw);
+        String username = (String) request.getParameter("username");
+        String fullname = (String) request.getParameter("fullname");
+        String genderraw =  request.getParameter("gender");
+        boolean gender = Boolean.valueOf(genderraw);
+        String address = (String) request.getParameter("address");
+        String phone = (String) request.getParameter("phone");
+        u.updateProfileUser(id, username, fullname, gender, address, phone);
+        response.sendRedirect("/admin/users");
     }
 
     /**
