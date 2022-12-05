@@ -42,8 +42,6 @@ public class LoginDAOImpl implements LoginDAO {
                 u.setAddress(rs.getString("address"));
                 u.setEmail(rs.getString("email"));
                 u.setPhonenumber(rs.getString("phonenumber"));
-//                Status s = new Status();
-//                s.setStatus_id(rs.getInt("status"));
                 u.setStatus(rs.getInt("status"));
                 Role r = new Role();
                 r.setRole_id(rs.getInt("Role_Id"));
@@ -85,6 +83,6 @@ public class LoginDAOImpl implements LoginDAO {
 
     public static void main(String[] args) {
         LoginDAOImpl db = new LoginDAOImpl();
-        System.out.println(db.getUser("Admin", "admin").getEmail());
+        System.out.println(db.getUser("Adminâ", "admin").getEmail());
     }
 }

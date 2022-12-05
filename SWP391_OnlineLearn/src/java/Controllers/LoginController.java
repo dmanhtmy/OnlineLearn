@@ -58,7 +58,6 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         request.getRequestDispatcher(request.getContextPath() + "/login/Login.jsp").forward(request, response);
     }
 
@@ -77,22 +76,20 @@ public class LoginController extends HttpServlet {
         String pass = request.getParameter("password");
         LoginDAOImpl login = new LoginDAOImpl();
         User userRole = login.getUser(user, pass);
-             HttpSession session=request.getSession();  
-             session.setAttribute("user", userRole);
+        HttpSession session = request.getSession();
+        session.setAttribute("user", userRole);
         if (userRole == null) {
-            
-            request.getRequestDispatcher(request.getContextPath() + "/login").forward(request, response);
+            response.sendRedirect(request.getContextPath() + "/login");
         } else {
             int role = userRole.getRole().getRole_id();
             switch (role) {
                 case 1:
-                      response.sendRedirect(request.getContextPath() + "/admin");
+                    response.sendRedirect(request.getContextPath() + "/admin");
                     break;
-                case 2:
-                request.getRequestDispatcher(request.getContextPath() + "/homePage").forward(request, response);
-                break;
+                case 4:
+                    request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
+            break;
             }
-          
 
         }
 

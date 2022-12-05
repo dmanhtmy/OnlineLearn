@@ -553,12 +553,10 @@
                 <div class="inner-box">
                     <div class="forms-wrap">
                         <form action="login" autocomplete="off" class="sign-in-form" method="post">
-                   
-
                             <div class="heading">
                                 <h2>Login</h2>
                                 <h6>Not registred yet?</h6>
-                                <a href="#" class="toggle">Sign up</a>
+                                <a href="signup" class="toggle">Sign up</a>
                             </div>
 
                             <div class="actual-form">
@@ -592,30 +590,14 @@
 
                      
                     </div>
-<!--                    <script type="text/javascript">
-                        var counter = 1;
-                        setInterval(function () {
-                            document.getElementById('radio' + counter).checked = true;
-                            counter++;
-                            if (counter > 4) {
-                                counter = 1;
-                            }
-                        }, 5000);
-                    </script>-->
                     <div class="carousel">
-                        <!--image slider start-->
                         <div class="slider">
                             <div class="slides">
-                                <!--radio buttons start-->
-                                <!--radio buttons end-->
-                                <!--slide images start-->
                                 <div class="slide first">
                                     <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1668544609/Home/homepage/dhfpt_tkbry2.jpg" alt="">
                                 </div>
-                                <!--slide images end-->
                             </div>
                         </div>
-
                     </div>
                 </div>
             </div>
