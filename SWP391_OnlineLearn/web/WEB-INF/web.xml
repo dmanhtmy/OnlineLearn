@@ -23,6 +23,8 @@
     <servlet>
         <servlet-name>BlogDetailController</servlet-name>
         <servlet-class>Controllers.BlogDetailController</servlet-class>
+    </servlet>
+    <servlet>
 
         <servlet-name>SliderListController</servlet-name>
         <servlet-class>Controllers.SliderListController</servlet-class>
@@ -67,6 +69,8 @@
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/home/blog/detail</url-pattern>
 
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SliderListController</servlet-name>
         <url-pattern>/admin/sliders</url-pattern>
     </servlet-mapping>

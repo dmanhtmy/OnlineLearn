@@ -88,9 +88,7 @@ public class LoginController extends HttpServlet {
                     break;
                 case 4:
                     request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
-                case 5:
-                    response.sendRedirect(request.getContextPath() + "/home");
-                    break;
+            break;
             }
 
         }
