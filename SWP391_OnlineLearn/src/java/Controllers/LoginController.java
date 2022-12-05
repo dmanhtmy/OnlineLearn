@@ -81,27 +81,32 @@ public class LoginController extends HttpServlet {
         if (userRole == null) {
             response.sendRedirect(request.getContextPath() + "/login");
         } else {
-            int role = userRole.getRole().getRole_id();
-            switch (role) {
-                case 1:
-                    response.sendRedirect(request.getContextPath() + "/admin");
-                    break;
-                case 4:
-                    request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
-            break;
+            try {
+                int role = userRole.getRole().getRole_id();
+                switch (role) {
+                    case 1:
+                        response.sendRedirect(request.getContextPath() + "/admin");
+                        break;
+                    case 4:
+                        request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
+                        break;
+                }
+            } catch (ServletException | IOException e) {
+                  response.sendRedirect(request.getContextPath() + "/login");
             }
-
         }
 
     }
 
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
+
+
+/**
+ * Returns a short description of the servlet.
+ *
+ * @return a String containing servlet description
+ */
+@Override
+public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
 

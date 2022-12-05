@@ -65,7 +65,7 @@ public class UserDAOImpl implements UserDAO {
 
         try {
             String sql = "SELECT * FROM onlinelearn.user join onlinelearn.role\n"
-                    + "on onlinelearn.user.Role_Id = onlinelearn.role.role_id;";
+                    + "on onlinelearn.user.Role_Id = onlinelearn.role.role_id where onlinelearn.user.Role_Id = 1 or onlinelearn.user.Role_Id = 4; ";
             Connection connection = dbContext.getConnection();
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();

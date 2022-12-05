@@ -16,16 +16,59 @@
         <style>
             html{
                 font-size: small;
-
             }
             table{
-                padding: 10px;
+                padding: 20px;
                 text-align: center;
+                width: 95%;
+                height: 100%;
+                border: solid white;
+                margin: auto;
+                border-radius: 10px;
+                background-color: white;
+            }
+            .btn-edit{
+                height: 20px;
+                width: 30px;
+                background-color: #3498DB ;
+                color: white;
+                border-radius: 4px;
+            }
+            h1{
+                padding: 10px;
+                color: #3498DB;
+            }
+            .menu-container{
+                display: flex;
+                padding: 10px;
+                margin: auto;
+                justify-content: space-between;
+            }
+            .filter-container{
+                display: flex;
+                justify-content: space-between;
+            }
+            td{
+                height: 30px;
+                background: #3498DB;
             }
         </style>
     </head>
     <body>
-        <table style="width:100%">
+        <h1>User List</h1>
+        <div class="menu-container">
+            <div class="filter-container">
+                <h3>Filter</h3>
+                <select name="cars" id="cars">
+                    <option value="1">Admin</option>
+                    <option value="4">Customer</option>
+                </select>
+            </div>
+            <div>
+                <a href="admin/user/adduser.jsp"> Add User</a>
+            </div>
+        </div>
+        <table>
             <tr>
                 <th>
                     ID
@@ -49,7 +92,7 @@
                     Status
                 </th>
                 <th>
-                    detail
+                    Detail
                 </th>
             </tr>
             <c:forEach items="${requestScope.listUser}" var = "i" >
@@ -92,7 +135,7 @@
                         <td>  <c:out value = "hide"/></td>
                     </c:if>
                     <td>
-                        <a href="/admin/userdetail?id=${i.id}">edit</a>
+                        <a href="/admin/userdetail?id=${i.id}" class="btn-edit">edit</a>
                     </td>
                 </tr>
             </c:forEach>
