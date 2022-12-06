@@ -46,8 +46,6 @@ public class HomeController extends HttpServlet {
         loadHeaderAndAsideRight(request, response);
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("user", user);
-        String title_value = "ECOURSE - Online Course";
-        request.setAttribute("title_value", title_value);
         request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
         request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
     }
