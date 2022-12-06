@@ -105,7 +105,7 @@
                             <div class="navbar-nav py-0">
                                 <a href="<%= request.getContextPath()%>/home" class="nav-item nav-link">Home</a>
                                 <a href="<%= request.getContextPath()%>/home/about" class="nav-item nav-link">About</a>
-                                <a href="<%= request.getContextPath()%>/course" class="nav-item nav-link">Courses</a>
+                                <a href="<%= request.getContextPath()%>/home/course" class="nav-item nav-link">Courses</a>
                                 <a href="<%= request.getContextPath()%>/home/blog" class="nav-item nav-link">Blog</a>
                             </div>
                             <c:choose>
