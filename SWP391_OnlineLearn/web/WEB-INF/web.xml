@@ -13,6 +13,18 @@
         <servlet-class>Controllers.SignupController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SettingsListController</servlet-name>
+        <servlet-class>Controllers.SettingsListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSettingsController</servlet-name>
+        <servlet-class>Controllers.EditSettingsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSettingsController</servlet-name>
+        <servlet-class>Controllers.AddSettingsController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controllers.HomeController</servlet-class>
     </servlet>
@@ -41,6 +53,18 @@
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SettingsListController</servlet-name>
+        <url-pattern>/admin/settingslist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSettingsController</servlet-name>
+        <url-pattern>/admin/editsetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSettingsController</servlet-name>
+        <url-pattern>/admin/addsetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
@@ -52,6 +76,34 @@
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/home/blog/detail</url-pattern>
     </servlet-mapping>
+<!--    <servlet-mapping>
+        <servlet-name>SliderListController</servlet-name>
+        <url-pattern>/admin/sliders</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserListController</servlet-name>
+        <url-pattern>/admin/users</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserDetailController</servlet-name>
+        <url-pattern>/admin/userdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminBlogListController</servlet-name>
+        <url-pattern>/admin/blogs</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminBlogDeleteController</servlet-name>
+        <url-pattern>/admin/blog/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectListController</servlet-name>
+        <url-pattern>/admin/subjectlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSubjectController</servlet-name>
+        <url-pattern>/admin/addsubject</url-pattern>
+    </servlet-mapping>-->
     <servlet-mapping>
         <servlet-name>CourseController</servlet-name>
         <url-pattern>/home/course</url-pattern>
