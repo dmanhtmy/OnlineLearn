@@ -23,7 +23,8 @@
     <servlet>
         <servlet-name>BlogDetailController</servlet-name>
         <servlet-class>Controllers.BlogDetailController</servlet-class>
-
+    </servlet>
+    <servlet>
         <servlet-name>SliderListController</servlet-name>
         <servlet-class>Controllers.SliderListController</servlet-class>
     </servlet>
@@ -42,6 +43,10 @@
     <servlet>
         <servlet-name>AdminBlogDeleteController</servlet-name>
         <servlet-class>Controllers.AdminBlogDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminBlogCreateController</servlet-name>
+        <servlet-class>Controllers.AdminBlogCreateController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -66,7 +71,8 @@
     <servlet-mapping>
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/home/blog/detail</url-pattern>
-
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>SliderListController</servlet-name>
         <url-pattern>/admin/sliders</url-pattern>
     </servlet-mapping>
@@ -85,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>AdminBlogDeleteController</servlet-name>
         <url-pattern>/admin/blog/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminBlogCreateController</servlet-name>
+        <url-pattern>/admin/blog/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

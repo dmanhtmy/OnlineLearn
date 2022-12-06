@@ -104,17 +104,15 @@ public class BlogDAOImpl implements BlogDAO {
         DBContext dbContext = new DBContext();
         try {
             Connection connection = dbContext.getConnection();
-            String sql = "INSERT INTO onlinelearn.blog_list(title, category_id, postdate,brief_info,thumbnail,feature,status,post_content)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO onlinelearn.blog_list(title, category_id, postdate,brief_info,thumbnail,post_content)\n"
+                    + "VALUES (?,?,?,?,?,?);";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, t.getTitle());
             stm.setInt(2, t.getCategory_id());
             stm.setDate(3, t.getPostdate());
             stm.setString(4, t.getBrief_info());
             stm.setString(5, t.getThumbnail());
-            stm.setBoolean(6, t.isFeature());
-            stm.setBoolean(7, t.isStatus());
-            stm.setString(8, t.getBlogdetail());
+            stm.setString(6, t.getBlogdetail());
             stm.executeUpdate();
             dbContext.closeConnection(connection, stm);
             return true;
@@ -187,12 +185,13 @@ public class BlogDAOImpl implements BlogDAO {
         }
         return listBlog;
     }
+    
 
     public static void main(String[] args) {
         BlogDAOImpl db = new BlogDAOImpl();
-        List<BlogList> list=db.search("SQUARE ");
+        List<BlogList> list=db.getAll();
         for (BlogList blogList : list) {
-            System.out.println(blogList.getTitle());
+            System.out.println(blogList.getCategory_id());
         }
     }
 
