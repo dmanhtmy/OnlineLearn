@@ -6,7 +6,10 @@ package Controllers;
 
 import DAO.Impl.BlogCategoryDAOImpl;
 import DAO.Impl.BlogDAOImpl;
+import Models.BlogList;
 import Models.CategoryBlog;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,7 +17,11 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -78,18 +85,34 @@ public class AdminBlogCreateController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
         BlogDAOImpl blogDAO = new BlogDAOImpl();
-        String title = request.getParameter("title");
-        String brief = request.getParameter("brief");
-        String content = request.getParameter("content");
-        int category_id = Integer.parseInt(request.getParameter("category"));
-        Part part = request.getPart("thumbnail");
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
         Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
                 "cloud_name", "ddrjnfihc",
                 "api_key", "295827132792413",
                 "api_secret", "SyPzR-EcBnCG-BSQ5298s4MC9LE"));
         cloudinary.config.secure = true;
+        String title = request.getParameter("title");
+        String brief = request.getParameter("brief");
+        String content = request.getParameter("content");
+        int category_id = Integer.parseInt(request.getParameter("category"));
+        Part filePart = request.getPart("thumbnail");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        filePart.write(request.getRealPath("thumbnail") + fileName);
+        Map path = ObjectUtils.asMap(
+                "public_id", "Admin/Blog/images/" + title,
+                "overwrite", true,
+                "resource_type", "image"
+        );
+        Map uploadResult = cloudinary.uploader().upload(request.getRealPath("thumbnail") + fileName, path);
+        filePart.delete();
+        String geturl = uploadResult.get("secure_url").toString();
+        BlogList blog = new BlogList(title, category_id, formatter.format(date), brief, geturl, content);
+//        boolean status = blogDAO.insert(new BlogList(title, category_id, formatter.format(date), brief, geturl, content));
+        boolean status = blogDAO.insert(blog);
+        request.setAttribute("status", status);
+        request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
     }
 
     /**

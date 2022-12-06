@@ -38,7 +38,7 @@ public class BlogDAOImpl implements BlogDAO {
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
                 blog.setBrief_info(rs.getString("brief_info"));
-                blog.setPostdate(rs.getDate("postdate"));
+                blog.setPostdate(rs.getString("postdate"));
                 listBlog.add(blog);
             }
             dBContext.closeConnection(connection, ps, rs);
@@ -64,7 +64,7 @@ public class BlogDAOImpl implements BlogDAO {
                 blog.setTitle(rs.getString("title"));
                 blog.setBrief_info(rs.getString("brief_info"));
                 blog.setThumbnail(rs.getString("thumbnail"));
-                blog.setPostdate(rs.getDate("postdate"));
+                blog.setPostdate(rs.getString("postdate"));
                 blog.setBlogdetail(rs.getString("post_content"));
                 return blog;
             }
@@ -89,7 +89,7 @@ public class BlogDAOImpl implements BlogDAO {
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
                 blog.setBrief_info(rs.getString("brief_info"));
-                blog.setPostdate(rs.getDate("postdate"));
+                blog.setPostdate(rs.getString("postdate"));
                 listBlog.add(blog);
             }
             dbContext.closeConnection(connection, stm, rs);
@@ -109,7 +109,7 @@ public class BlogDAOImpl implements BlogDAO {
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, t.getTitle());
             stm.setInt(2, t.getCategory_id());
-            stm.setDate(3, t.getPostdate());
+            stm.setString(3, t.getPostdate());
             stm.setString(4, t.getBrief_info());
             stm.setString(5, t.getThumbnail());
             stm.setString(6, t.getBlogdetail());
@@ -177,7 +177,7 @@ public class BlogDAOImpl implements BlogDAO {
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
                 blog.setBrief_info(rs.getString("brief_info"));
-                blog.setPostdate(rs.getDate("postdate"));
+                blog.setPostdate(rs.getString("postdate"));
                 listBlog.add(blog);
             }
         } catch (SQLException e) {
@@ -189,10 +189,7 @@ public class BlogDAOImpl implements BlogDAO {
 
     public static void main(String[] args) {
         BlogDAOImpl db = new BlogDAOImpl();
-        List<BlogList> list=db.getAll();
-        for (BlogList blogList : list) {
-            System.out.println(blogList.getCategory_id());
-        }
+        System.out.println(db.insert(new BlogList("abcd", 1, "2022-12-07", "abcd", "acbd", "abcd")));
     }
 
 }

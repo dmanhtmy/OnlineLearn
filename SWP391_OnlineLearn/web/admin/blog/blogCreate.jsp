@@ -18,23 +18,17 @@ crossorigin="anonymous"></script>
         <div class="col-md-12">
             <section class="panel">
                 <div class="panel-body">
-                    <c:if test="${sessionScope.message != null}">
-                        <div style="text-align: center">
-                            <h1>${message}<i class="fa fa-check-square-o"></i></h1>
-                        </div>
-                    </c:if>
-                    <c:set var="message" scope="session" value="${null}"></c:set>
-                        <form class="form-horizontal tasi-form" method="Post" action="admin/blog/create" enctype="multipart/form-data">
-                            <div class="form-group">
-                                <label class="col-sm-2 col-sm-2 control-label">Title(*)</label>
-                                <div class="col-sm-8">
-                                    <input  name ="title" type="text" class="form-control" required="required">
-                                </div>
+                    <form class="form-horizontal tasi-form" method="Post" action="<%= request.getContextPath()%>/admin/blog/create" enctype="multipart/form-data">
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Title(*)</label>
+                            <div class="col-sm-8">
+                                <input  name ="title" type="text" class="form-control" required="required">
                             </div>
-                            <div class="form-group">
-                                <label class="col-sm-2 col-sm-2 control-label">Author</label>
-                                <div class="col-sm-8">
-                                    <input  type="text" value="${sessionScope.user.getUsername()}" class="form-control" disabled="disabled">
+                        </div>
+                        <div class="form-group">
+                            <label class="col-sm-2 col-sm-2 control-label">Author</label>
+                            <div class="col-sm-8">
+                                <input  type="text" value="${sessionScope.user.getUsername()}" class="form-control" disabled="disabled">
                             </div>
                         </div>
                         <div class="form-group">
@@ -46,9 +40,7 @@ crossorigin="anonymous"></script>
                         <div class="form-group">
                             <label class="col-sm-2 col-sm-2 control-label">Post Content</label>
                             <div class="col-sm-8">
-                                <textarea id="editor" name="content" class="form-control round-input" style="height: 200px;color: black" required="required">
-                                    ${blogDetail.post_content}
-                                </textarea>
+                                <input class="form-control round-input" id="editor" type="text" name="content" style="height: 200px;color: black">
                             </div>
                         </div>
                         <div class="form-group">
@@ -67,8 +59,6 @@ crossorigin="anonymous"></script>
                             <div class="col-sm-8">
                                 <img id="blah" onchange="PreviewImage();" src="" style="border-radius: 1rem" width="70%">
                             </div>
-
-
                         </div>
                         <div style="text-align: center"><button type="submit"  id="buu" class="btn btn-secondary btn-lg ">ADD POST</button></div>
                     </form>

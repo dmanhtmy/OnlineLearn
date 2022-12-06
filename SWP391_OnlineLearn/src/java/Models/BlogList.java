@@ -16,7 +16,7 @@ public class BlogList {
     private int id;
     private String title;
     private int category_id;
-    private Date postdate;
+    private String postdate;
     private String brief_info;
     private String thumbnail;
     private String blogdetail;
@@ -24,8 +24,16 @@ public class BlogList {
     public BlogList() {
     }
 
-    public BlogList(int id, String title, int category_id, Date postdate, String brief_info, String thumbnail, String blogdetail) {
+    public BlogList(int id, String title, int category_id, String postdate, String brief_info, String thumbnail, String blogdetail) {
         this.id = id;
+        this.title = title;
+        this.category_id = category_id;
+        this.postdate = postdate;
+        this.brief_info = brief_info;
+        this.thumbnail = thumbnail;
+        this.blogdetail = blogdetail;
+    }
+    public BlogList( String title, int category_id, String postdate, String brief_info, String thumbnail, String blogdetail) {
         this.title = title;
         this.category_id = category_id;
         this.postdate = postdate;
@@ -58,11 +66,11 @@ public class BlogList {
         this.category_id = category_id;
     }
 
-    public Date getPostdate() {
+    public String getPostdate() {
         return postdate;
     }
 
-    public void setPostdate(Date postdate) {
+    public void setPostdate(String postdate) {
         this.postdate = postdate;
     }
 
