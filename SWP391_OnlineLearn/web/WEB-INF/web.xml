@@ -76,7 +76,7 @@
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/home/blog/detail</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+<!--    <servlet-mapping>
         <servlet-name>SliderListController</servlet-name>
         <url-pattern>/admin/sliders</url-pattern>
     </servlet-mapping>
@@ -103,6 +103,10 @@
     <servlet-mapping>
         <servlet-name>AddSubjectController</servlet-name>
         <url-pattern>/admin/addsubject</url-pattern>
+    </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>CourseController</servlet-name>
+        <url-pattern>/home/course</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
