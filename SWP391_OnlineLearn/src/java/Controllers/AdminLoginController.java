@@ -4,20 +4,21 @@
  */
 package Controllers;
 
+import DAO.Impl.LoginDAOImpl;
 import Models.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 /**
  *
- * @author HP
+ * @author DELL
  */
-@WebServlet (name="HomeController",urlPatterns={"/home"})
-public class HomeController extends HttpServlet {
+public class AdminLoginController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,26 +29,21 @@ public class HomeController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
-        String login_href_value = "";
-        String logout_href = "home";
-        if (request.getSession().getAttribute("user") == null) {
-            return;
-        } else {
-            User user = (User) request.getSession().getAttribute("user");
-            login_href_value += user.getFullname();
-        }
-        request.setAttribute("login_href_value", login_href_value);
-        request.setAttribute("logout_href", logout_href);
-    }
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        loadHeaderAndAsideRight(request, response);
-        User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("user", user);
-        request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
-        request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AdminLoginController</title>");            
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AdminLoginController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -62,7 +58,8 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        
+        request.getRequestDispatcher(request.getContextPath() + "./login/login.jsp").forward(request, response);
     }
 
     /**
@@ -76,7 +73,23 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String user = request.getParameter("username");
+        String pass = request.getParameter("password");
+ 
+        LoginDAOImpl login = new LoginDAOImpl();
+        User userRole = login.getUser(user, pass);
+        
+        
+         HttpSession session = request.getSession();
+        session.setAttribute("user", userRole);
+         int role = userRole.getRole().getRole_id();
+        if(role == 1) {
+            response.sendRedirect(request.getContextPath() + "/admin");
+        }
+        else {
+            response.sendRedirect(request.getContextPath() + "/admin/login");
+        }
+            
     }
 
     /**
