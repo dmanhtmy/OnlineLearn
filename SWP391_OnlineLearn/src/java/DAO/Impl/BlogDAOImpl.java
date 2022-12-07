@@ -54,7 +54,7 @@ public class BlogDAOImpl implements BlogDAO {
         BlogList blog = new BlogList();
         try {
             Connection connection = dbContext.getConnection();
-            String sql = "select bl.id,bl.title,bl.brief_info,bl.thumbnail,bl.postdate,bl.post_content from onlinelearn.blog_list bl\n"
+            String sql = "select bl.id,bl.title,bl.category_id,bl.brief_info,bl.thumbnail,bl.postdate,bl.post_content from onlinelearn.blog_list bl\n"
                     + "where bl.id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
@@ -62,6 +62,7 @@ public class BlogDAOImpl implements BlogDAO {
             while (rs.next()) {
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
+                blog.setCategory_id(rs.getInt("category_id"));
                 blog.setBrief_info(rs.getString("brief_info"));
                 blog.setThumbnail(rs.getString("thumbnail"));
                 blog.setPostdate(rs.getString("postdate"));
@@ -124,7 +125,33 @@ public class BlogDAOImpl implements BlogDAO {
 
     @Override
     public boolean update(BlogList t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DBContext dbContext = new DBContext();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "UPDATE onlinelearn.blog_list\n"
+                    + "SET \n"
+                    + "title = ?, \n"
+                    + "category_id = ?,\n"
+                    + "postdate=?,\n"
+                    + "brief_info=?,\n"
+                    + "thumbnail=?,\n"
+                    + "post_content=?\n"
+                    + "WHERE id=?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, t.getTitle());
+            stm.setInt(2, t.getCategory_id());
+            stm.setString(3, t.getPostdate());
+            stm.setString(4, t.getBrief_info());
+            stm.setString(5, t.getThumbnail());
+            stm.setString(6, t.getBlogdetail());
+            stm.setInt(7, t.getId());
+            stm.executeUpdate();
+            dbContext.closeConnection(connection, stm);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
@@ -188,9 +215,9 @@ public class BlogDAOImpl implements BlogDAO {
 
     public static void main(String[] args) {
         BlogDAOImpl db = new BlogDAOImpl();
-//        System.out.println(db.insert(new BlogList("abcdfds", 1, "2022-12-07", "abcfdd", "acbfdsd", "abfsdcd")));
-        BlogList blog = new BlogList("huyenana", 2, "2022-01-01", "gbsadjfbasj", "fbjabfajs", "fgbasjfbajs");
-        System.out.println(db.insert(blog));
+        System.out.println(db.update(new BlogList(35, "huhahaha", 3, "2022-01-01", "hahahah", "heuhehe", "hahahah")));
+//        BlogList blog = new BlogList("huyenana", 2, "2022-01-01", "gbsadjfbasj", "fbjabfajs", "fgbasjfbajs");
+//        System.out.println(db.get(9).getTitle());
     }
 
 }

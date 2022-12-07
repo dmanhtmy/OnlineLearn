@@ -20,17 +20,17 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.nio.file.Paths;
-import java.util.List;
-import java.util.Map;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
  * @author MrTuan
  */
 @MultipartConfig
-public class AdminBlogCreateController extends HttpServlet {
+public class AdminBlogUpdateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -49,10 +49,10 @@ public class AdminBlogCreateController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminBlogCreateController</title>");
+            out.println("<title>Servlet AdminBlogUpdateController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminBlogCreateController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminBlogUpdateController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -76,12 +76,15 @@ public class AdminBlogCreateController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/home");
         } else {
         BlogCategoryDAOImpl blogCategoryDAO = new BlogCategoryDAOImpl();
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+        BlogList blog = blogDAO.get(id);
         List<CategoryBlog> listCategoryBlog = blogCategoryDAO.getAll();
+        request.setAttribute("blog", blog);
         request.setAttribute("listCategory", listCategoryBlog);
-        request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blogCreate.jsp").forward(request, response);
-        }
+        request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blogUpdate.jsp").forward(request, response);
     }
-
+}
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -101,6 +104,7 @@ public class AdminBlogCreateController extends HttpServlet {
         cloudinary.config.secure = true;
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         Date date = new Date();
+        int id = Integer.parseInt(request.getParameter("id"));
         String title = request.getParameter("title");
         String brief = request.getParameter("brief");
         String content = request.getParameter("content");
@@ -110,13 +114,13 @@ public class AdminBlogCreateController extends HttpServlet {
         filePart.write(request.getRealPath("image") + fileName);
         Map path = ObjectUtils.asMap(
                 "public_id", "Admin/Blog/images/" + title,
-                "overwrite", false,
+                "overwrite", true,
                 "resource_type", "image"
         );
         Map uploadResult = cloudinary.uploader().upload(request.getRealPath("image") + fileName, path);
         filePart.delete();
         String geturl = uploadResult.get("secure_url").toString();
-        boolean status = blogDAO.insert(new BlogList(title, category_id, formatter.format(date), brief, geturl, content));
+        boolean status = blogDAO.update(new BlogList(id, title, category_id, formatter.format(date), brief, geturl, content));
         request.setAttribute("status", status);
         response.sendRedirect(request.getContextPath() + "/admin/blogs?status=" + status);
     }

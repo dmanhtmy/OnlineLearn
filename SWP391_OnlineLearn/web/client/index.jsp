@@ -104,9 +104,9 @@
                         <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                             <div class="navbar-nav py-0">
                                 <a href="<%= request.getContextPath()%>/home" class="nav-item nav-link">Home</a>
-                                <a href="<%= request.getContextPath()%>/home/about" class="nav-item nav-link">About</a>
-                                <a href="<%= request.getContextPath()%>/home/course" class="nav-item nav-link">Courses</a>
-                                <a href="<%= request.getContextPath()%>/home/blog" class="nav-item nav-link">Blog</a>
+                                <a href="<%= request.getContextPath()%>/about" class="nav-item nav-link">About</a>
+                                <a href="<%= request.getContextPath()%>/course" class="nav-item nav-link">Courses</a>
+                                <a href="<%= request.getContextPath()%>/blog" class="nav-item nav-link">Blog</a>
                             </div>
                             <c:choose>
                                 <c:when test="${sessionScope.user!=null}">
@@ -119,7 +119,7 @@
                                             <a href="" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                                                 Edit your profile
                                             </a>
-                                            <a class="dropdown-item" href="<%= request.getContextPath()%>/login">Logout</a>
+                                            <a class="dropdown-item" href="<%= request.getContextPath()%>/logout">Logout</a>
                                         </div>
                                     </div>
                                 </c:when>

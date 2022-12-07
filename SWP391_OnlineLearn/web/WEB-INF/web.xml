@@ -48,6 +48,14 @@
         <servlet-name>AdminBlogCreateController</servlet-name>
         <servlet-class>Controllers.AdminBlogCreateController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AdminBlogUpdateController</servlet-name>
+        <servlet-class>Controllers.AdminBlogUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Controllers.LogoutController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -66,7 +74,7 @@
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogListController</servlet-name>
-        <url-pattern>/home/blog</url-pattern>
+        <url-pattern>/blog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogDetailController</servlet-name>
@@ -95,6 +103,14 @@
     <servlet-mapping>
         <servlet-name>AdminBlogCreateController</servlet-name>
         <url-pattern>/admin/blog/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminBlogUpdateController</servlet-name>
+        <url-pattern>/admin/blog/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

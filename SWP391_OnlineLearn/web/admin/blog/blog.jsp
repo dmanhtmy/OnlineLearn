@@ -48,7 +48,7 @@
                             <td>${blog.getTitle()}</td>
                             <td>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${blog.getId()}">Delete</button>
-                                <button type="button" class="btn btn-info" onclick="updateBlog(${blog.getId()})">Update</button>
+                                <button type="button" class="btn btn-info" onclick="updateBlog(${blog.getId()})" name="id" value="${blog.getId()}">Update</button>
                             </td>
                         </tr>
                         <div class="modal fade" id="exampleModal${blog.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

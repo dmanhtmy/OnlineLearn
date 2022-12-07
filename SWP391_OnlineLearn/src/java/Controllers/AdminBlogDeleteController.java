@@ -6,6 +6,7 @@ package Controllers;
 
 import DAO.Impl.BlogDAOImpl;
 import Models.BlogList;
+import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -59,6 +60,10 @@ public class AdminBlogDeleteController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 //        processRequest(request, response);
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/home");
+        } else {
         BlogDAOImpl blogDAO = new BlogDAOImpl();
         int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
         String indexpasge = request.getParameter("page");
@@ -89,7 +94,7 @@ public class AdminBlogDeleteController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/admin/blogs?status=" + status);
         }
     }
-
+}
     /**
      * Handles the HTTP <code>POST</code> method.
      *
