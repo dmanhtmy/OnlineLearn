@@ -4,21 +4,18 @@
  */
 package Controllers;
 
-import DAO.Impl.LoginDAOImpl;
-import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.HttpSession;
 
 /**
  *
  * @author DELL
  */
-public class AdminLoginController extends HttpServlet {
+public class ChangePassword extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +34,10 @@ public class AdminLoginController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminLoginController</title>");            
+            out.println("<title>Servlet ChangePassword</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminLoginController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet ChangePassword at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,8 +55,7 @@ public class AdminLoginController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
-        request.getRequestDispatcher(request.getContextPath() + "./login/login.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     /**
@@ -73,23 +69,7 @@ public class AdminLoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String user = request.getParameter("username");
-        String pass = request.getParameter("password");
- 
-        LoginDAOImpl login = new LoginDAOImpl();
-        User userRole = login.getUser(user, pass);
-        
-        
-         HttpSession session = request.getSession();
-        session.setAttribute("user", userRole);
-         int role = userRole.getRole().getRole_id();
-        if(role == 1) {
-            response.sendRedirect(request.getContextPath() + "/admin");
-        }
-        else {
-            response.sendRedirect(request.getContextPath() + "/admin/login");
-        }
-            
+        processRequest(request, response);
     }
 
     /**

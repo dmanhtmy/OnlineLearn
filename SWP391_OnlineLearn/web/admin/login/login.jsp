@@ -30,41 +30,26 @@
     </nav>
     <article></article>
     <div style="background: var(--bs-border-color-translucent);margin-top: 164px;">
-        <form action="login" autocomplete="off" class="sign-in-form" method="post" >
+        <form action="/admin/login" autocomplete="off" class="sign-in-form" method="post" >
         <div style="margin-bottom: 44px;margin-left: 183px;position: static;margin-top: 163px;padding-left: 154px;">
             <div class="container">
                 <div class="row" style=";text-align: left;margin-left: -192px;padding-left: 191px;">
-                    <div class="col-md-6" style="padding-bottom: 0px;margin-bottom: 0px;"><label class="col-form-label" style="font-weight: bold;font-size: 23px;">User</label></div>
-                    <div class="col-md-6"><input type="text" style="padding-top: 1px;margin-right: -1px;margin-left: -183px;background: var(--bs-border-color-translucent);"></div>
+                    <div  class="col-md-6" style="padding-bottom: 0px;margin-bottom: 0px;"><label class="col-form-label" style="font-weight: bold;font-size: 23px;">User</label></div>
+                    <div  class="col-md-6"><input type="text" minlength="4" class="input-field" name="username" autocomplete="off" required placeholder="Name" name ="username" style="padding-top: 1px;margin-right: -1px;margin-left: -183px;background: var(--bs-border-color-translucent);"></div>
                 </div>
             </div>
             <div class="container">
                 <div class="row" style="--bs-body-font-weight: normal;">
                     <div class="col-md-6"><label class="col-form-label" style="font-weight: bold;font-size: 21px;margin-left: 12px;">Password</label></div>
-                    <div class="col-md-6"><input type="text" style="padding-left: 0px;margin-right: 1px;margin-left: -178px;background: var(--bs-border-color-translucent);"></div>
+                    <div class="col-md-6"><input type="password" minlength="4" class="input-field" name="password" autocomplete="off" required placeholder="Password" name ="password" style="padding-left: 0px;margin-right: 1px;margin-left: -178px;background: var(--bs-border-color-translucent);"></div>
                 </div>
-            </div><input type="submit" value="Sign In" class="sign-btn" style="background: var(--bs-border-color-translucent);border-top-color: var(--bs-black);color: var(--bs-btn-color);font-weight: bold;font-size: 20px;text-align: right;padding-left: 0px;margin-right: -68px;padding-right: 17px;margin-left: 357px;">Login/>
+            </div>
+            <input type="submit" value="Sign In" class="sign-btn" style="background: var(--bs-border-color-translucent);border-top-color: var(--bs-black);color: var(--bs-btn-color);font-weight: bold;font-size: 20px;text-align: right;padding-left: 0px;margin-right: -68px;padding-right: 17px;margin-left: 357px;"/>
         </div>
             </form>
     </div>
     <script src="bootstrap.min.js">
-        String user = request.getParameter("username");
-        String pass = request.getParameter("password");
-        LoginDAOImpl login = new LoginDAOImpl();
-        User userRole = login.getUser(user, pass);
-        HttpSession session = request.getSession();
-        session.setAttribute("user", userRole);
-        if (userRole == null) {
-            response.sendRedirect(request.getContextPath() + "/login");
-        } else {
-            int role = userRole.getRole().getRole_id();
-            switch (role) {
-                case 1:
-                    response.sendRedirect(request.getContextPath() + "/admin");
-                    break;
-                case 4:
-                    request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
-            break;
+        
     </script>
 </body>
 

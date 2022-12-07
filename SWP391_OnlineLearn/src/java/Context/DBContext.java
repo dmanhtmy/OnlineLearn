@@ -28,7 +28,7 @@ public class DBContext {
     private final String dbName = "onlinelearn";
     private final String portNumber = "3306";
     private final String userID = "root";
-    private final String password = "vanh1108";
+    private final String password = "Manh05052000";
 
     public Connection getConnection() {
 
