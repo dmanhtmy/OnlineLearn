@@ -733,7 +733,7 @@
                     searchButtonIcon.classList.replace('bx-x', 'bx-search');
                 }
             }
-        })
+        });
 
 
 
