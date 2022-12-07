@@ -13,75 +13,42 @@ crossorigin="anonymous"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../layout/layout.jsp" %>
 <main>
-    <!-- Main content -->
-    <div class="row">
-        <div class="col-md-12">
-            <section class="panel">
-                <div class="panel-body">
-                    <form class="form-horizontal tasi-form" method="Post" action="<%= request.getContextPath()%>/admin/blog/create" enctype="multipart/form-data">
-                        <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Title(*)</label>
-                            <div class="col-sm-8">
-                                <input  name ="title" type="text" class="form-control" required="required">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Author</label>
-                            <div class="col-sm-8">
-                                <input  type="text" value="${sessionScope.user.getUsername()}" class="form-control" disabled="disabled">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Brief_Info(*)</label>
-                            <div class="col-sm-8">
-                                <textarea  name="brief" class="form-control round-input" style="height: 100px;color: black" required="required"></textarea>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Post Content</label>
-                            <div class="col-sm-8">
-                                <input class="form-control round-input" id="editor" type="text" name="content" style="height: 200px;color: black">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label class="col-sm-2 col-sm-2 control-label">Category</label>
-                            <div class="col-sm-8">
-                                <select name="category" required="required">
-                                    <c:forEach items="${requestScope.listCategory}" var="ca" >
-                                        <option value="${ca.getId()}">${ca.getName()}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group" >
-                            <label class="col-sm-2 col-sm-2 control-label">Upload Thumbnail </label>
-                            <input type="file" class="col-sm-2" accept="image/*" name="thumbnail" id="imgInp">
-                            <div class="col-sm-8">
-                                <img id="blah" onchange="PreviewImage();" src="" style="border-radius: 1rem" width="70%">
-                            </div>
-                        </div>
-                        <div style="text-align: center"><button type="submit"  id="buu" class="btn btn-secondary btn-lg ">ADD POST</button></div>
-                    </form>
-                </div>
-            </section>
+    <form action="/admin/blog/create" method="POST" enctype="multipart/form-data">
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">*Title</span>
+            <input type="text" class="form-control" placeholder="title..." aria-label="Username" aria-describedby="basic-addon1" title="title">
         </div>
-    </div>
-    <script src="//cdn.ckeditor.com/4.17.2/full/ckeditor.js"></script>    
-    <script>
 
-                                    CKEDITOR.replace('editor');
-                                    let i = document.getElementById("editor");
-                                    console.log(typeof (i.value));
-    </script>
-    <script>
-        imgInp.onchange = evt => {
-            const [file] = imgInp.files;
-            if (file) {
-                blah.src = URL.createObjectURL(file);
-            }
-        };
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">Brief Infor</span>
+            <input type="text" class="form-control" placeholder="brief infor..." aria-label="Recipient's username" aria-describedby="basic-addon2" name="brief">
+        </div>
 
-    </script>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">Author</span>
+            <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="${sessionScope.user.getUsername()}" readonly="true" disabled="true">
+        </div>
+        <div class="input-group mb-3">
+            <label class="input-group-text" for="inputGroupFile01">Upload Image</label>
+            <!--<input type="file" class="form-control" id="images" name="image">-->
+            <input type="file" id="file" name="image" accept="image/png,image/jpeg" multiple="multiple">
+        </div>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon2">Category</span>
+            <div class="col-sm-8">
+                <select name="category" required="required" style="height: 40px;">
+                    <c:forEach items="${requestScope.listCategory}" var="ca" >
+                        <option value="${ca.getId()}">${ca.getName()}</option>
+                    </c:forEach>
+                </select>
+            </div>
+        </div>
+        <div class="input-group">
+            <span class="input-group-text">Content</span>
+            <textarea class="form-control" aria-label="With textarea" style="height: 200px;" name="content"></textarea>
+        </div>
+        <div class="button-submit" style="text-align: center;margin-top: 50px;"><button type="submit" class="btn btn-primary" >Create Blog</button></div>
+    </form>
 </main>
 </section>
 </body>
