@@ -37,32 +37,8 @@
         <servlet-class>Controllers.BlogDetailController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>SliderListController</servlet-name>
-        <servlet-class>Controllers.SliderListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UserListController</servlet-name>
-        <servlet-class>Controllers.UserListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>UserDetailController</servlet-name>
-        <servlet-class>Controllers.UserDetailController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminBlogListController</servlet-name>
-        <servlet-class>Controllers.AdminBlogListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AdminBlogDeleteController</servlet-name>
-        <servlet-class>Controllers.AdminBlogDeleteController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>SubjectListController</servlet-name>
-        <servlet-class>Controllers.SubjectListController</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>AddSubjectController</servlet-name>
-        <servlet-class>Controllers.AddSubjectController</servlet-class>
+        <servlet-name>CourseController</servlet-name>
+        <servlet-class>Controllers.CourseController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AdminLoginController</servlet-name>
@@ -112,7 +88,7 @@
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/home/blog/detail</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
+<!--    <servlet-mapping>
         <servlet-name>SliderListController</servlet-name>
         <url-pattern>/admin/sliders</url-pattern>
     </servlet-mapping>
@@ -139,6 +115,10 @@
     <servlet-mapping>
         <servlet-name>AddSubjectController</servlet-name>
         <url-pattern>/admin/addsubject</url-pattern>
+    </servlet-mapping>-->
+    <servlet-mapping>
+        <servlet-name>CourseController</servlet-name>
+        <url-pattern>/home/course</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminLoginController</servlet-name>
