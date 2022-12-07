@@ -29,6 +29,121 @@ public class CourseDAOImpl implements CourseDAO {
     private DBContext dbContext = new DBContext();
     private Connection connection = dbContext.getConnection();
 
+    public int updateSubject(Course c, String thumbnail, InputStream fileDocument) {
+        int row = 0;
+        try {
+            String sql = "UPDATE `onlinelearn`.`course`\n"
+                    + "SET\n"
+                    + "`title` = ?,\n"
+                    + "`briefinfo` = ?,\n"
+                    + "`author` = ?,\n"
+                    + "`introduction` = ?,\n"
+                    + "`listprice` = ?,\n"
+                    + "`saleprice` = ?,\n"
+                    + "`status` = ?,\n"
+                    + "`featureflag` = ?,\n"
+                    + "`updatedate` = ?\n";
+            if (thumbnail != null) {
+                sql += ",`thumbnail` = ?\n";
+            }
+            if (fileDocument != null) {
+                sql += ",`document` = ?, filedocumentname = ? \n";
+            }
+            sql += " WHERE `cid` = ?;";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setString(1, c.getTitle());
+            stm.setString(2, c.getBriefinfo());
+            stm.setInt(3, c.getAuthor().getId());
+            stm.setString(4, c.getIntroduction());
+            stm.setDouble(5, c.getListprice());
+            stm.setDouble(6, c.getSaleprice());
+            stm.setBoolean(7, c.isStatus());
+            stm.setBoolean(8, c.isFeatureflag());
+            stm.setDate(9, c.getUpdatedate());
+            if (thumbnail != null && fileDocument != null) {
+                stm.setString(10, thumbnail);
+                stm.setBlob(11, fileDocument);
+                stm.setString(12, c.getFilename());
+                stm.setInt(13, c.getCid());
+            } else if (thumbnail != null && fileDocument == null) {
+                stm.setString(10, thumbnail);
+                stm.setInt(11, c.getCid());
+            } else if (thumbnail == null && fileDocument != null) {
+                stm.setBlob(10, fileDocument);
+                stm.setString(11, c.getFilename());
+                stm.setInt(12, c.getCid());
+            } else {
+                stm.setInt(10, c.getCid());
+            }
+            row = stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return row;
+    }
+
+    public Course getCourseById(int id) {
+        try {
+            String sql = "SELECT `course`.`cid`,\n"
+                    + "    `course`.`title`,\n"
+                    + "    `course`.`thumbnail`,\n"
+                    + "    `course`.`briefinfo`,\n"
+                    + "    `course`.`author`,\n"
+                    + "    `course`.`introduction`,\n"
+                    + "    `course`.`listprice`,\n"
+                    + "    `course`.`saleprice`,\n"
+                    + "    `course`.`status`,\n"
+                    + "    `course`.`featureflag`,\n"
+                    + "    `course`.`document`,\n"
+                    + "course.filedocumentname\n"
+                    + "FROM `onlinelearn`.`course` WHERE cid = ?;";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            if (rs.next()) {
+                Course c = new Course();
+                c.setCid(rs.getInt("cid"));
+                c.setTitle(rs.getString("title"));
+                c.setThumbnail(rs.getString("thumbnail"));
+                c.setBriefinfo(rs.getString("briefinfo"));
+                User u = new User();
+                u.setId(rs.getInt("author"));
+                c.setAuthor(u);
+                c.setIntroduction(rs.getString("introduction"));
+                c.setListprice(rs.getDouble("listprice"));
+                c.setSaleprice(rs.getDouble("saleprice"));
+                c.setStatus(rs.getBoolean("status"));
+                c.setFeatureflag(rs.getBoolean("featureflag"));
+                c.setDocument(rs.getBlob("document"));
+                c.setFilename(rs.getString("filedocumentname"));
+                return c;
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+
+    public void updateStatus(int id, int status) {
+        try {
+            String sql = "UPDATE `onlinelearn`.`course`\n"
+                    + "SET\n"
+                    + "`status` = ?\n"
+                    + "WHERE `cid` = ?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            if (status == 1) {
+                stm.setBoolean(1, false);
+            } else {
+                stm.setBoolean(1, true);
+            }
+            stm.setInt(2, id);
+
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
     @Override
     public Course get(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -159,6 +274,7 @@ public class CourseDAOImpl implements CourseDAO {
         }
         return categorys;
     }
+
     public int insertSubject(Course c, String thumbnail, InputStream fileDocument) {
         int row = 0;
         try {
@@ -210,7 +326,7 @@ public class CourseDAOImpl implements CourseDAO {
         }
         return row;
     }
-    
+
     public Course getCourse(int course_id) {
         String sql_Course = "SELECT * FROM onlinelearn.course WHERE cid = ?";
         Course c = new Course();
@@ -234,7 +350,7 @@ public class CourseDAOImpl implements CourseDAO {
         }
         return c;
     }
-    
+
     public List<Course> getAllCoursePagging(String name, int pageIndex, int pageSize) {
         List<Course> list = new ArrayList<>();
         try {
@@ -270,7 +386,7 @@ public class CourseDAOImpl implements CourseDAO {
         }
         return null;
     }
-    
+
     public int totalCourse(String name) {
         try {
             String sql = "select count(cid) as total from onlinelearn.course ";
@@ -286,7 +402,7 @@ public class CourseDAOImpl implements CourseDAO {
         }
         return 0;
     }
-    
+
     public List<CourseRegistration> getListCourseRegistedByUserID(int userId) {
         List<CourseRegistration> list = new ArrayList<>();
 
