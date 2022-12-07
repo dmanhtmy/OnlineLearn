@@ -4,22 +4,33 @@
  */
 package Controllers;
 
+import DAO.Impl.BlogCategoryDAOImpl;
 import DAO.Impl.BlogDAOImpl;
 import Models.BlogList;
+import Models.CategoryBlog;
 import Models.User;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+import java.nio.file.Paths;
 import java.util.List;
+import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
  * @author MrTuan
  */
-public class AdminBlogDeleteController extends HttpServlet {
+@MultipartConfig
+public class AdminBlogCreateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +49,10 @@ public class AdminBlogDeleteController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminBlogDeleteController</title>");
+            out.println("<title>Servlet AdminBlogCreateController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminBlogDeleteController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminBlogCreateController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -64,37 +75,13 @@ public class AdminBlogDeleteController extends HttpServlet {
         if (user == null) {
             response.sendRedirect(request.getContextPath() + "/home");
         } else {
-        BlogDAOImpl blogDAO = new BlogDAOImpl();
-        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
-        String indexpasge = request.getParameter("page");
-        if (indexpasge == null) {
-            indexpasge = "1";
-            int page = Integer.parseInt(indexpasge);
-            int count = blogDAO.getTotalBlog();
-            int endpage = count / 5;
-            if (count % 5 != 0) {
-                endpage++;
-            }
-            boolean status = blogDAO.delete(id);
-            List<BlogList> categories = blogDAO.getAll(page);
-            request.setAttribute("blogs", categories);
-            request.setAttribute("endpage", endpage);
-            response.sendRedirect(request.getContextPath() + "/admin/blogs?status=" + status);
-        } else {
-            int page = Integer.parseInt(indexpasge);
-            int count = blogDAO.getTotalBlog();
-            int endpage = count / 5;
-            if (count % 5 != 0) {
-                endpage++;
-            }
-            boolean status = blogDAO.delete(id);
-            List<BlogList> categories = blogDAO.getAll(page);
-            request.setAttribute("blogs", categories);
-            request.setAttribute("endpage", endpage);
-            response.sendRedirect(request.getContextPath() + "/admin/blogs?status=" + status);
+        BlogCategoryDAOImpl blogCategoryDAO = new BlogCategoryDAOImpl();
+        List<CategoryBlog> listCategoryBlog = blogCategoryDAO.getAll();
+        request.setAttribute("listCategory", listCategoryBlog);
+        request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blogCreate.jsp").forward(request, response);
         }
     }
-}
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -106,7 +93,32 @@ public class AdminBlogDeleteController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "ddrjnfihc",
+                "api_key", "295827132792413",
+                "api_secret", "SyPzR-EcBnCG-BSQ5298s4MC9LE"));
+        cloudinary.config.secure = true;
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = new Date();
+        String title = request.getParameter("title");
+        String brief = request.getParameter("brief");
+        String content = request.getParameter("content");
+        int category_id = Integer.parseInt(request.getParameter("category"));
+        Part filePart = request.getPart("image");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        filePart.write(request.getRealPath("image") + fileName);
+        Map path = ObjectUtils.asMap(
+                "public_id", "Admin/Blog/images/" + title,
+                "overwrite", false,
+                "resource_type", "image"
+        );
+        Map uploadResult = cloudinary.uploader().upload(request.getRealPath("image") + fileName, path);
+        filePart.delete();
+        String geturl = uploadResult.get("secure_url").toString();
+        boolean status = blogDAO.insert(new BlogList(title, category_id, formatter.format(date), brief, geturl, content));
+        request.setAttribute("status", status);
+        response.sendRedirect(request.getContextPath() + "/admin/blogs?status=" + status);
     }
 
     /**
