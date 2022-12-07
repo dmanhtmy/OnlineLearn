@@ -557,8 +557,6 @@
                                 <h2>Login</h2>
                                 <h6>Not registred yet?</h6>
                                 <a href="signup" class="toggle">Sign up</a>
-                                <h6>Or</h6>
-                                <a href="/admin/login" class="toggle">Login with Admin</a>
                             </div>
 
                             <div class="actual-form">
