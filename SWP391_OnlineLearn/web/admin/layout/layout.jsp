@@ -663,7 +663,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<%= request.getContextPath()%>/login" class="logout">
+                    <a href="<%= request.getContextPath()%>/logout" class="logout">
                         <i class='bx bxs-log-out-circle' ></i>
                         <span class="text">Logout</span>
                     </a>
