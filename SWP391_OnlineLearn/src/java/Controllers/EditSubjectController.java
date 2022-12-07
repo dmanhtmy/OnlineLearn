@@ -12,7 +12,6 @@ import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -26,10 +25,7 @@ import java.util.ArrayList;
  *
  * @author windc
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB 
-        maxFileSize = 1024 * 1024 * 50, // 50 MB
-        maxRequestSize = 1024 * 1024 * 100)   	// 100 MB
-public class AddSubjectController extends HttpServlet {
+public class EditSubjectController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +44,10 @@ public class AddSubjectController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddSubjectController</title>");
+            out.println("<title>Servlet EditSubjectController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddSubjectController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditSubjectController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -69,17 +65,21 @@ public class AddSubjectController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("coursesubjectid"));
         UserDAOImpl userDBContext = new UserDAOImpl();
-        CourseDAOImpl courseDAO = new CourseDAOImpl();
-        ArrayList<User> authors = userDBContext.getAllAuthor();
-        ArrayList<CourseCategory> categorys = courseDAO.getAllCourseCategory();
 
+        ArrayList<User> authors = userDBContext.getAllAuthor();
         User user = (User) request.getSession().getAttribute("user");
+        CourseDAOImpl courseDAO = new CourseDAOImpl();
+        Course course = courseDAO.getCourseById(id);
+        ArrayList<CourseCategory> categorys = courseDAO.getAllCourseCategory();
         request.setAttribute("user", user);
         request.setAttribute("authors", authors);
+        request.setAttribute("course", course);
         request.setAttribute("categorys", categorys);
-        request.getRequestDispatcher(request.getContextPath() + "/admin/subject/addsubject.jsp").forward(request, response);
-
+        String title_value = "Edit Subject";
+        request.setAttribute("title_value", title_value);
+        request.getRequestDispatcher(request.getContextPath() + "/admin/subject/editSubject.jsp").forward(request, response);
     }
 
     /**
@@ -95,6 +95,7 @@ public class AddSubjectController extends HttpServlet {
             throws ServletException, IOException {
         CourseDAOImpl courseDAO = new CourseDAOImpl();
         String message;
+        int id = Integer.parseInt(request.getParameter("cid"));
         String title = request.getParameter("title");
         int author_id = Integer.parseInt(request.getParameter("authors"));
         String brief = request.getParameter("brief");
@@ -102,7 +103,7 @@ public class AddSubjectController extends HttpServlet {
         double saleprice = Double.parseDouble(request.getParameter("saleprice"));
         boolean status = request.getParameter("status").equals("Publish");
         String introduction = request.getParameter("introduction");
-//        String filename =  request.getParameter("document");
+        System.out.println("aaaa" + id);
         int category_id = Integer.parseInt(request.getParameter("categorys"));
         boolean feature;
         if (request.getParameter("feature") != null && request.getParameter("feature").equals("ON")) {
@@ -113,20 +114,27 @@ public class AddSubjectController extends HttpServlet {
         long millis = System.currentTimeMillis();
         Date updateDate = new Date(millis);
         //get thumbnail
+       //get thumbnail
         FileUploadHelper helper = new FileUploadHelper();
         final String path = "C:\\Users\\windc\\OneDrive\\Documents\\GitHub\\OnlineLearn\\SWP391_OnlineLearn\\web\\course_img";
         Part filePart = request.getPart("thumbnail"); // Retrieves <input type="file" name="thumbnail">
         String fileName = helper.getFileName(filePart); // getFilename from file part
+        String thumbnail = null;
         helper.getFileContent(fileName, filePart, path);
         File fileUpload = new File(path + "\\" + fileName);
-        String thumbnail = helper.getUrlCloudinaryForAddSubject(fileUpload, fileName);
+        if(!filePart.getSubmittedFileName().isEmpty()){
+            thumbnail = helper.getUrlCloudinaryForEditSubject(fileUpload,fileName);  
+        }
         //get document
-        Part fileDocs = request.getPart("file");
-        InputStream fileDocument = fileDocs.getInputStream();
+        InputStream fileDocument = null;
+        Part fileDocs = request.getPart("document");
+        if (!fileDocs.getSubmittedFileName().isEmpty()) {
+            fileDocument = fileDocs.getInputStream();
+        }
         String filename = fileDocs.getSubmittedFileName();
-
         //set subject
         Course c = new Course();
+        c.setCid(id);
         c.setTitle(title);
         User author = new User();
         author.setId(author_id);
@@ -142,18 +150,18 @@ public class AddSubjectController extends HttpServlet {
         CourseCategory category = new CourseCategory();
         category.setId(category_id);
         c.setCategory(category);
-        int row = courseDAO.insertSubject(c, thumbnail, fileDocument);
+        int row = courseDAO.updateSubject(c, thumbnail, fileDocument);
 
         if (row == 0) {
-            message = "Add Unsuccessfull";
+            message = "Edit Unsuccessfull";
         } else {
-            message = "Add Successfull";
+            message = "Edit Successfull";
         }
+
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("user", user);
         request.getSession().setAttribute("message", message);
-        response.sendRedirect("addsubject");
-
+        response.sendRedirect("editcoursesubject?coursesubjectid=" + id);
     }
 
     /**

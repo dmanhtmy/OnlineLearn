@@ -3,12 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/blog/blog.jsp</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Models/BlogList.java</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AdminBlogListController.java</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/BlogDAOImpl.java</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/blog/blogCreate.jsp</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AdminBlogCreateController.java</file>
+            <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/client/index.jsp</file>
+            <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/subject/editSubject.jsp</file>
+            <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/EditSubjectController.java</file>
         </group>
     </open-files>
 </project-private>
