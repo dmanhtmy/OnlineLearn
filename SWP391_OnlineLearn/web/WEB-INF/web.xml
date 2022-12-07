@@ -67,8 +67,8 @@
     <servlet>
         <servlet-name>AddSubjectController</servlet-name>
         <servlet-class>Controllers.AddSubjectController</servlet-class>
-        </servlet>
-       <servlet>
+    </servlet>
+    <servlet>
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>Controllers.ChangePassword</servlet-class>
     </servlet>
@@ -108,26 +108,26 @@
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/home/blog/detail</url-pattern>
     </servlet-mapping>
-<servlet-mapping>
+<!--    <servlet-mapping>
         <servlet-name>SliderListController</servlet-name>
         <url-pattern>/admin/sliders</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
+    </servlet-mapping>-->
+<!--    <servlet-mapping>
         <servlet-name>UserListController</servlet-name>
         <url-pattern>/admin/users</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
+    </servlet-mapping>-->
+<!--    <servlet-mapping>
         <servlet-name>UserDetailController</servlet-name>
         <url-pattern>/admin/userdetail</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
+    </servlet-mapping>-->
+<!--    <servlet-mapping>
         <servlet-name>AdminBlogListController</servlet-name>
         <url-pattern>/admin/blogs</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
+    </servlet-mapping>-->
+<!--    <servlet-mapping>
         <servlet-name>AdminBlogDeleteController</servlet-name>
         <url-pattern>/admin/blog/delete</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>-->
     <servlet-mapping>
         <servlet-name>AdminBlogCreateController</servlet-name>
         <url-pattern>/admin/blog/create</url-pattern>
