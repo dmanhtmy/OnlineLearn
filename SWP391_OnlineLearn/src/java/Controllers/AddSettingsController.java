@@ -4,20 +4,21 @@
  */
 package Controllers;
 
-import Models.User;
+import DAO.Impl.SettingsListDAOImpl;
+import Models.SettingType;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
- * @author HP
+ * @author windc
  */
-@WebServlet (name="HomeController",urlPatterns={"/home"})
-public class HomeController extends HttpServlet {
+public class AddSettingsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,28 +29,21 @@ public class HomeController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
-        String login_href_value = "";
-        String logout_href = "home";
-        if (request.getSession().getAttribute("user") == null) {
-            return;
-        } else {
-            User user = (User) request.getSession().getAttribute("user");
-            login_href_value += user.getFullname();
-        }
-        request.setAttribute("login_href_value", login_href_value);
-        request.setAttribute("logout_href", logout_href);
-    }
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        loadHeaderAndAsideRight(request, response);
-        User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("user", user);
-        String title_value = "ECOURSE - Online Course";
-        request.setAttribute("title_value", title_value);
-        request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
-        request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet AddSettingsController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet AddSettingsController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +58,11 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        SettingsListDAOImpl sldbc = new SettingsListDAOImpl();
+        ArrayList<SettingType> settingTypes = sldbc.listType();
+        request.setAttribute("ltype", settingTypes);
+
+        request.getRequestDispatcher(request.getContextPath() + "/admin/setting/add.jsp").forward(request, response);
     }
 
     /**
@@ -78,7 +76,15 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String aname = request.getParameter("name");
+        int astatus = Integer.parseInt(request.getParameter("status"));
+        String avalue = request.getParameter("value");
+        String adescription = request.getParameter("description");
+        int atype = Integer.parseInt(request.getParameter("type"));
+        SettingsListDAOImpl sldbc = new SettingsListDAOImpl();
+
+        sldbc.insertSetting(aname, adescription, atype, avalue, astatus);
+        response.sendRedirect("/admin/settingslist");
     }
 
     /**

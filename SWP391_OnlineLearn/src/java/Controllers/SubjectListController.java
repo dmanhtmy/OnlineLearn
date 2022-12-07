@@ -4,20 +4,21 @@
  */
 package Controllers;
 
+import DAO.Impl.CourseDAOImpl;
+import DAO.Impl.UserDAOImpl;
+import Models.Course;
 import Models.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-
+import java.util.ArrayList;
 /**
  *
- * @author HP
+ * @author windc
  */
-@WebServlet (name="HomeController",urlPatterns={"/home"})
-public class HomeController extends HttpServlet {
+public class SubjectListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,28 +29,46 @@ public class HomeController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
-        String login_href_value = "";
-        String logout_href = "home";
-        if (request.getSession().getAttribute("user") == null) {
-            return;
-        } else {
-            User user = (User) request.getSession().getAttribute("user");
-            login_href_value += user.getFullname();
-        }
-        request.setAttribute("login_href_value", login_href_value);
-        request.setAttribute("logout_href", logout_href);
-    }
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        loadHeaderAndAsideRight(request, response);
-        User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("user", user);
-        String title_value = "ECOURSE - Online Course";
-        request.setAttribute("title_value", title_value);
-        request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
-        request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
+       String raw_author_id = request.getParameter("author");
+        String raw_subject_status_id = request.getParameter("status");
+        String subject_title = request.getParameter("subject_title");
+        String index = request.getParameter("index");
+
+        if (raw_author_id == null || raw_author_id.length() == 0) {
+            raw_author_id = "-1";
+        }
+        if (raw_subject_status_id == null || raw_subject_status_id.length() == 0) {
+            raw_subject_status_id = "-1";
+        }
+        if (index == null || index.length() == 0) {
+            index = "0";
+        }
+
+        int subject_status = Integer.parseInt(raw_subject_status_id);
+        int author = Integer.parseInt(raw_author_id);
+        //get all author
+        UserDAOImpl userDBContext = new UserDAOImpl();
+        ArrayList<User> authors = userDBContext.getAllAuthor();
+        request.setAttribute("authors", authors);
+        //get all coure
+        CourseDAOImpl courseDAO = new CourseDAOImpl();
+        int totalPageSearch = courseDAO.getRowcount(subject_status, author, subject_title);
+        int endPage = totalPageSearch / 3;
+        if (totalPageSearch % 3 != 0) {
+            endPage++;
+        }
+        ArrayList<Course> courses = courseDAO.getAllCourseSubject(Integer.parseInt(index), subject_status, author, subject_title);
+        request.setAttribute("current_index", index);
+        request.setAttribute("endPage", endPage);
+        request.setAttribute("courses", courses);
+
+        request.setAttribute("subject_title", subject_title);
+        request.setAttribute("subject_status", subject_status);
+        request.setAttribute("author_id", author);
+        
+        request.getRequestDispatcher(request.getContextPath() + "/admin/subject/subjectList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

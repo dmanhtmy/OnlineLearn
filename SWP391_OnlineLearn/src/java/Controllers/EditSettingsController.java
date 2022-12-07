@@ -4,20 +4,22 @@
  */
 package Controllers;
 
-import Models.User;
+import DAO.Impl.SettingsListDAOImpl;
+import Models.Setting;
+import Models.SettingType;
 import java.io.IOException;
+import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
 
 /**
  *
- * @author HP
+ * @author windc
  */
-@WebServlet (name="HomeController",urlPatterns={"/home"})
-public class HomeController extends HttpServlet {
+public class EditSettingsController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -28,28 +30,21 @@ public class HomeController extends HttpServlet {
      * @throws ServletException if a servlet-specific error occurs
      * @throws IOException if an I/O error occurs
      */
-    protected void loadHeaderAndAsideRight(HttpServletRequest request, HttpServletResponse response) {
-        String login_href_value = "";
-        String logout_href = "home";
-        if (request.getSession().getAttribute("user") == null) {
-            return;
-        } else {
-            User user = (User) request.getSession().getAttribute("user");
-            login_href_value += user.getFullname();
-        }
-        request.setAttribute("login_href_value", login_href_value);
-        request.setAttribute("logout_href", logout_href);
-    }
-    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        loadHeaderAndAsideRight(request, response);
-        User user = (User) request.getSession().getAttribute("user");
-        request.setAttribute("user", user);
-        String title_value = "ECOURSE - Online Course";
-        request.setAttribute("title_value", title_value);
-        request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
-        request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try ( PrintWriter out = response.getWriter()) {
+            /* TODO output your page here. You may use following sample code. */
+            out.println("<!DOCTYPE html>");
+            out.println("<html>");
+            out.println("<head>");
+            out.println("<title>Servlet EditSettingsController</title>");
+            out.println("</head>");
+            out.println("<body>");
+            out.println("<h1>Servlet EditSettingsController at " + request.getContextPath() + "</h1>");
+            out.println("</body>");
+            out.println("</html>");
+        }
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
@@ -64,7 +59,15 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String eid = request.getParameter("sid");
+        SettingsListDAOImpl dao = new SettingsListDAOImpl();
+        Setting s = dao.getSettingById(eid);
+        request.setAttribute("st", s);
+        ArrayList<SettingType> ltype = dao.listSettingType();
+        request.setAttribute("ltype", ltype);
+        String title_value = "Edit Setting";
+        request.setAttribute("title_value", title_value);
+        request.getRequestDispatcher(request.getContextPath() + "/admin/setting/edit.jsp").forward(request, response);
     }
 
     /**
@@ -78,7 +81,17 @@ public class HomeController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String eid = request.getParameter("id");
+        String ename = request.getParameter("name");
+        int estatus = Integer.parseInt(request.getParameter("status"));
+        String evalue = request.getParameter("value");
+        String edescription = request.getParameter("description");
+        int etype = Integer.parseInt(request.getParameter("type"));
+//        int etype = 1;
+        SettingsListDAOImpl dao = new SettingsListDAOImpl();
+
+        dao.updateSetting(eid, ename, edescription, etype, evalue, estatus);
+        response.sendRedirect("/admin/settingslist");
     }
 
     /**

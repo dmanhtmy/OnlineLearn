@@ -6,6 +6,7 @@
 
         <!-- Boxicons -->
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <title>AdminHub</title>
     </head>
     <style>
@@ -647,10 +648,16 @@
                         <span class="text">Blogs</span>
                     </a>
                 </li>
+                <li>
+                    <a href="<%= request.getContextPath()%>/admin/subjectlist">
+                        <i class='bx bx-menu' ></i>
+                        <span class="text">Subjects</span>
+                    </a>
+                </li>
             </ul>
             <ul class="side-menu">
                 <li>
-                    <a href="#">
+                    <a href="/admin/settingslist">
                         <i class='bx bxs-cog' ></i>
                         <span class="text">Settings</span>
                     </a>
