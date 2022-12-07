@@ -31,7 +31,7 @@ public class BlogDAOImpl implements BlogDAO {
             String sql = "SELECT * FROM onlinelearn.blog_list bl\n"
                     + "WHERE bl.title LIKE ? ";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, '%'+name+'%');
+            ps.setString(1, '%' + name + '%');
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 BlogList blog = new BlogList();
@@ -185,11 +185,12 @@ public class BlogDAOImpl implements BlogDAO {
         }
         return listBlog;
     }
-    
 
     public static void main(String[] args) {
         BlogDAOImpl db = new BlogDAOImpl();
-        System.out.println(db.insert(new BlogList("abcd", 1, "2022-12-07", "abcd", "acbd", "abcd")));
+//        System.out.println(db.insert(new BlogList("abcdfds", 1, "2022-12-07", "abcfdd", "acbfdsd", "abfsdcd")));
+        BlogList blog = new BlogList("huyenana", 2, "2022-01-01", "gbsadjfbasj", "fbjabfajs", "fgbasjfbajs");
+        System.out.println(db.insert(blog));
     }
 
 }

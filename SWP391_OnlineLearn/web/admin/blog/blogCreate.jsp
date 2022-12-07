@@ -16,9 +16,8 @@ crossorigin="anonymous"></script>
     <form action="/admin/blog/create" method="POST" enctype="multipart/form-data">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">*Title</span>
-            <input type="text" class="form-control" placeholder="title..." aria-label="Username" aria-describedby="basic-addon1" title="title">
+            <input type="text" class="form-control" placeholder="title..." aria-label="Username" aria-describedby="basic-addon1" title="title" name="title">
         </div>
-
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon2">Brief Infor</span>
             <input type="text" class="form-control" placeholder="brief infor..." aria-label="Recipient's username" aria-describedby="basic-addon2" name="brief">
@@ -28,11 +27,11 @@ crossorigin="anonymous"></script>
             <span class="input-group-text" id="basic-addon3">Author</span>
             <input type="text" class="form-control" id="basic-url" aria-describedby="basic-addon3" value="${sessionScope.user.getUsername()}" readonly="true" disabled="true">
         </div>
-        <div class="input-group mb-3">
+        <div class="input-group mb-3" id="div-image-profile">
             <label class="input-group-text" for="inputGroupFile01">Upload Image</label>
-            <!--<input type="file" class="form-control" id="images" name="image">-->
-            <input type="file" id="file" name="image" accept="image/png,image/jpeg" multiple="multiple">
+            <input type="file" class="form-control" id="file" name="image"accept="image/png,image/jpeg" multiple="multiple">
         </div>
+            <img id="photo" class= "img-profile" src="">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon2">Category</span>
             <div class="col-sm-8">
@@ -52,3 +51,36 @@ crossorigin="anonymous"></script>
 </main>
 </section>
 </body>
+<script>
+    const imgDiv = document.querySelector('#div-image-profile');
+    const img = document.querySelector('#photo');
+    const file = document.querySelector('#file');
+
+    file.addEventListener('change', function () {
+        const choosedFile = this.files[0];
+
+        if (choosedFile) {
+
+            const reader = new FileReader();
+
+            reader.addEventListener('load', function () {
+                img.setAttribute('src', reader.result);
+            });
+
+            reader.readAsDataURL(choosedFile);
+        }
+    });
+</script>
+<style>
+    .div-image-profile{
+        display: block;
+        margin: auto;
+        overflow: hidden;
+    }
+    .img-profile{
+        width: 200px;
+        height: auto;
+        cursor: zoom-in;
+        background-color: lightgray;
+    }
+</style>
