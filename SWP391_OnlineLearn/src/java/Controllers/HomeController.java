@@ -4,6 +4,8 @@
  */
 package Controllers;
 
+import DAO.BlogDAO;
+import Models.BlogList;
 import Models.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -11,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -46,6 +49,8 @@ public class HomeController extends HttpServlet {
         loadHeaderAndAsideRight(request, response);
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("user", user);
+        String title_value = "ECOURSE - Online Course";
+        request.setAttribute("title_value", title_value);
         request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
         request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
     }
