@@ -6,7 +6,6 @@
 
         <!-- Boxicons -->
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
-         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
         <title>AdminHub</title>
     </head>
     <style>
