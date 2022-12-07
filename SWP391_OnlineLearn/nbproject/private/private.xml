@@ -3,12 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/blog/blog.jsp</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Models/BlogList.java</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AdminBlogListController.java</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/BlogDAOImpl.java</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/blog/blogCreate.jsp</file>
-            <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AdminBlogCreateController.java</file>
+<<<<<<< HEAD
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Models/UserCourse.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/BlogDetailController.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/login/Login.jsp</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/UserListController.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Context/DBContext.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/HomeController.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/slider/sliderlist.jsp</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/UserDetailController.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/UserDAOImpl.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/SignupController.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/user/userdetail.jsp</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/LoginDAOImpl.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/LoginController.java</file>
+=======
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/CourseController.java</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/index.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/course/course.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/CourseDAOImpl.java</file>
+>>>>>>> manhnd128/week1-course
         </group>
     </open-files>
 </project-private>

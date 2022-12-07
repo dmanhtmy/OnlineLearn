@@ -6,7 +6,6 @@ package Controllers;
 
 import DAO.Impl.BlogDAOImpl;
 import Models.BlogList;
-import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -59,55 +58,50 @@ public class AdminBlogListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        User user = (User) request.getSession().getAttribute("user");
-        if (user == null) {
-            response.sendRedirect(request.getContextPath() + "/home");
-        } else {
-            BlogDAOImpl blogDAO = new BlogDAOImpl();
-            String indexpasge = request.getParameter("page");
-            String search = request.getParameter("search");
-            String status = request.getParameter("status");
-            if (indexpasge == null) {
-                indexpasge = "1";
-                int page = Integer.parseInt(indexpasge);
-                if (search != null) {
-                    List<BlogList> listBlogs = blogDAO.search(search);
-                    request.setAttribute("blogs", listBlogs);
-                    request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
-                } else {
-                    List<BlogList> listBlogs = blogDAO.getAll(page);
-                }
-                int count = blogDAO.getTotalBlog();
-                int endpage = count / 5;
-                if (count % 5 != 0) {
-                    endpage++;
-                }
-                List<BlogList> listBlogs = blogDAO.getAll(page);
-                request.setAttribute("endpage", endpage);
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        String indexpasge = request.getParameter("page");
+        String search = request.getParameter("search");
+        String status = request.getParameter("status");
+        if (indexpasge == null) {
+            indexpasge = "1";
+            int page = Integer.parseInt(indexpasge);
+            if (search != null) {
+                List<BlogList> listBlogs = blogDAO.search(search);
                 request.setAttribute("blogs", listBlogs);
-                request.setAttribute("status", status);
                 request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
             } else {
-                int page = Integer.parseInt(indexpasge);
-                if (search != null) {
-                    List<BlogList> listBlogs = blogDAO.search(search);
-                    request.setAttribute("search", search);
-                    request.setAttribute("blogs", listBlogs);
-                    request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
-                } else {
-                    List<BlogList> listBlogs = blogDAO.getAll(page);
-                }
-                int count = blogDAO.getTotalBlog();
-                int endpage = count / 5;
-                if (count % 5 != 0) {
-                    endpage++;
-                }
                 List<BlogList> listBlogs = blogDAO.getAll(page);
-                request.setAttribute("endpage", endpage);
-                request.setAttribute("blogs", listBlogs);
-                request.setAttribute("status", status);
-                request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
             }
+            int count = blogDAO.getTotalBlog();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            List<BlogList> listBlogs = blogDAO.getAll(page);
+            request.setAttribute("endpage", endpage);
+            request.setAttribute("blogs", listBlogs);
+            request.setAttribute("status", status);
+            request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
+        }else{
+            int page = Integer.parseInt(indexpasge);
+            if (search != null) {
+                List<BlogList> listBlogs = blogDAO.search(search);
+                request.setAttribute("search", search);
+                request.setAttribute("blogs", listBlogs);
+                request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
+            } else {
+                List<BlogList> listBlogs = blogDAO.getAll(page);
+            }
+            int count = blogDAO.getTotalBlog();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            List<BlogList> listBlogs = blogDAO.getAll(page);
+            request.setAttribute("endpage", endpage);
+            request.setAttribute("blogs", listBlogs);
+            request.setAttribute("status", status);
+            request.getRequestDispatcher(request.getContextPath() + "/admin/blog/blog.jsp").forward(request, response);
         }
     }
 
