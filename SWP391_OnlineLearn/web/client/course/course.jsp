@@ -90,44 +90,12 @@
                                                                                </div>
                                                                                <div class="modal-body">
                                                                                    <form action="../g4/course/customer-register" method="POST" id="form1" onclick="checkUsernameExist('${requestScope.username}'), checkEmailExist('${requestScope.email}')">
-                                                                                       <div class="form-group">
-                                                                                           <label>Full Name</label>
-                                                                                           <input name="fullname" class="form-control" type="text" placeholder="Full Name">
-                                                                                       </div>
-                                                                                       <div class="form-group">
-                                                                                           <label>Title</label>
-                                                                                           <input name="title" class="form-control" type="text" id="username" placeholder="Title">
-                                                                                           <i class="fas fa-check-circle success" style="margin-top: 20px"></i>
-                                                                                           <i class="fas fa-exclamation-circle error" style="margin-top: 20px"></i>
-                                                                                           <small class="form-message"></small>
-                                                                                       </div>
-                                                                                       <div class="form-group">
-                                                                                           <label>Email</label>
-                                                                                           <input name="email" class="form-control" type="text" id="email" placeholder="Email">
-                                                                                           <i class="fas fa-check-circle success" style="margin-top: 20px"></i>
-                                                                                           <i class="fas fa-exclamation-circle error" style="margin-top: 20px"></i>
-                                                                                           <small class="form-message"></small>
-                                                                                           <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
-                                                                                       </div>
-                                                                                       <div class="form-group">
-                                                                                           <label>Mobile Phone</label>
-                                                                                           <input name="phonenumber" class="form-control" type="text" placeholder="Phone number">
-                                                                                           <small class="form-message"></small>
-                                                                                           <small id="emailHelp" class="form-text text-muted">We'll never share your phone number with anyone else.</small>
-                                                                                       </div>
-                                                                                       <div class="form-group">
-                                                                                           <label>Address</label>
-                                                                                           <input name="address" class="form-control" type="text" placeholder="Address">
-                                                                                           <small class="form-message"></small>
-                                                                                       </div>
                                                                                        <small id="loginHelp" class="form-text text-muted">If you have account <a href="/g4/client/login">Login</a></small>
                                                                                        <small id="registerHelp" class="form-text text-muted">If you don't have account <a href="../g4/register">Register</a></small>
                                                                                        <!-- Modal Footer -->
                                                                                        <input type="hidden" name="id" value="${c.cid}">
                                                                                        <div class="modal-footer">
                                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                                                           <input type="hidden" name="courseId" value="${c.cid}">
-                                                                                           <input type="submit" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal${c.cid}" onsubmit="event.preventDefault();myValidation();" value="Join"/> 
                                                                                        </div>
                                                                                    </form>
                                                                                </div>
