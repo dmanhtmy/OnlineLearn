@@ -179,13 +179,19 @@ public class UserDAOImpl implements UserDAO {
         return null;
     }
 
-    @Override
-    public List<User> getAll() {
+    public List<User> getAll(int status, String search) {
         List<User> list = new ArrayList<>();
 
         try {
             String sql = "SELECT * FROM onlinelearn.user join onlinelearn.role\n"
-                    + "on onlinelearn.user.Role_Id = onlinelearn.role.role_id;";
+                    + "on onlinelearn.user.Role_Id = onlinelearn.role.role_id where (onlinelearn.user.Role_Id = 1 or onlinelearn.user.Role_Id = 4) ";
+            if (status != -1) {
+                sql = sql + "and onlinelearn.user.status = " + status;
+            }
+            if (!search.isEmpty() || search == null) {
+                sql = sql + " and onlinelearn.user.fullname like '%" + search + "%'";
+
+            }
             Connection connection = dbContext.getConnection();
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
@@ -269,6 +275,46 @@ public class UserDAOImpl implements UserDAO {
         return 0;
     }
 
+    public void addUser(User u) {
+        DBContext dbContext = new DBContext();
+        String sql = "INSERT INTO `onlinelearn`.`user`\n"
+                + "(\n"
+                + "`username`,\n"
+                + "`password`,\n"
+                + "`fullname`,\n"
+                + "`gender`,\n"
+                + "`address`,\n"
+                + "`email`,\n"
+                + "`phonenumber`,\n"
+                + "`status`,\n"
+                + "`Role_Id`)\n"
+                + "VALUES\n"
+                + "(?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?\n"
+                + ",?)";
+        try {
+
+            Connection connection = dbContext.getConnection();
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, u.getUsername());
+            stm.setString(2, u.getPassword());
+            stm.setString(3, u.getFullname());
+            stm.setBoolean(4, u.isGender());
+            stm.setString(5, u.getAddress());
+            stm.setString(6, u.getEmail());
+            stm.setString(7, u.getPhonenumber());
+            stm.setInt(8, u.getStatus());
+            stm.setInt(9, u.getRole().getRole_id());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
+        }
     public int getRowcount(int status, int author, String title) {
         try {
             Connection connection = dbContext.getConnection();
@@ -330,11 +376,19 @@ public class UserDAOImpl implements UserDAO {
 
     public static void main(String[] args) {
         UserDAOImpl db = new UserDAOImpl();
-        List<User> u = db.getAll();
+        List<User> u = db.getAll(1, "");
         for (int i = 0; i < u.size(); i++) {
             System.out.println(u.get(i).getFullname());
         }
-        db.updateProfileUser(1, "long", "long", true, "Hoa", "0192103131");
-        System.out.println(db.getTotalUser());
+        Role r = new Role();
+        r.setRole_id(1);
+        User us = new User(1, "longgg11", "longgg2", "longg3", true, "hoalac", "long@gmail.com", "123456789", 1, r);
+        db.addUser(us);
+
+    }
+
+    @Override
+    public List<User> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

@@ -59,8 +59,22 @@ public class SliderListController extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SliderDAOImpl s = new SliderDAOImpl();
-        List<Slider> list = s.getAll();
-        request.setAttribute("list", list);
+        String cid_raw = request.getParameter("status1");
+        int cid;
+        try {
+            if (cid_raw == null) {
+                cid = -1;
+            } else {
+                cid = Integer.parseInt(cid_raw);
+            }
+
+            List<Slider> list = s.getAll(cid);
+            request.setAttribute("list", list);
+            request.setAttribute("cid1", cid);
+        } catch (NumberFormatException e) {
+
+        }
+
         request.getRequestDispatcher(request.getContextPath() + "/admin/slider/sliderlist.jsp").forward(request, response);
     }
 

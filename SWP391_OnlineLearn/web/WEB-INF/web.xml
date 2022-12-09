@@ -103,6 +103,18 @@
     <servlet>
         <servlet-name>UserMylearningController</servlet-name>
         <servlet-class>Controllers.UserMylearningController</servlet-class>
+     </servlet>
+     <servlet>
+        <servlet-name>LessonViewController</servlet-name>
+        <servlet-class>Controllers.LessonViewController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SliderDetail</servlet-name>
+        <servlet-class>Controllers.SliderDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUserController</servlet-name>
+        <servlet-class>Controllers.AddUserController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -161,6 +173,14 @@
         <url-pattern>/admin/blog/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SliderDetail</servlet-name>
+        <url-pattern>/admin/sliderdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserController</servlet-name>
+        <url-pattern>/admin/adduser</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
         <servlet-name>AdminBlogCreateController</servlet-name>
         <url-pattern>/admin/blog/create</url-pattern>
     </servlet-mapping>
@@ -203,6 +223,10 @@
     <servlet-mapping>
         <servlet-name>UserMylearningController</servlet-name>
         <url-pattern>/mylearn</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonViewController</servlet-name>
+        <url-pattern>/lessonview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

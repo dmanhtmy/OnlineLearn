@@ -4,21 +4,24 @@
  */
 package Controllers;
 
-import DAO.Impl.UserDAOImpl;
-import Models.User;
+import DAO.Impl.CourseDAOImpl;
+import DAO.Impl.LessonDAOImpl;
+import Models.Course;
+import Models.Topic;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.util.List;
 
 /**
  *
- * @author hp
+ * @author HP
  */
-public class UserListController extends HttpServlet {
+public class LessonViewController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -31,18 +34,23 @@ public class UserListController extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        try ( PrintWriter out = response.getWriter()) {
-            /* TODO output your page here. You may use following sample code. */
-            out.println("<!DOCTYPE html>");
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet UserListController</title>");
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet UserListController at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
+        CourseDAOImpl cDao = new CourseDAOImpl();
+        LessonDAOImpl lDao = new LessonDAOImpl();
+        
+        try {
+            int course_id = Integer.parseInt(request.getParameter("cid"));
+            Course c = cDao.getCourse(course_id);
+            List<Topic> listTopic = lDao.getListTopicByCourseId(course_id);
+            if (listTopic != null) {
+                request.setAttribute("course_id", course_id);
+                request.setAttribute("ListTopic", listTopic);
+                request.setAttribute("title_value", c.getTitle());
+                request.getRequestDispatcher("/client/lessonView.jsp").forward(request, response);
+            } else {
+                response.sendRedirect("course");
+            }
+        } catch (Exception e) {
+            response.sendRedirect("home");
         }
     }
 
@@ -58,29 +66,7 @@ public class UserListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAOImpl u = new UserDAOImpl();
-        String cid_raw = request.getParameter("status");
-        String search = request.getParameter("keyword");
-        int cid;
-        try {
-            if (cid_raw == null) {
-                cid = -1;
-            } else {
-                cid = Integer.parseInt(cid_raw);
-            }
-            if(search == null){
-                search = "";
-            }
-            List<User> list = u.getAll(cid, search);
-            request.setAttribute("listUser", list);
-            request.setAttribute("cid", cid);
-
-        } catch (NumberFormatException e) {
-
-        }
-
-        request.getRequestDispatcher(request.getContextPath() + "/admin/user/userlist.jsp").forward(request, response);
-
+        processRequest(request, response);
     }
 
     /**

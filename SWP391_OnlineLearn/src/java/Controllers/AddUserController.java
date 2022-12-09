@@ -5,6 +5,7 @@
 package Controllers;
 
 import DAO.Impl.UserDAOImpl;
+import Models.Role;
 import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -12,13 +13,13 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import java.util.List;
+import java.io.File;
 
 /**
  *
  * @author hp
  */
-public class UserListController extends HttpServlet {
+public class AddUserController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -37,10 +38,10 @@ public class UserListController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserListController</title>");
+            out.println("<title>Servlet AddUserController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserListController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddUserController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -58,29 +59,7 @@ public class UserListController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAOImpl u = new UserDAOImpl();
-        String cid_raw = request.getParameter("status");
-        String search = request.getParameter("keyword");
-        int cid;
-        try {
-            if (cid_raw == null) {
-                cid = -1;
-            } else {
-                cid = Integer.parseInt(cid_raw);
-            }
-            if(search == null){
-                search = "";
-            }
-            List<User> list = u.getAll(cid, search);
-            request.setAttribute("listUser", list);
-            request.setAttribute("cid", cid);
-
-        } catch (NumberFormatException e) {
-
-        }
-
-        request.getRequestDispatcher(request.getContextPath() + "/admin/user/userlist.jsp").forward(request, response);
-
+      request.getRequestDispatcher(request.getContextPath()+"user/adduser.jsp").forward(request, response);
     }
 
     /**
@@ -94,7 +73,22 @@ public class UserListController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+       String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        String fullname = request.getParameter("fullname");
+        boolean gender = request.getParameter("gender").equals("male");
+        String address = request.getParameter("address");
+        String email = request.getParameter("email");
+        String phonenumber = request.getParameter("phonenumber");
+        int status = Integer.parseInt(request.getParameter("status"));
+        int role_id = Integer.parseInt(request.getParameter("role_id"));
+        UserDAOImpl ud = new UserDAOImpl();
+        Role r = new Role();
+        r.setRole_id(role_id);
+        User u = new User(-1, username, password, fullname, gender, address,
+                email, phonenumber, status, r);
+        ud.addUser(u);
+        response.sendRedirect("users");
     }
 
     /**
