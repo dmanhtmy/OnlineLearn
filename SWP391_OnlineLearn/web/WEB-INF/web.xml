@@ -100,6 +100,14 @@
         <servlet-name>LessonViewController</servlet-name>
         <servlet-class>Controllers.LessonViewController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>SliderDetail</servlet-name>
+        <servlet-class>Controllers.SliderDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUserController</servlet-name>
+        <servlet-class>Controllers.AddUserController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -157,6 +165,14 @@
         <url-pattern>/admin/blog/delete</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SliderDetail</servlet-name>
+        <url-pattern>/admin/sliderdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserController</servlet-name>
+        <url-pattern>/admin/adduser</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
         <servlet-name>AdminBlogCreateController</servlet-name>
         <url-pattern>/admin/blog/create</url-pattern>
     </servlet-mapping>
@@ -188,7 +204,6 @@
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/admin/login</url-pattern>
     </servlet-mapping>
-   
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/password</url-pattern>
