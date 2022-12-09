@@ -96,6 +96,14 @@
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>Controllers.ChangePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>RegisterCourseController</servlet-name>
+        <servlet-class>Controllers.RegisterCourseController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>UserMylearningController</servlet-name>
+        <servlet-class>Controllers.UserMylearningController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -172,7 +180,7 @@
         <servlet-name>AddSubjectController</servlet-name>
         <url-pattern>/admin/addsubject</url-pattern>
     </servlet-mapping>
-        <servlet-mapping>
+    <servlet-mapping>
         <servlet-name>EditSubjectController</servlet-name>
         <url-pattern>/admin/editcoursesubject</url-pattern>
     </servlet-mapping>
@@ -184,10 +192,17 @@
         <servlet-name>AdminLoginController</servlet-name>
         <url-pattern>/admin/login</url-pattern>
     </servlet-mapping>
-   
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>RegisterCourseController</servlet-name>
+        <url-pattern>/course/user-register</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>UserMylearningController</servlet-name>
+        <url-pattern>/mylearn</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
