@@ -103,8 +103,8 @@
     <servlet>
         <servlet-name>UserMylearningController</servlet-name>
         <servlet-class>Controllers.UserMylearningController</servlet-class>
-     </servlet>
-     <servlet>
+    </servlet>
+    <servlet>
         <servlet-name>LessonViewController</servlet-name>
         <servlet-class>Controllers.LessonViewController</servlet-class>
     </servlet>
@@ -115,7 +115,6 @@
     <servlet>
         <servlet-name>AddUserController</servlet-name>
         <servlet-class>Controllers.AddUserController</servlet-class>
-
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -180,8 +179,8 @@
     <servlet-mapping>
         <servlet-name>AddUserController</servlet-name>
         <url-pattern>/admin/adduser</url-pattern>
-</servlet-mapping>
-<servlet-mapping>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AdminBlogCreateController</servlet-name>
         <url-pattern>/admin/blog/create</url-pattern>
     </servlet-mapping>
@@ -225,10 +224,6 @@
         <servlet-name>UserMylearningController</servlet-name>
         <url-pattern>/mylearn</url-pattern>
     </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>LessonViewController</servlet-name>
-        <url-pattern>/lessonview</url-pattern>
-		</servlet-mapping>
     <servlet-mapping>
         <servlet-name>LessonViewController</servlet-name>
         <url-pattern>/lessonview</url-pattern>
