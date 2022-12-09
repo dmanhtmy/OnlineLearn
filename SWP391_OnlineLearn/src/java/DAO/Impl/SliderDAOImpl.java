@@ -27,12 +27,14 @@ public class SliderDAOImpl implements SliderDAO {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
-    @Override
-    public List<Slider> getAll() {
+    public List<Slider> getAll(int status) {
         DBContext dbContext = new DBContext();
         ArrayList<Slider> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM onlinelearn.slider";
+             if (status != -1) {
+                sql = sql + " where onlinelearn.slider.status = " + status;
+            }
             Connection connection = dbContext.getConnection();
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
@@ -69,10 +71,15 @@ public class SliderDAOImpl implements SliderDAO {
 
     public static void main(String[] args) {
         SliderDAOImpl s = new SliderDAOImpl();
-        List<Slider> list = s.getAll();
+        List<Slider> list = s.getAll(1);
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).getTitle());
         }
+    }
+
+    @Override
+    public List<Slider> getAll() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }
