@@ -7,10 +7,10 @@
         <!-- Boxicons -->
         <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/css/bootstrap.min.css" rel="stylesheet"
-          integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
-            integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
-    crossorigin="anonymous"></script>
+              integrity="sha384-iYQeCzEYFbKjA/T2uDLTpkwGzCiq6soy8tYaI1GyVh/UjpbCx/TYkiZhlZB6+fzT" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
+                integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
+        crossorigin="anonymous"></script>
         <title>AdminHub</title>
     </head>
     <style>
@@ -22,7 +22,7 @@
             Created on : Nov 30, 2022, 12:02:16 AM
             Author     : Mr Tuan
         */
-        
+
 
         @import url('https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Poppins:wght@400;500;600;700&display=swap');
 
@@ -681,94 +681,94 @@
             <!-- NAVBAR -->
             <nav>
                 <i class='bx bx-menu' ></i>
-<!--                <a href="#" class="notification">
-                    <i class='bx bxs-bell' ></i>
-                    <span class="num">8</span>
-                </a>
-                <a href="#" class="profile">
-                    <img src="img/people.png">
-                </a>-->
+                <!--                <a href="#" class="notification">
+                                    <i class='bx bxs-bell' ></i>
+                                    <span class="num">8</span>
+                                </a>
+                                <a href="#" class="profile">
+                                    <img src="img/people.png">
+                                </a>-->
             </nav>
             <!-- NAVBAR -->
 
             <!-- MAIN -->
 
             <!-- MAIN -->
-<!--        </section>
-         CONTENT 
-    </body>-->
-    <script>
-        /* 
-         * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
-         * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
-         */
+            <!--        </section>
+                     CONTENT 
+                </body>-->
+            <script>
+                /* 
+                 * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+                 * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/JavaScript.js to edit this template
+                 */
 
 
-        const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
+                const allSideMenu = document.querySelectorAll('#sidebar .side-menu.top li a');
 
-        allSideMenu.forEach(item => {
-            const li = item.parentElement;
+                allSideMenu.forEach(item => {
+                    const li = item.parentElement;
 
-            item.addEventListener('click', function () {
-                allSideMenu.forEach(i => {
-                    i.parentElement.classList.remove('active');
+                    item.addEventListener('click', function () {
+                        allSideMenu.forEach(i => {
+                            i.parentElement.classList.remove('active');
+                        })
+                        li.classList.add('active');
+                    })
+                });
+
+
+
+
+        // TOGGLE SIDEBAR
+                const menuBar = document.querySelector('#content nav .bx.bx-menu');
+
+
+                const searchButton = document.querySelector('#content nav form .form-input button');
+                const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
+                const searchForm = document.querySelector('#content nav form');
+
+                searchButton.addEventListener('click', function (e) {
+                    if (window.innerWidth < 576) {
+                        e.preventDefault();
+                        searchForm.classList.toggle('show');
+                        if (searchForm.classList.contains('show')) {
+                            searchButtonIcon.classList.replace('bx-search', 'bx-x');
+                        } else {
+                            searchButtonIcon.classList.replace('bx-x', 'bx-search');
+                        }
+                    }
                 })
-                li.classList.add('active');
-            })
-        });
 
 
 
 
-// TOGGLE SIDEBAR
-        const menuBar = document.querySelector('#content nav .bx.bx-menu');
 
-
-        const searchButton = document.querySelector('#content nav form .form-input button');
-        const searchButtonIcon = document.querySelector('#content nav form .form-input button .bx');
-        const searchForm = document.querySelector('#content nav form');
-
-        searchButton.addEventListener('click', function (e) {
-            if (window.innerWidth < 576) {
-                e.preventDefault();
-                searchForm.classList.toggle('show');
-                if (searchForm.classList.contains('show')) {
-                    searchButtonIcon.classList.replace('bx-search', 'bx-x');
-                } else {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.add('hide');
+                } else if (window.innerWidth > 576) {
                     searchButtonIcon.classList.replace('bx-x', 'bx-search');
+                    searchForm.classList.remove('show');
                 }
-            }
-        })
+
+
+                window.addEventListener('resize', function () {
+                    if (this.innerWidth > 576) {
+                        searchButtonIcon.classList.replace('bx-x', 'bx-search');
+                        searchForm.classList.remove('show');
+                    }
+                })
 
 
 
+                const switchMode = document.getElementById('switch-mode');
 
-
-        if (window.innerWidth < 768) {
-            sidebar.classList.add('hide');
-        } else if (window.innerWidth > 576) {
-            searchButtonIcon.classList.replace('bx-x', 'bx-search');
-            searchForm.classList.remove('show');
-        }
-
-
-        window.addEventListener('resize', function () {
-            if (this.innerWidth > 576) {
-                searchButtonIcon.classList.replace('bx-x', 'bx-search');
-                searchForm.classList.remove('show');
-            }
-        })
-
-
-
-        const switchMode = document.getElementById('switch-mode');
-
-        switchMode.addEventListener('change', function () {
-            if (this.checked) {
-                document.body.classList.add('dark');
-            } else {
-                document.body.classList.remove('dark');
-            }
-        })
-    </script>
+                switchMode.addEventListener('change', function () {
+                    if (this.checked) {
+                        document.body.classList.add('dark');
+                    } else {
+                        document.body.classList.remove('dark');
+                    }
+                })
+            </script>
 </html>

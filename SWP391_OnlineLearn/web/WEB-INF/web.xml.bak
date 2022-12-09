@@ -115,13 +115,6 @@
     <servlet>
         <servlet-name>AddUserController</servlet-name>
         <servlet-class>Controllers.AddUserController</servlet-class>
-<<<<<<< HEAD
-    </servlet>
-    <servlet>
-        <servlet-name>Test</servlet-name>
-        <servlet-class>Controllers.Test</servlet-class>
-=======
->>>>>>> 6daf9695cc9db4dc2dd9400a836b5ef1505c65f3
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -232,18 +225,8 @@
         <url-pattern>/mylearn</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
-<<<<<<< HEAD
-        <servlet-name>Test</servlet-name>
-        <url-pattern>/admin/test</url-pattern>
-=======
         <servlet-name>LessonViewController</servlet-name>
         <url-pattern>/lessonview</url-pattern>
->>>>>>> 6daf9695cc9db4dc2dd9400a836b5ef1505c65f3
-=======
-        <servlet-name>LessonViewController</servlet-name>
-        <url-pattern>/lessonview</url-pattern>
->>>>>>> 6daf9695cc9db4dc2dd9400a836b5ef1505c65f3
     </servlet-mapping>
     <session-config>
         <session-timeout>
