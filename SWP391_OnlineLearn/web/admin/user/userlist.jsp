@@ -4,141 +4,92 @@
     Author     : hp
 --%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../layout/layout.jsp" %>
 
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-        <style>
-            html{
-                font-size: small;
-            }
-            table{
-                padding: 20px;
-                text-align: center;
-                width: 95%;
-                height: 100%;
-                border: solid white;
-                margin: auto;
-                border-radius: 10px;
-                background-color: white;
-            }
-            .btn-edit{
-                height: 20px;
-                width: 30px;
-                background-color: #3498DB ;
-                color: white;
-                border-radius: 4px;
-            }
-            h1{
-                padding: 10px;
-                color: #3498DB;
-            }
-            .menu-container{
-                display: flex;
-                padding: 10px;
-                margin: auto;
-                justify-content: space-between;
-            }
-            .filter-container{
-                display: flex;
-                justify-content: space-between;
-            }
-            td{
-                height: 30px;
-                background: #3498DB;
-            }
-        </style>
-    </head>
-    <body>
-        <h1>User List</h1>
-        <div class="menu-container">
-            <div class="filter-container">
-                <h3>Filter</h3>
-                <select name="cars" id="cars">
-                    <option value="1">Admin</option>
-                    <option value="4">Customer</option>
-                </select>
-            </div>
-            <div>
-                <a href="admin/user/adduser.jsp"> Add User</a>
+<script>
+    function doEdit(id)
+    {
+        window.location.href = "userdetail?id=" + id;
+    }
+    function change() {
+        document.getElementById("f1").submit();
+    }
+</script>
+
+<main>
+    <section class="content">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="panel">
+                    <header class="panel-heading">
+                        <div class="panel-heading" style="display: flex;justify-content: space-between;align-items: center;">
+                            <h1 style="padding: 10px"> User  List</h1>
+                            <div>
+                                <a href="adduser" style="padding: 10px">Add user</a>
+                            </div>
+                        </div>
+                    </header>
+
+                    <div class="panel-body table-responsive">
+                        <div class="box-tools m-b-15" style="display: flex;">
+                            <form action="users" method="get" id="f1">
+                                Status <select name="status" class="input-sm" onchange="change()" >
+                                    <option value="-1" ${requestScope.cid eq -1?"selected=\"selected\"" : ""}>All</option>
+                                    <option value="1" ${requestScope.cid eq 1?"selected=\"selected\"" : ""}>Active</option>
+                                    <option value="2" ${requestScope.cid eq 2?"selected=\"selected\"" : ""}>Deactive</option>
+                                    <option value="3" ${requestScope.cid eq 3?"selected=\"selected\"" : ""}>Denied</option>
+                                </select>
+
+                                <input type="text" name="keyword" placeholder="Enter name, email.."/>
+                                <input type="submit" value="Search"/>
+                            </form>
+                        </div>
+                        <table class="table table-hover">
+                            <tr>
+                                <th>ID</th>
+                                <th>Full Name</th>
+                                <th>Gender</th>
+                                <th>Email</th>
+                                <th>Moblie</th>
+                                <th>Role</th>
+                                <th>Status</th>
+                            </tr>
+                            <c:forEach items="${requestScope.listUser}" var="i">
+                                <tr>
+                                    <td onclick="doEdit(${i.id})">${i.id}</td>
+                                    <td onclick="doEdit(${i.id})">${i.fullname}</td>
+                                    <td onclick="doEdit(${i.id})"> 
+                                        <c:if test="${i.gender == true}">
+                                            Male
+                                        </c:if>
+                                        <c:if test="${i.gender == false}">
+                                            Female 
+                                        </c:if>
+                                    </td>
+                                    <td onclick="doEdit(${i.id})">${i.email}</td>
+                                    <td onclick="doEdit(${i.id})">${i.phonenumber}</td>
+                                    <td onclick="doEdit(${i.id})">${i.role.role_name}</td>
+                                    <td>
+                                        <c:if test="${i.status eq '1'}">
+                                            Deactive
+                                        </c:if>
+                                        <c:if test="${i.status eq '2'}">
+                                            Active
+                                        </c:if>
+                                        <c:if test="${i.status eq '3'}">
+                                            Denied
+                                        </c:if>
+                                    </td>
+                                </tr>
+                            </c:forEach>  
+                        </table>
+                    </div><!-- /.box-body -->
+                </div><!-- /.box -->
             </div>
         </div>
-        <table>
-            <tr>
-                <th>
-                    ID
-                </th>
-                <th>
-                    Full Name    
-                </th>
-                <th>
-                    Gender
-                </th>
-                <th>
-                    Email
-                </th>
-                <th>
-                    Mobile
-                </th>
-                <th>
-                    Role
-                </th>
-                <th>
-                    Status
-                </th>
-                <th>
-                    Detail
-                </th>
-            </tr>
-            <c:forEach items="${requestScope.listUser}" var = "i" >
-                <tr>
-                    <td>
-                        ${i.id}
-                    </td>
-                    <td>
-                        ${i.fullname}
-                    </td>
-                    <c:if test = "${i.gender == true}">
-
-                        <td>  <c:out value = "male"/></td>
-                    </c:if> 
-                    <c:if test = "${i.gender == false}">
-
-                        <td>  <c:out value = "female"/></td>
-                    </c:if>   
-                    <td>
-                        ${i.email}
-                    </td>
-
-
-                    <td>
-                        ${i.phonenumber}
-                    </td>
-                    <td>
-                        ${i.role.role_name}
-                    </td>
-                    <c:if test = "${i.status == 1}">
-
-                        <td>  <c:out value = "show"/></td>
-                    </c:if> 
-                    <c:if test = "${i.status == 2}">
-
-                        <td>  <c:out value = "hide"/></td>
-                    </c:if>  
-                    <c:if test = "${i.status == 3}">
-
-                        <td>  <c:out value = "hide"/></td>
-                    </c:if>
-                    <td>
-                        <a href="/admin/userdetail?id=${i.id}" class="btn-edit">edit</a>
-                    </td>
-                </tr>
-            </c:forEach>
-        </table>
-    </body>
-</html>
+       
+    </section>
+</section>
+</main> 

@@ -91,7 +91,7 @@ public class LoginController extends HttpServlet {
                         request.getRequestDispatcher(request.getContextPath() + "/home").forward(request, response);
                         break;
                 }
-            } catch (ServletException | IOException e) {
+            } catch (Exception e) {
                   response.sendRedirect(request.getContextPath() + "/login");
             }
         }

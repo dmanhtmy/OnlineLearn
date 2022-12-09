@@ -25,7 +25,6 @@
         <servlet-class>Controllers.BlogDetailController</servlet-class>
     </servlet>
     <servlet>
-
         <servlet-name>SliderListController</servlet-name>
         <servlet-class>Controllers.SliderListController</servlet-class>
     </servlet>
@@ -44,6 +43,14 @@
     <servlet>
         <servlet-name>AdminBlogDeleteController</servlet-name>
         <servlet-class>Controllers.AdminBlogDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SliderDetail</servlet-name>
+        <servlet-class>Controllers.SliderDetail</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddUserController</servlet-name>
+        <servlet-class>Controllers.AddUserController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -68,7 +75,6 @@
     <servlet-mapping>
         <servlet-name>BlogDetailController</servlet-name>
         <url-pattern>/home/blog/detail</url-pattern>
-
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>SliderListController</servlet-name>
@@ -89,6 +95,14 @@
     <servlet-mapping>
         <servlet-name>AdminBlogDeleteController</servlet-name>
         <url-pattern>/admin/blog/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SliderDetail</servlet-name>
+        <url-pattern>/admin/sliderdetail</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddUserController</servlet-name>
+        <url-pattern>/admin/adduser</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
