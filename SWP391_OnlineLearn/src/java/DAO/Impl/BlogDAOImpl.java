@@ -31,14 +31,14 @@ public class BlogDAOImpl implements BlogDAO {
             String sql = "SELECT * FROM onlinelearn.blog_list bl\n"
                     + "WHERE bl.title LIKE ? ";
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setString(1, '%'+name+'%');
+            ps.setString(1, '%' + name + '%');
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 BlogList blog = new BlogList();
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
                 blog.setBrief_info(rs.getString("brief_info"));
-                blog.setPostdate(rs.getDate("postdate"));
+                blog.setPostdate(rs.getString("postdate"));
                 listBlog.add(blog);
             }
             dBContext.closeConnection(connection, ps, rs);
@@ -54,7 +54,7 @@ public class BlogDAOImpl implements BlogDAO {
         BlogList blog = new BlogList();
         try {
             Connection connection = dbContext.getConnection();
-            String sql = "select bl.id,bl.title,bl.brief_info,bl.thumbnail,bl.postdate,bl.post_content from onlinelearn.blog_list bl\n"
+            String sql = "select bl.id,bl.title,bl.category_id,bl.brief_info,bl.thumbnail,bl.postdate,bl.post_content from onlinelearn.blog_list bl\n"
                     + "where bl.id=?";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setInt(1, id);
@@ -62,9 +62,10 @@ public class BlogDAOImpl implements BlogDAO {
             while (rs.next()) {
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
+                blog.setCategory_id(rs.getInt("category_id"));
                 blog.setBrief_info(rs.getString("brief_info"));
                 blog.setThumbnail(rs.getString("thumbnail"));
-                blog.setPostdate(rs.getDate("postdate"));
+                blog.setPostdate(rs.getString("postdate"));
                 blog.setBlogdetail(rs.getString("post_content"));
                 return blog;
             }
@@ -89,7 +90,7 @@ public class BlogDAOImpl implements BlogDAO {
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
                 blog.setBrief_info(rs.getString("brief_info"));
-                blog.setPostdate(rs.getDate("postdate"));
+                blog.setPostdate(rs.getString("postdate"));
                 listBlog.add(blog);
             }
             dbContext.closeConnection(connection, stm, rs);
@@ -104,17 +105,15 @@ public class BlogDAOImpl implements BlogDAO {
         DBContext dbContext = new DBContext();
         try {
             Connection connection = dbContext.getConnection();
-            String sql = "INSERT INTO onlinelearn.blog_list(title, category_id, postdate,brief_info,thumbnail,feature,status,post_content)\n"
-                    + "VALUES (?,?,?,?,?,?,?,?);";
+            String sql = "INSERT INTO onlinelearn.blog_list(title, category_id, postdate,brief_info,thumbnail,post_content)\n"
+                    + "VALUES (?,?,?,?,?,?);";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, t.getTitle());
             stm.setInt(2, t.getCategory_id());
-            stm.setDate(3, t.getPostdate());
+            stm.setString(3, t.getPostdate());
             stm.setString(4, t.getBrief_info());
             stm.setString(5, t.getThumbnail());
-            stm.setBoolean(6, t.isFeature());
-            stm.setBoolean(7, t.isStatus());
-            stm.setString(8, t.getBlogdetail());
+            stm.setString(6, t.getBlogdetail());
             stm.executeUpdate();
             dbContext.closeConnection(connection, stm);
             return true;
@@ -126,7 +125,33 @@ public class BlogDAOImpl implements BlogDAO {
 
     @Override
     public boolean update(BlogList t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DBContext dbContext = new DBContext();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "UPDATE onlinelearn.blog_list\n"
+                    + "SET \n"
+                    + "title = ?, \n"
+                    + "category_id = ?,\n"
+                    + "postdate=?,\n"
+                    + "brief_info=?,\n"
+                    + "thumbnail=?,\n"
+                    + "post_content=?\n"
+                    + "WHERE id=?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, t.getTitle());
+            stm.setInt(2, t.getCategory_id());
+            stm.setString(3, t.getPostdate());
+            stm.setString(4, t.getBrief_info());
+            stm.setString(5, t.getThumbnail());
+            stm.setString(6, t.getBlogdetail());
+            stm.setInt(7, t.getId());
+            stm.executeUpdate();
+            dbContext.closeConnection(connection, stm);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(BlogList.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
@@ -179,7 +204,7 @@ public class BlogDAOImpl implements BlogDAO {
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
                 blog.setBrief_info(rs.getString("brief_info"));
-                blog.setPostdate(rs.getDate("postdate"));
+                blog.setPostdate(rs.getString("postdate"));
                 listBlog.add(blog);
             }
         } catch (SQLException e) {
@@ -190,10 +215,9 @@ public class BlogDAOImpl implements BlogDAO {
 
     public static void main(String[] args) {
         BlogDAOImpl db = new BlogDAOImpl();
-        List<BlogList> list=db.search("SQUARE ");
-        for (BlogList blogList : list) {
-            System.out.println(blogList.getTitle());
-        }
+        System.out.println(db.update(new BlogList(35, "huhahaha", 3, "2022-01-01", "hahahah", "heuhehe", "hahahah")));
+//        BlogList blog = new BlogList("huyenana", 2, "2022-01-01", "gbsadjfbasj", "fbjabfajs", "fgbasjfbajs");
+//        System.out.println(db.get(9).getTitle());
     }
 
 }

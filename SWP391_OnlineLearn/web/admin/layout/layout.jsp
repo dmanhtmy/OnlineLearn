@@ -653,16 +653,22 @@
                         <span class="text">Blogs</span>
                     </a>
                 </li>
+                <li>
+                    <a href="<%= request.getContextPath()%>/admin/subjectlist">
+                        <i class='bx bx-menu' ></i>
+                        <span class="text">Subjects</span>
+                    </a>
+                </li>
             </ul>
             <ul class="side-menu">
                 <li>
-                    <a href="#">
+                    <a href="/admin/settingslist">
                         <i class='bx bxs-cog' ></i>
                         <span class="text">Settings</span>
                     </a>
                 </li>
                 <li>
-                    <a href="<%= request.getContextPath()%>/login" class="logout">
+                    <a href="<%= request.getContextPath()%>/logout" class="logout">
                         <i class='bx bxs-log-out-circle' ></i>
                         <span class="text">Logout</span>
                     </a>

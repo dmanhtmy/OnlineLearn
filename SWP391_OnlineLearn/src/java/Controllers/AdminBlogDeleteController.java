@@ -5,12 +5,15 @@
 package Controllers;
 
 import DAO.Impl.BlogDAOImpl;
+import Models.BlogList;
+import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
@@ -56,9 +59,42 @@ public class AdminBlogDeleteController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+//        processRequest(request, response);
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/home");
+        } else {
+        BlogDAOImpl blogDAO = new BlogDAOImpl();
+        int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+        String indexpasge = request.getParameter("page");
+        if (indexpasge == null) {
+            indexpasge = "1";
+            int page = Integer.parseInt(indexpasge);
+            int count = blogDAO.getTotalBlog();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            boolean status = blogDAO.delete(id);
+            List<BlogList> categories = blogDAO.getAll(page);
+            request.setAttribute("blogs", categories);
+            request.setAttribute("endpage", endpage);
+            response.sendRedirect(request.getContextPath() + "/admin/blogs?status=" + status);
+        } else {
+            int page = Integer.parseInt(indexpasge);
+            int count = blogDAO.getTotalBlog();
+            int endpage = count / 5;
+            if (count % 5 != 0) {
+                endpage++;
+            }
+            boolean status = blogDAO.delete(id);
+            List<BlogList> categories = blogDAO.getAll(page);
+            request.setAttribute("blogs", categories);
+            request.setAttribute("endpage", endpage);
+            response.sendRedirect(request.getContextPath() + "/admin/blogs?status=" + status);
+        }
     }
-
+}
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -70,15 +106,7 @@ public class AdminBlogDeleteController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-//        processRequest(request, response);
-        BlogDAOImpl db = new BlogDAOImpl();
-        int id = Integer.parseInt(request.getParameter("id"));
-        boolean status=db.delete(id);
-        if(status==true){
-            
-        }else{
-            
-        }
+        processRequest(request, response);
     }
 
     /**

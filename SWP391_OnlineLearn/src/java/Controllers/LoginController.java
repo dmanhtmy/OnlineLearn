@@ -72,11 +72,11 @@ public class LoginController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String user = request.getParameter("username");
         String pass = request.getParameter("password");
         LoginDAOImpl login = new LoginDAOImpl();
         User userRole = login.getUser(user, pass);
-        HttpSession session = request.getSession();
         session.setAttribute("user", userRole);
         if (userRole == null) {
             response.sendRedirect(request.getContextPath() + "/login");
@@ -93,6 +93,7 @@ public class LoginController extends HttpServlet {
                 }
             } catch (Exception e) {
                   response.sendRedirect(request.getContextPath() + "/login");
+
             }
         }
 

@@ -13,6 +13,18 @@
         <servlet-class>Controllers.SignupController</servlet-class>
     </servlet>
     <servlet>
+        <servlet-name>SettingsListController</servlet-name>
+        <servlet-class>Controllers.SettingsListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSettingsController</servlet-name>
+        <servlet-class>Controllers.EditSettingsController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSettingsController</servlet-name>
+        <servlet-class>Controllers.AddSettingsController</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>HomeController</servlet-name>
         <servlet-class>Controllers.HomeController</servlet-class>
     </servlet>
@@ -23,6 +35,26 @@
     <servlet>
         <servlet-name>BlogDetailController</servlet-name>
         <servlet-class>Controllers.BlogDetailController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CourseController</servlet-name>
+        <servlet-class>Controllers.CourseController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminLoginController</servlet-name>
+        <servlet-class>Controllers.AdminLoginController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminHomeController</servlet-name>
+        <servlet-class>Controllers.AdminHomeController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminBlogDeleteController</servlet-name>
+        <servlet-class>Controllers.AdminBlogDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminBlogListController</servlet-name>
+        <servlet-class>Controllers.AdminBlogListController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SliderListController</servlet-name>
@@ -37,12 +69,36 @@
         <servlet-class>Controllers.UserDetailController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminBlogListController</servlet-name>
-        <servlet-class>Controllers.AdminBlogListController</servlet-class>
+        <servlet-name>AdminBlogCreateController</servlet-name>
+        <servlet-class>Controllers.AdminBlogCreateController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdminBlogDeleteController</servlet-name>
-        <servlet-class>Controllers.AdminBlogDeleteController</servlet-class>
+        <servlet-name>AdminBlogUpdateController</servlet-name>
+        <servlet-class>Controllers.AdminBlogUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LogoutController</servlet-name>
+        <servlet-class>Controllers.LogoutController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>SubjectListController</servlet-name>
+        <servlet-class>Controllers.SubjectListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AddSubjectController</servlet-name>
+        <servlet-class>Controllers.AddSubjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditSubjectController</servlet-name>
+        <servlet-class>Controllers.EditSubjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ChangePassword</servlet-name>
+        <servlet-class>Controllers.ChangePassword</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>LessonViewController</servlet-name>
+        <servlet-class>Controllers.LessonViewController</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>SliderDetail</servlet-name>
@@ -65,12 +121,24 @@
         <url-pattern>/signup</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
+        <servlet-name>SettingsListController</servlet-name>
+        <url-pattern>/admin/settingslist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditSettingsController</servlet-name>
+        <url-pattern>/admin/editsetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSettingsController</servlet-name>
+        <url-pattern>/admin/addsetting</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>HomeController</servlet-name>
         <url-pattern>/home</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogListController</servlet-name>
-        <url-pattern>/home/blog</url-pattern>
+        <url-pattern>/blog</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>BlogDetailController</servlet-name>
@@ -103,6 +171,46 @@
     <servlet-mapping>
         <servlet-name>AddUserController</servlet-name>
         <url-pattern>/admin/adduser</url-pattern>
+</servlet-mapping>
+<servlet-mapping>
+        <servlet-name>AdminBlogCreateController</servlet-name>
+        <url-pattern>/admin/blog/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminBlogUpdateController</servlet-name>
+        <url-pattern>/admin/blog/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LogoutController</servlet-name>
+        <url-pattern>/logout</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>SubjectListController</servlet-name>
+        <url-pattern>/admin/subjectlist</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSubjectController</servlet-name>
+        <url-pattern>/admin/addsubject</url-pattern>
+    </servlet-mapping>
+        <servlet-mapping>
+        <servlet-name>EditSubjectController</servlet-name>
+        <url-pattern>/admin/editcoursesubject</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CourseController</servlet-name>
+        <url-pattern>/course</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminLoginController</servlet-name>
+        <url-pattern>/admin/login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ChangePassword</servlet-name>
+        <url-pattern>/password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonViewController</servlet-name>
+        <url-pattern>/lessonview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

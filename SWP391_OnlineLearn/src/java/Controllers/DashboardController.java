@@ -7,6 +7,7 @@ package Controllers;
 import DAO.Impl.BlogDAOImpl;
 import DAO.Impl.CourseDAOImpl;
 import DAO.Impl.UserDAOImpl;
+import Models.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -31,17 +32,21 @@ public class DashboardController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAOImpl userDAO = new UserDAOImpl();
-        BlogDAOImpl blogDAO = new BlogDAOImpl();
-        CourseDAOImpl courseDAO=new CourseDAOImpl();
-        int totalUsers= userDAO.getTotalUser();
-        int totalBlogs=blogDAO.getTotalBlog();
-        int totalCourse=courseDAO.getTotalCourse();
-        request.setAttribute("users", totalUsers);
-        request.setAttribute("blogs", totalBlogs);
-        request.setAttribute("courses", totalCourse);
-        request.getRequestDispatcher(request.getContextPath() + "/admin/dashboard/dashboard.jsp").forward(request, response);
-
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/home");
+        } else {
+            UserDAOImpl userDAO = new UserDAOImpl();
+            BlogDAOImpl blogDAO = new BlogDAOImpl();
+            CourseDAOImpl courseDAO = new CourseDAOImpl();
+            int totalUsers = userDAO.getTotalUser();
+            int totalBlogs = blogDAO.getTotalBlog();
+            int totalCourse = courseDAO.getTotalCourse();
+            request.setAttribute("users", totalUsers);
+            request.setAttribute("blogs", totalBlogs);
+            request.setAttribute("courses", totalCourse);
+            request.getRequestDispatcher(request.getContextPath() + "/admin/dashboard/dashboard.jsp").forward(request, response);
+        }
     }
 
     /**
