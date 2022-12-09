@@ -12,6 +12,7 @@ import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -25,6 +26,9 @@ import java.util.ArrayList;
  *
  * @author windc
  */
+@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB 
+        maxFileSize = 1024 * 1024 * 50, // 50 MB
+        maxRequestSize = 1024 * 1024 * 100)   	// 100 MB
 public class EditSubjectController extends HttpServlet {
 
     /**
@@ -95,7 +99,7 @@ public class EditSubjectController extends HttpServlet {
             throws ServletException, IOException {
         CourseDAOImpl courseDAO = new CourseDAOImpl();
         String message;
-        int id = Integer.parseInt(request.getParameter("cid"));
+        int id = Integer.parseInt(request.getParameter("cidi"));
         String title = request.getParameter("title");
         int author_id = Integer.parseInt(request.getParameter("authors"));
         String brief = request.getParameter("brief");
