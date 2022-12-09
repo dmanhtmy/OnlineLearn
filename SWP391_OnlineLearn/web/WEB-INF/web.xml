@@ -96,6 +96,10 @@
         <servlet-name>ChangePassword</servlet-name>
         <servlet-class>Controllers.ChangePassword</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LessonViewController</servlet-name>
+        <servlet-class>Controllers.LessonViewController</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -188,6 +192,10 @@
     <servlet-mapping>
         <servlet-name>ChangePassword</servlet-name>
         <url-pattern>/password</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LessonViewController</servlet-name>
+        <url-pattern>/lessonview</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
