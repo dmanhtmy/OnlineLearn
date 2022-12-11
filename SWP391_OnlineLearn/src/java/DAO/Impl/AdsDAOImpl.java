@@ -35,6 +35,7 @@ public class AdsDAOImpl implements AdsDAO{
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 ads.setId(rs.getInt("id"));
+                ads.setName_brand(rs.getString("name_brand"));
                 ads.setImage(rs.getString("image"));
                 ads.setHref(rs.getString("href"));
                 ads.setStatus(rs.getBoolean("status"));
@@ -59,6 +60,7 @@ public class AdsDAOImpl implements AdsDAO{
             while (rs.next()) {
                 Ads ads = new Ads();
                 ads.setId(rs.getInt("id"));
+                ads.setName_brand(rs.getString("name_brand"));
                 ads.setImage(rs.getString("image"));
                 ads.setHref(rs.getString("href"));
                 ads.setStatus(rs.getBoolean("status"));
@@ -76,12 +78,13 @@ public class AdsDAOImpl implements AdsDAO{
         DBContext dbContext = new DBContext();
         try {
             Connection connection = dbContext.getConnection();
-            String sql = "INSERT INTO onlinelearn.ads(image, href, status)\n"
-                    + "VALUES (?,?,?);";
+            String sql = "INSERT INTO onlinelearn.ads(name_brand,image, href, status)\n"
+                    + "VALUES (?,?,?,?);";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, t.getImage());
-            stm.setString(2, t.getHref());
-            stm.setBoolean(3, t.isStatus());
+            stm.setString(1, t.getName_brand());
+            stm.setString(2, t.getImage());
+            stm.setString(3, t.getHref());
+            stm.setBoolean(4, t.isStatus());
             stm.executeUpdate();
             dbContext.closeConnection(connection, stm);
             return true;
@@ -98,15 +101,17 @@ public class AdsDAOImpl implements AdsDAO{
             Connection connection = dbContext.getConnection();
             String sql = "UPDATE onlinelearn.ads\n"
                     + "SET \n"
+                    + "name_brand = ?, \n"
                     + "image = ?, \n"
                     + "href = ?,\n"
                     + "status=?,\n"
                     + "WHERE id=?;";
             PreparedStatement stm = connection.prepareStatement(sql);
-            stm.setString(1, t.getImage());
-            stm.setString(2, t.getHref());
-            stm.setBoolean(3, t.isStatus());
-            stm.setInt(4, t.getId());
+            stm.setString(1, t.getName_brand());
+            stm.setString(2, t.getImage());
+            stm.setString(3, t.getHref());
+            stm.setBoolean(4, t.isStatus());
+            stm.setInt(5, t.getId());
             stm.executeUpdate();
             dbContext.closeConnection(connection, stm);
             return true;

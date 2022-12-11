@@ -25,7 +25,7 @@
     <main>
         <ul class="box-info-blog">
             <table class="table">
-                <button type="button" class="btn btn-primary" style="background-color: #3C91E6;" onclick="createBlog()">Create Blog</button>
+                <button type="button" class="btn btn-primary" style="background-color: #3C91E6;" onclick="createAds()">Create Ads</button>
                 <form id="form" action="blogs" method="GET">
                     <div class="form-input">
                         <input name="search" type="text" placeholder="Search...">
@@ -37,6 +37,7 @@
                         <th scope="col">#</th>
                         <th scope="col">Ads Name</th>
                         <th scope="col">Status</th>
+                        <th scope="col">#</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -45,13 +46,15 @@
                         <c:set var="i" value="${i+1}"></c:set>
                             <tr>
                                 <th scope="row">${i}</th>
-                            <td>${blog.getTitle()}</td>
+                            <td>${ads.getName_brand()}</td>
+                            <td>${ads.isStatus()}</td>
                             <td>
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${blog.getId()}">Delete</button>
-                                <button type="button" class="btn btn-info" onclick="updateBlog(${blog.getId()})" name="id" value="${blog.getId()}">Update</button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${ads.getId()}">Delete</button>
+                                <button type="button" class="btn btn-info" onclick="updateAds(${ads.getId()})" name="id" value="${ads.getId()}">Update</button>
+                                <button type="button" class="btn btn-warning" onclick="updateAds(${ads.getId()})" name="id" value="${ads.getId()}">Change Mode</button>
                             </td>
                         </tr>
-                        <div class="modal fade" id="exampleModal${blog.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id="exampleModal${ads.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
@@ -59,10 +62,10 @@
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        Do you want delete '${blog.getTitle()}' ?
+                                        Do you want delete '${ads.getName_brand()}' ?
                                     </div>
                                     <div class="modal-footer">
-                                        <button  type="submit" class="btn btn-danger" onclick="deleteBlog(${blog.getId()})" name="id" value="${blog.getId()}">Delete</button>
+                                        <button  type="submit" class="btn btn-danger" onclick="deleteAds(${ads.getId()})" name="id" value="${ads.getId()}">Delete</button>
                                         <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>
@@ -76,7 +79,7 @@
         <div class="paging">
             <ul class="pagination justify-content-center">
                 <c:forEach begin="1" end="${endpage}" var="p">
-                    <li class="page-item"><a class="page-link" href="<%= request.getContextPath()%>/admin/blogs?page=${p}">${p}</a></li>
+                    <li class="page-item"><a class="page-link" href="<%= request.getContextPath()%>/admin/ads?page=${p}">${p}</a></li>
                     </c:forEach>
             </ul>
         </div>
