@@ -196,6 +196,8 @@ public class UserDAOImpl implements UserDAO {
         } catch (SQLException ex) {
             Logger.getLogger(UserDAOImpl.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
     public int getRowcount(int status, int author, String title) {
         try {
             Connection connection = dbContext.getConnection();
