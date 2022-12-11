@@ -119,7 +119,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="submit" value="${course.cid}" name="cid" id="buu" class="btn btn-success btn-lg ">Edit Subject</button>
+                        <button type="submit" value="${course.cid}" name="cidi" id="buu" class="btn btn-success btn-lg ">Edit Subject</button>
                     </form>
                 </div>
             </section>

@@ -3,23 +3,8 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/user/userlist.jsp</file>
-            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AddUserController.java</file>
-            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/UserDAOImpl.java</file>
-            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/user/adduser.jsp</file>
-            <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/client/index.jsp</file>
+            <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml.bak</file>
             <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/subject/editSubject.jsp</file>
-            <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/EditSubjectController.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/login/login.jsp</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/index.jsp</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AddSettingsController.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Context/DBContext.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/course/course.jsp</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/CourseDAOImpl.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/nbproject/build-impl.xml</file>
         </group>
     </open-files>
 </project-private>

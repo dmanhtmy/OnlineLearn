@@ -89,6 +89,11 @@
                         <a href="<%= request.getContextPath()%>/home/about" class="nav-item nav-link">About</a>
                         <a href="<%= request.getContextPath()%>/home/course" class="nav-item nav-link">Courses</a>
                         <a href="<%= request.getContextPath()%>/home/blog" class="nav-item nav-link">Blog</a>
+                        <c:choose>
+                            <c:when test="${requestScope.user != null}">
+                                <a href="mylearn" class="nav-item nav-link">My Course</a>
+                            </c:when>
+                        </c:choose>
                     </div>
                     <c:choose>
                         <c:when test="${sessionScope.user!=null}">
