@@ -73,7 +73,22 @@ public class AdsDAOImpl implements AdsDAO{
 
     @Override
     public boolean insert(Ads t) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DBContext dbContext = new DBContext();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "INSERT INTO onlinelearn.ads(image, href, status)\n"
+                    + "VALUES (?,?,?);";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, t.getImage());
+            stm.setString(2, t.getHref());
+            stm.setBoolean(3, t.isStatus());
+            stm.executeUpdate();
+            dbContext.closeConnection(connection, stm);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Ads.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
 
     @Override
@@ -103,7 +118,20 @@ public class AdsDAOImpl implements AdsDAO{
 
     @Override
     public boolean delete(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        DBContext dbContext = new DBContext();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "DELETE FROM onlinelearn.ads a \n"
+                    + "WHERE a.id=?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            stm.executeUpdate();
+            dbContext.closeConnection(connection, stm);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Ads.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
     }
     public static void main(String[] args) {
         AdsDAOImpl db= new AdsDAOImpl();
