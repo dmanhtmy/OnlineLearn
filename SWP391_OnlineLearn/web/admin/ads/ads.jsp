@@ -36,7 +36,6 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">Ads Name</th>
-                        <th scope="col">Status</th>
                         <th scope="col">#</th>
                     </tr>
                 </thead>
@@ -47,7 +46,6 @@
                             <tr>
                                 <th scope="row">${i}</th>
                             <td>${ads.getName_brand()}</td>
-                            <td>${ads.isStatus()}</td>
                             <td>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${ads.getId()}">Delete</button>
                                 <button type="button" class="btn btn-info" onclick="updateAds(${ads.getId()})" name="id" value="${ads.getId()}">Update</button>

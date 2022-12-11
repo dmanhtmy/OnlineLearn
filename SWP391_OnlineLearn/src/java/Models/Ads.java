@@ -14,24 +14,21 @@ public class Ads {
     private String name_brand;
     private String image;
     private String href;
-    private boolean status;
 
     public Ads() {
     }
 
-    public Ads(int id, String name_brand, String image, String href, boolean status) {
+    public Ads(int id, String name_brand, String image, String href) {
         this.id = id;
         this.name_brand = name_brand;
         this.image = image;
         this.href = href;
-        this.status = status;
     }
 
-    public Ads(String name_brand, String image, String href, boolean status) {
+    public Ads(String name_brand, String image, String href) {
         this.name_brand = name_brand;
         this.image = image;
         this.href = href;
-        this.status = status;
     }
 
     public int getId() {
@@ -64,13 +61,5 @@ public class Ads {
 
     public void setHref(String href) {
         this.href = href;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
     }
 }

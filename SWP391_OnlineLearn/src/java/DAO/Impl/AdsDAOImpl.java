@@ -39,7 +39,6 @@ public class AdsDAOImpl implements AdsDAO {
                 ads.setName_brand(rs.getString("name_brand"));
                 ads.setImage(rs.getString("image"));
                 ads.setHref(rs.getString("href"));
-                ads.setStatus(rs.getBoolean("status"));
                 listAds.add(ads);
             }
             dBContext.closeConnection(connection, ps, rs);
@@ -65,7 +64,6 @@ public class AdsDAOImpl implements AdsDAO {
                 ads.setName_brand(rs.getString("name_brand"));
                 ads.setImage(rs.getString("image"));
                 ads.setHref(rs.getString("href"));
-                ads.setStatus(rs.getBoolean("status"));
                 return ads;
             }
             dbContext.closeConnection(connection, stm, rs);
@@ -90,7 +88,6 @@ public class AdsDAOImpl implements AdsDAO {
                 ads.setName_brand(rs.getString("name_brand"));
                 ads.setImage(rs.getString("image"));
                 ads.setHref(rs.getString("href"));
-                ads.setStatus(rs.getBoolean("status"));
                 listAds.add(ads);
             }
             dbContext.closeConnection(connection, stm, rs);
@@ -105,13 +102,12 @@ public class AdsDAOImpl implements AdsDAO {
         DBContext dbContext = new DBContext();
         try {
             Connection connection = dbContext.getConnection();
-            String sql = "INSERT INTO onlinelearn.ads(name_brand,image, href, status)\n"
-                    + "VALUES (?,?,?,?);";
+            String sql = "INSERT INTO onlinelearn.ads(name_brand,image, href)\n"
+                    + "VALUES (?,?,?);";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, t.getName_brand());
             stm.setString(2, t.getImage());
             stm.setString(3, t.getHref());
-            stm.setBoolean(4, t.isStatus());
             stm.executeUpdate();
             dbContext.closeConnection(connection, stm);
             return true;
@@ -130,15 +126,13 @@ public class AdsDAOImpl implements AdsDAO {
                     + "SET \n"
                     + "name_brand = ?, \n"
                     + "image = ?, \n"
-                    + "href = ?,\n"
-                    + "status=?,\n"
+                    + "href = ?\n"
                     + "WHERE id=?;";
             PreparedStatement stm = connection.prepareStatement(sql);
             stm.setString(1, t.getName_brand());
             stm.setString(2, t.getImage());
             stm.setString(3, t.getHref());
-            stm.setBoolean(4, t.isStatus());
-            stm.setInt(5, t.getId());
+            stm.setInt(4, t.getId());
             stm.executeUpdate();
             dbContext.closeConnection(connection, stm);
             return true;
@@ -199,7 +193,6 @@ public class AdsDAOImpl implements AdsDAO {
                 ads.setName_brand(rs.getString("name_brand"));
                 ads.setImage(rs.getString("image"));
                 ads.setHref(rs.getString("href"));
-                ads.setStatus(rs.getBoolean("status"));
                 listAds.add(ads);
             }
         } catch (SQLException e) {
@@ -210,7 +203,7 @@ public class AdsDAOImpl implements AdsDAO {
 
     public static void main(String[] args) {
         AdsDAOImpl db = new AdsDAOImpl();
-        System.out.println(db.get(1).isStatus());
+        System.out.println(db.update(new Ads(4, "hola", "abcd", "abcd")));
 //        List<Ads> listAds=db.getAll();
 //        for (Ads listAd : listAds) {
 //            System.out.println(listAd.getHref());

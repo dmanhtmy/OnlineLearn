@@ -18,7 +18,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.nio.file.Paths;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -26,7 +25,7 @@ import java.util.Map;
  * @author MrTuan
  */
 @MultipartConfig
-public class AdminAdsCreateController extends HttpServlet {
+public class AdminAdsUpdateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -45,10 +44,10 @@ public class AdminAdsCreateController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdminAdsCreateController</title>");
+            out.println("<title>Servlet AdminAdsUpdateController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdminAdsCreateController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminAdsUpdateController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -72,9 +71,10 @@ public class AdminAdsCreateController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/home");
         } else {
             AdsDAOImpl adsDAOImpl = new AdsDAOImpl();
-            List<Ads> listAds = adsDAOImpl.getAll();
-            request.setAttribute("listAds", listAds);
-            request.getRequestDispatcher(request.getContextPath() + "/admin/ads/adsCreate.jsp").forward(request, response);
+            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+            Ads ads = adsDAOImpl.get(id);
+            request.setAttribute("ads", ads);
+            request.getRequestDispatcher(request.getContextPath() + "/admin/ads/adsUpdate.jsp").forward(request, response);
         }
     }
 
@@ -96,6 +96,7 @@ public class AdminAdsCreateController extends HttpServlet {
                 "api_key", "295827132792413",
                 "api_secret", "SyPzR-EcBnCG-BSQ5298s4MC9LE"));
         cloudinary.config.secure = true;
+        int id = Integer.parseInt(request.getParameter("id"));
         String name_brand = request.getParameter("brand");
         Part filePart = request.getPart("image");
         String link = request.getParameter("link");
@@ -109,7 +110,7 @@ public class AdminAdsCreateController extends HttpServlet {
         Map uploadResult = cloudinary.uploader().upload(request.getRealPath("image") + fileName, path);
         filePart.delete();
         String geturl = uploadResult.get("secure_url").toString();
-        boolean status = adsDAOImpl.insert(new Ads(name_brand, geturl, link));
+        boolean status = adsDAOImpl.update(new Ads(id, name_brand, geturl, link));
         request.setAttribute("status", status);
         response.sendRedirect(request.getContextPath() + "/admin/ads?status=" + status);
     }

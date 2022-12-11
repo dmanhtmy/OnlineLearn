@@ -1,6 +1,6 @@
 <%-- 
-    Document   : adsCreate
-    Created on : Dec 11, 2022, 7:20:03 PM
+    Document   : adsUpdate
+    Created on : Dec 11, 2022, 8:56:17 PM
     Author     : MrTuan
 --%>
 
@@ -13,21 +13,21 @@ crossorigin="anonymous"></script>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@include file="../layout/layout.jsp" %>
 <main>
-    <form action="/admin/ads/create" method="POST" enctype="multipart/form-data">
+    <form action="/admin/ads/update" method="POST" enctype="multipart/form-data">
         <div class="input-group mb-3">
             <span class="input-group-text" id="basic-addon1">Name Brand</span>
-            <input type="text" class="form-control" placeholder="name..." aria-label="Username" aria-describedby="basic-addon1" title="title" name="brand">
+            <input type="text" class="form-control" placeholder="name..." aria-label="Username" aria-describedby="basic-addon1" title="title" name="brand" value="${ads.getName_brand()}">
         </div>
         <div class="input-group mb-3" id="div-image-profile">
             <label class="input-group-text" for="inputGroupFile01">Upload Image</label>
             <input type="file" class="form-control" id="file" name="image"accept="image/png,image/jpeg" multiple="multiple">
         </div>
-        <img id="photo" class= "img-profile" src="">
+        <img id="photo" class= "img-profile" src="${ads.getImage()}">
         <div class="input-group mb-3" style="margin-top: 1rem!important;">
             <span class="input-group-text" id="basic-addon2">Link</span>
-            <input type="text" class="form-control" placeholder="link infor..." aria-label="Recipient's username" aria-describedby="basic-addon2" name="link">
+            <input type="text" class="form-control" placeholder="link infor..." aria-label="Recipient's username" aria-describedby="basic-addon2" name="link" value="${ads.getHref()}">
         </div><br>
-        <div class="button-submit" style="text-align: center;margin-top: 50px;"><button type="submit" class="btn btn-primary" >Create Ads</button></div>
+        <div class="button-submit" style="text-align: center;margin-top: 50px;"><button type="submit" class="btn btn-primary" name="id" value="${ads.getId()}">Save</button></div>
     </form>
 </main>
 </section>
@@ -65,4 +65,5 @@ crossorigin="anonymous"></script>
         background-color: lightgray;
     }
 </style>
+
 
