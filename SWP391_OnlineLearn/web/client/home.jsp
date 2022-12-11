@@ -74,8 +74,8 @@
                 <div class="image">
                     <span style="font-family: Arial; font-size:12px;display:block;text-align:left;color:#ccc">Advertisement</span>
                     <div class="bg-lightgray  text-center ">
-                        <a target="_blank" href="http://letzcricket.com">
-                            <img src="https://res.cloudinary.com/ddrjnfihc/image/upload/v1670559493/Admin/Ads/mau-banner-quang-cao-3_h87zmc.jpg" class="img-responsive">
+                        <a target="_blank" href="${ads.getHref()}">
+                            <img src="${ads.getImage()}" class="img-responsive">
                         </a>
                     </div>
                     <i class="icon-close" onclick="hideOverlay();"><span>X</span></i>
