@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author MrTuan
  */
-public class AdsListController extends HttpServlet {
+public class AdminAdsListController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>

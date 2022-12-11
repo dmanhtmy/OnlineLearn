@@ -117,8 +117,12 @@
         <servlet-class>Controllers.AddUserController</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>AdsListController</servlet-name>
-        <servlet-class>Controllers.AdsListController</servlet-class>
+        <servlet-name>AdminAdsListController</servlet-name>
+        <servlet-class>Controllers.AdminAdsListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAdsCreateController</servlet-name>
+        <servlet-class>Controllers.AdminAdsCreateController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -233,8 +237,12 @@
         <url-pattern>/lessonview</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>AdsListController</servlet-name>
+        <servlet-name>AdminAdsListController</servlet-name>
         <url-pattern>/admin/ads</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAdsCreateController</servlet-name>
+        <url-pattern>/admin/ads/create</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
