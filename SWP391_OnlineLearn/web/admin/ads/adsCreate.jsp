@@ -28,11 +28,12 @@ crossorigin="anonymous"></script>
             <input type="text" class="form-control" placeholder="link infor..." aria-label="Recipient's username" aria-describedby="basic-addon2" name="link">
         </div><br>
         <div class="input-group mb-3">
-            <span>Status: </span>
-            <div class="col-sm-8" style="margin-left: 2%;transform: translateY(2px)">
-                <input type="radio" value="1" name="mode" class="mode"> on
-                &emsp;
-                <input type="radio" value="0" name="mode" class="mode"> off
+            <span class="input-group-text" id="basic-addon2">Status</span>
+            <div class="col-sm-8">
+                <select name="mode" required="required" style="height: 40px;">
+                        <option value="true">On</option>
+                        <option value="false">Off</option>
+                </select>
             </div>
         </div>
         <div class="button-submit" style="text-align: center;margin-top: 50px;"><button type="submit" class="btn btn-primary" >Create Ads</button></div>

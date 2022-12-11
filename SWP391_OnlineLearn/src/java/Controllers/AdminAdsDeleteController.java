@@ -5,6 +5,7 @@
 package Controllers;
 
 import DAO.Impl.AdsDAOImpl;
+import DAO.Impl.BlogDAOImpl;
 import Models.Ads;
 import Models.User;
 import java.io.IOException;
@@ -19,7 +20,7 @@ import java.util.List;
  *
  * @author MrTuan
  */
-public class AdminAdsListController extends HttpServlet {
+public class AdminAdsDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -38,10 +39,10 @@ public class AdminAdsListController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AdsListController</title>");
+            out.println("<title>Servlet AdminAdsDeleteController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AdsListController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminAdsDeleteController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -65,49 +66,33 @@ public class AdminAdsListController extends HttpServlet {
             response.sendRedirect(request.getContextPath() + "/home");
         } else {
             AdsDAOImpl adsDAOImpl = new AdsDAOImpl();
+            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
             String indexpasge = request.getParameter("page");
-            String search = request.getParameter("search");
-            String status = request.getParameter("status");
             if (indexpasge == null) {
                 indexpasge = "1";
                 int page = Integer.parseInt(indexpasge);
-                if (search != null) {
-                    List<Ads> listAds = adsDAOImpl.search(search);
-                    request.setAttribute("listAds", listAds);
-                            request.getRequestDispatcher(request.getContextPath() + "/admin/ads/ads.jsp").forward(request, response);
-                } else {
-                    List<Ads> listAds = adsDAOImpl.getAll(page);
-                }
                 int count = adsDAOImpl.getTotalBlog();
                 int endpage = count / 5;
                 if (count % 5 != 0) {
                     endpage++;
                 }
+                boolean status = adsDAOImpl.delete(id);
                 List<Ads> listAds = adsDAOImpl.getAll(page);
+                request.setAttribute("blogs", listAds);
                 request.setAttribute("endpage", endpage);
-                request.setAttribute("listAds", listAds);
-                request.setAttribute("status", status);
-                request.getRequestDispatcher(request.getContextPath() + "/admin/ads/ads.jsp").forward(request, response);
+                response.sendRedirect(request.getContextPath() + "/admin/ads?status=" + status);
             } else {
                 int page = Integer.parseInt(indexpasge);
-                if (search != null) {
-                    List<Ads> listAds = adsDAOImpl.search(search);
-                    request.setAttribute("search", search);
-                    request.setAttribute("listAds", listAds);
-                    request.getRequestDispatcher(request.getContextPath() + "/admin/ads/ads.jsp").forward(request, response);
-                } else {
-                    List<Ads> listAds = adsDAOImpl.getAll(page);
-                }
                 int count = adsDAOImpl.getTotalBlog();
                 int endpage = count / 5;
                 if (count % 5 != 0) {
                     endpage++;
                 }
+                boolean status = adsDAOImpl.delete(id);
                 List<Ads> listAds = adsDAOImpl.getAll(page);
-                request.setAttribute("endpage", endpage);
                 request.setAttribute("listAds", listAds);
-                request.setAttribute("status", status);
-                request.getRequestDispatcher(request.getContextPath() + "/admin/ads/ads.jsp").forward(request, response);
+                request.setAttribute("endpage", endpage);
+                response.sendRedirect(request.getContextPath() + "/admin/ads?status=" + status);
             }
         }
     }

@@ -5,11 +5,13 @@
 package DAO;
 
 import Models.Ads;
+import java.util.List;
 
 /**
  *
  * @author MrTuan
  */
 public interface AdsDAO extends BaseDAO<Ads>{
-    
+    public List<Ads> search(String name);
+    public List<Ads> getAll(int page);
 }
