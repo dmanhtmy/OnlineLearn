@@ -74,6 +74,29 @@ public class AdsDAOImpl implements AdsDAO {
     }
 
     @Override
+    public Ads get() {
+        DBContext dbContext = new DBContext();
+        Ads ads = new Ads();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "select * from onlinelearn.ads_list";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                ads.setId(rs.getInt("id"));
+                ads.setName_brand(rs.getString("name_brand"));
+                ads.setImage(rs.getString("image"));
+                ads.setHref(rs.getString("href"));
+                return ads;
+            }
+            dbContext.closeConnection(connection, stm, rs);
+        } catch (SQLException e) {
+            Logger.getLogger(Ads.class.getName()).log(Level.SEVERE, null, e);
+        }
+        return null;
+    }
+
+    @Override
     public List<Ads> getAll() {
         DBContext dbContext = new DBContext();
         List<Ads> listAds = new ArrayList<>();
@@ -118,11 +141,56 @@ public class AdsDAOImpl implements AdsDAO {
     }
 
     @Override
+    public boolean insertToAdsList(Ads t) {
+        DBContext dbContext = new DBContext();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "INSERT INTO onlinelearn.ads_list(id,name_brand,image,href)\n"
+                    + "VALUES (?,?,?,?);";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, t.getId());
+            stm.setString(2, t.getName_brand());
+            stm.setString(3, t.getImage());
+            stm.setString(4, t.getHref());
+            stm.executeUpdate();
+            dbContext.closeConnection(connection, stm);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Ads.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+
+    @Override
     public boolean update(Ads t) {
         DBContext dbContext = new DBContext();
         try {
             Connection connection = dbContext.getConnection();
             String sql = "UPDATE onlinelearn.ads\n"
+                    + "SET \n"
+                    + "name_brand = ?, \n"
+                    + "image = ?, \n"
+                    + "href = ?\n"
+                    + "WHERE id=?;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setString(1, t.getName_brand());
+            stm.setString(2, t.getImage());
+            stm.setString(3, t.getHref());
+            stm.setInt(4, t.getId());
+            stm.executeUpdate();
+            dbContext.closeConnection(connection, stm);
+            return true;
+        } catch (SQLException ex) {
+            Logger.getLogger(Ads.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return false;
+    }
+    @Override
+    public boolean updateToAdsList(Ads t) {
+        DBContext dbContext = new DBContext();
+        try {
+            Connection connection = dbContext.getConnection();
+            String sql = "UPDATE onlinelearn.ads_list\n"
                     + "SET \n"
                     + "name_brand = ?, \n"
                     + "image = ?, \n"

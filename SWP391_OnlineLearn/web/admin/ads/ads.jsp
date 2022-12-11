@@ -49,14 +49,14 @@
                             <td>
                                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal${ads.getId()}">Delete</button>
                                 <button type="button" class="btn btn-info" onclick="updateAds(${ads.getId()})" name="id" value="${ads.getId()}">Update</button>
-                                <button type="button" class="btn btn-warning" onclick="updateAds(${ads.getId()})" name="id" value="${ads.getId()}">Change Mode</button>
+                                <button type="button" class="btn btn-warning" data-bs-toggle="modal" data-bs-target="#changemode${ads.getId()}">Change Mode</button>
                             </td>
                         </tr>
                         <div class="modal fade" id="exampleModal${ads.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <h5 class="modal-title"  id="exampleModalLabel">Delete Blog</h5>
+                                        <h5 class="modal-title"  id="exampleModalLabel">Delete Ads</h5>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
@@ -64,6 +64,23 @@
                                     </div>
                                     <div class="modal-footer">
                                         <button  type="submit" class="btn btn-danger" onclick="deleteAds(${ads.getId()})" name="id" value="${ads.getId()}">Delete</button>
+                                        <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal fade" id="changemode${ads.getId()}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title"  id="exampleModalLabel">Change Mode</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        Do you want display '${ads.getName_brand()}' in Homepage?
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button  type="submit" class="btn btn-warning" onclick="changeMode(${ads.getId()})" name="id" value="${ads.getId()}">Change</button>
                                         <button type="submit" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                                     </div>
                                 </div>
@@ -189,6 +206,9 @@
     }
     function deleteAds(id) {
         window.location.href = "<%=request.getContextPath()%>/admin/ads/delete?id=" + id;
+    }
+    function changeMode(id) {
+        window.location.href = "<%=request.getContextPath()%>/admin/ads/changemode?id=" + id;
     }
     function closeAlertModal() {
         let modal = document.getElementById("alert");
