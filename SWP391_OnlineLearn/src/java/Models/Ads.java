@@ -12,14 +12,16 @@ public class Ads {
     private int id;
     private String image;
     private String href;
+    private boolean status;
 
     public Ads() {
     }
 
-    public Ads(int id, String image, String href) {
+    public Ads(int id, String image, String href, boolean status) {
         this.id = id;
         this.image = image;
         this.href = href;
+        this.status = status;
     }
 
     public int getId() {
@@ -45,5 +47,15 @@ public class Ads {
     public void setHref(String href) {
         this.href = href;
     }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    
     
 }
