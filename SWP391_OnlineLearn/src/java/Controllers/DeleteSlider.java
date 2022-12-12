@@ -9,19 +9,16 @@ import Models.Slider;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.File;
+import java.util.List;
 
 /**
  *
  * @author hp
  */
-@MultipartConfig
-public class AddSlider extends HttpServlet {
+public class DeleteSlider extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +37,10 @@ public class AddSlider extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddSlider</title>");
+            out.println("<title>Servlet DeleteSlider</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddSlider at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet DeleteSlider at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,7 +58,23 @@ public class AddSlider extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher(request.getContextPath() + "slider/addslider.jsp").forward(request, response);
+        SliderDAOImpl s = new SliderDAOImpl();
+        String cid_raw = request.getParameter("status1");
+        int cid;
+        List<Slider> list = s.getAll();
+        try {
+            if (cid_raw == null) {
+                cid = -1;
+            } else {
+                cid = Integer.parseInt(cid_raw);
+            }
+            
+            request.setAttribute("list", list);
+            request.setAttribute("cid1", cid);
+        } catch (NumberFormatException e) {
+            
+        }
+        request.getRequestDispatcher(request.getContextPath() + "slider/deleteslider.jsp").forward(request, response);
     }
 
     /**
@@ -75,32 +88,12 @@ public class AddSlider extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        response.setContentType("text/html");
+        String list[] = request.getParameterValues("check12");
+        
         SliderDAOImpl s = new SliderDAOImpl();
-        FileUploadHelper helper = new FileUploadHelper();
-        final String path = "C:\\Users\\hp\\Desktop";
-        Part filePart = request.getPart("image"); // Retrieves <input type="file" name="thumbnail">
-        String fileName = helper.getFileName(filePart); // getFilename from file part
-        String image = null;
-        helper.getFileContent(fileName, filePart, path);
-        File fileUpload = new File(path + "\\" + fileName);
-        if (!filePart.getSubmittedFileName().isEmpty()) {
-            image = helper.getUrlCloudinaryForEditSlide(fileUpload, fileName);
-        }
-        String backlink = request.getParameter("backlink");
-        String statusraw = request.getParameter("status1");
-        String note = request.getParameter("note");
-        String title = request.getParameter("title");
-        try {
-            int status = Integer.parseInt(statusraw);
-            // Get image
-            Slider sl1 = new Slider(-1, title, image, backlink, status, note);
-            s.insert(sl1);
-
-        } catch (NumberFormatException e) {
-
-        }
-//         s.updateSlider(1, title, image, backlink, 1, note);
-        response.sendRedirect("sliders");
+        s.delete(list);
+        response.sendRedirect(request.getContextPath() + "deleteslider");
     }
 
     /**

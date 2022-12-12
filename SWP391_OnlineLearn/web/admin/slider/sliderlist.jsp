@@ -30,6 +30,8 @@
                         <h1 style="padding: 10px;">Sliders  List</h1>
                         <div>
                             <a href="addslider" style="margin-left: 90px">Add Slider</a>
+                            <a href="deleteslider" style="margin-left: 90px">Delete Slider</a>
+
                         </div>
                     </div>
                 </header>
@@ -56,9 +58,9 @@
                             <th>Status</th>
                             <th> </th>
                         </tr>
-                        <c:forEach items="${requestScope.list}" var="s">
+                        <c:forEach items="${requestScope.list}" var="s" varStatus="a" begin="1">
                             <tr>
-                                <td onclick="doEdit(${s.id})">${s.id}</td>
+                                <td onclick="doEdit(${s.id})">${a.index}</td>
                                 <td onclick="doEdit(${s.id})">${s.title}</td>
                                 <td onclick="doEdit(${s.id})"><img src="${s.image}" width="200px"></td>
                                 <td onclick="doEdit(${s.id})"><a href="${s.backlink}">${s.backlink}</a></td>

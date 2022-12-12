@@ -7,12 +7,22 @@
             <file>file:/C:/Users/windc/OneDrive/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/layout/layout.jsp</file>
             <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/slider/sliderdetail.jsp</file>
             <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AddSlider.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/slider/sliderdetail.jsp</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/LessonViewController.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/subject/subjectList.jsp</file>
             <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Context/DBContext.java</file>
             <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/SliderDAOImpl.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Models/Slider.java</file>
             <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/slider/sliderlist.jsp</file>
             <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/slider/addslider.jsp</file>
             <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/SliderDetail.java</file>
+
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/user/userlist.jsp</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/client/lessonView.jsp</file>
+
             <file>file:/C:/Users/NC/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/client/home.jsp</file>
+
         </group>
     </open-files>
 </project-private>

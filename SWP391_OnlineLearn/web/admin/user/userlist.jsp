@@ -56,9 +56,9 @@
                                 <th>Role</th>
                                 <th>Status</th>
                             </tr>
-                            <c:forEach items="${requestScope.listUser}" var="i">
+                            <c:forEach items="${requestScope.listUser}" var="i" begin="1" varStatus="a">
                                 <tr>
-                                    <td onclick="doEdit(${i.id})">${i.id}</td>
+                                    <td onclick="doEdit(${i.id})">${a.index}</td>
                                     <td onclick="doEdit(${i.id})">${i.fullname}</td>
                                     <td onclick="doEdit(${i.id})"> 
                                         <c:if test="${i.gender == true}">
@@ -89,7 +89,7 @@
                 </div><!-- /.box -->
             </div>
         </div>
-       
+
     </section>
 </section>
 </main> 
