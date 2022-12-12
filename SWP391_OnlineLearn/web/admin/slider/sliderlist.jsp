@@ -29,7 +29,7 @@
                     <div class="panel-heading" style="display: flex ;align-items: center">
                         <h1 style="padding: 10px;">Sliders  List</h1>
                         <div>
-                            <a href="add-slider" style="margin-left: 90px">Add Slider</a>
+                            <a href="addslider" style="margin-left: 90px">Add Slider</a>
                         </div>
                     </div>
                 </header>

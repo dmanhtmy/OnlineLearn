@@ -11,6 +11,7 @@
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js"
                 integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz"
         crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
         <title>AdminHub</title>
     </head>
     <style>
@@ -657,6 +658,12 @@
                     <a href="<%= request.getContextPath()%>/admin/subjectlist">
                         <i class='bx bx-menu' ></i>
                         <span class="text">Subjects</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="<%= request.getContextPath()%>/admin/ads">
+                        <i class="fa-solid fa-rectangle-ad" style="width: 40px;padding-left: 12px;"></i>
+                        <span class="text">Advertisement</span>
                     </a>
                 </li>
             </ul>

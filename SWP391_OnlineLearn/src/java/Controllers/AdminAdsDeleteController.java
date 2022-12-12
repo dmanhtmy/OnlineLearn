@@ -4,24 +4,23 @@
  */
 package Controllers;
 
-import DAO.Impl.SliderDAOImpl;
-import Models.Slider;
+import DAO.Impl.AdsDAOImpl;
+import DAO.Impl.BlogDAOImpl;
+import Models.Ads;
+import Models.User;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
-import jakarta.servlet.http.Part;
-import java.io.File;
+import java.util.List;
 
 /**
  *
- * @author hp
+ * @author MrTuan
  */
-@MultipartConfig
-public class SliderDetail extends HttpServlet {
+public class AdminAdsDeleteController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +39,10 @@ public class SliderDetail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SliderDetail</title>");
+            out.println("<title>Servlet AdminAdsDeleteController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SliderDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminAdsDeleteController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,12 +60,41 @@ public class SliderDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idraw = request.getParameter("id");
-        int id = Integer.parseInt(idraw);
-        SliderDAOImpl sl = new SliderDAOImpl();
-        Slider s = sl.get(id);
-        request.setAttribute("sliderdetail", s);
-        request.getRequestDispatcher(request.getContextPath() + "slider/sliderdetail.jsp").forward(request, response);
+//        processRequest(request, response);
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/home");
+        } else {
+            AdsDAOImpl adsDAOImpl = new AdsDAOImpl();
+            int id = request.getParameter("id") != null ? Integer.parseInt(request.getParameter("id")) : 0;
+            String indexpasge = request.getParameter("page");
+            if (indexpasge == null) {
+                indexpasge = "1";
+                int page = Integer.parseInt(indexpasge);
+                int count = adsDAOImpl.getTotalBlog();
+                int endpage = count / 5;
+                if (count % 5 != 0) {
+                    endpage++;
+                }
+                boolean status = adsDAOImpl.delete(id);
+                List<Ads> listAds = adsDAOImpl.getAll(page);
+                request.setAttribute("blogs", listAds);
+                request.setAttribute("endpage", endpage);
+                response.sendRedirect(request.getContextPath() + "/admin/ads?status=" + status);
+            } else {
+                int page = Integer.parseInt(indexpasge);
+                int count = adsDAOImpl.getTotalBlog();
+                int endpage = count / 5;
+                if (count % 5 != 0) {
+                    endpage++;
+                }
+                boolean status = adsDAOImpl.delete(id);
+                List<Ads> listAds = adsDAOImpl.getAll(page);
+                request.setAttribute("listAds", listAds);
+                request.setAttribute("endpage", endpage);
+                response.sendRedirect(request.getContextPath() + "/admin/ads?status=" + status);
+            }
+        }
     }
 
     /**
@@ -80,34 +108,7 @@ public class SliderDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SliderDAOImpl s = new SliderDAOImpl();
-        FileUploadHelper helper = new FileUploadHelper();
-        final String path = "C:\\Users\\hp\\Desktop";
-        Part filePart = request.getPart("image"); // Retrieves <input type="file" name="thumbnail">
-        String fileName = helper.getFileName(filePart); // getFilename from file part
-        String image = null;
-        helper.getFileContent(fileName, filePart, path);
-        File fileUpload = new File(path + "\\" + fileName);
-        if (!filePart.getSubmittedFileName().isEmpty()) {
-            image = helper.getUrlCloudinaryForEditSlide(fileUpload, fileName);
-        }
-        String backlink = request.getParameter("backlink");
-        String statusraw = request.getParameter("status1");
-        String note = request.getParameter("note");
-        String title = request.getParameter("title");
-        String idraw = request.getParameter("id1");
-        try {
-            int id = Integer.parseInt(idraw);
-            int status = Integer.parseInt(statusraw);
-            // Get image
-            s.updateSlider(id, title, image, backlink, status, note);
-            
-        } catch (NumberFormatException e) {
-             s.updateSlider(1, title, image, backlink, 0, note);
-             
-        }
-//         s.updateSlider(1, title, image, backlink, 1, note);
-        response.sendRedirect("sliders");
+        processRequest(request, response);
     }
 
     /**
