@@ -119,6 +119,24 @@
     <servlet>
         <servlet-name>AddSlider</servlet-name>
         <servlet-class>Controllers.AddSlider</servlet-class>
+        <servlet-name>AdminAdsListController</servlet-name>
+        <servlet-class>Controllers.AdminAdsListController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAdsCreateController</servlet-name>
+        <servlet-class>Controllers.AdminAdsCreateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAdsDeleteController</servlet-name>
+        <servlet-class>Controllers.AdminAdsDeleteController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAdsUpdateController</servlet-name>
+        <servlet-class>Controllers.AdminAdsUpdateController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>AdminAdsChangeModeController</servlet-name>
+        <servlet-class>Controllers.AdminAdsChangeModeController</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -235,6 +253,24 @@
     <servlet-mapping>
         <servlet-name>AddSlider</servlet-name>
         <url-pattern>/admin/addslider</url-pattern>
+        <servlet-name>AdminAdsListController</servlet-name>
+        <url-pattern>/admin/ads</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAdsCreateController</servlet-name>
+        <url-pattern>/admin/ads/create</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAdsDeleteController</servlet-name>
+        <url-pattern>/admin/ads/delete</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAdsUpdateController</servlet-name>
+        <url-pattern>/admin/ads/update</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AdminAdsChangeModeController</servlet-name>
+        <url-pattern>/admin/ads/changemode</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
