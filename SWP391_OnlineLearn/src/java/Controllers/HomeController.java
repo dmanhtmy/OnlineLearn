@@ -4,6 +4,8 @@
  */
 package Controllers;
 
+import DAO.Impl.AdsDAOImpl;
+import Models.Ads;
 import Models.User;
 import java.io.IOException;
 import jakarta.servlet.ServletException;
@@ -45,6 +47,9 @@ public class HomeController extends HttpServlet {
             throws ServletException, IOException {
         loadHeaderAndAsideRight(request, response);
         User user = (User) request.getSession().getAttribute("user");
+        AdsDAOImpl adsDAOImpl=new AdsDAOImpl();
+        Ads ads=adsDAOImpl.get();
+        request.setAttribute("ads", ads);
         request.setAttribute("user", user);
         request.setAttribute("pageInclude", request.getContextPath()+"/client/home.jsp");
         request.getRequestDispatcher(request.getContextPath()+"/client/index.jsp").forward(request, response);
