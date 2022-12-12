@@ -659,6 +659,12 @@
                         <span class="text">Subjects</span>
                     </a>
                 </li>
+                <li>
+                    <a href="<%= request.getContextPath()%>/admin/subjectLesson">
+                        <i class='bx bx-menu' ></i>
+                        <span class="text">Lesson</span>
+                    </a>
+                </li>
             </ul>
             <ul class="side-menu">
                 <li>

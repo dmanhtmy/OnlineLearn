@@ -437,4 +437,36 @@ public class CourseDAOImpl implements CourseDAO {
 
         return list;
     }
+    
+    public List<Course> getAllCourse() {
+        List<Course> list = new ArrayList<>();
+        try {
+            String sql = "SELECT  c.cid, c.title, c.thumbnail , c.briefinfo, c.introduction, c.listprice, c.saleprice, c.status, c.featureflag, c.updatedate, u.fullname, c.status\n"
+                    + "FROM onlinelearn.course as c join onlinelearn.user as u ON c.author = u.id "
+                    + "AND c.status=1 ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Course c = new Course();
+                c.setCid(rs.getInt(1));
+                c.setTitle(rs.getString("title"));
+                c.setThumbnail(rs.getString("thumbnail"));
+                c.setBriefinfo(rs.getString("briefinfo"));
+                c.setFeatureflag(rs.getBoolean("featureflag"));
+                User u = new User();
+                u.setFullname(rs.getString("fullname"));
+                c.setAuthor(u);
+                c.setIntroduction(rs.getString("introduction"));
+                c.setListprice(rs.getDouble("listprice"));
+                c.setSaleprice(rs.getDouble("saleprice"));
+                c.setStatus(rs.getBoolean("status"));
+                list.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println("Error at getAllCourse: ");
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+    }
 }

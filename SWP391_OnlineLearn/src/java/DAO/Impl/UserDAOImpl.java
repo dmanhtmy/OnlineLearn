@@ -344,7 +344,6 @@ public class UserDAOImpl implements UserDAO {
 
     public ArrayList<User> getAllAuthor() {
         try {
-            Connection connection = dbContext.getConnection();
             ArrayList<User> users = new ArrayList<>();
             String sql = "SELECT * FROM onlinelearn.user AS u JOIN onlinelearn.role r on u.Role_Id = r.role_id WHERE u.Role_id = 6;";
             PreparedStatement stm = connection.prepareStatement(sql);

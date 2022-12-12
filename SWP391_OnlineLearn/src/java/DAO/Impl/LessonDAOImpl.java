@@ -71,7 +71,6 @@ public class LessonDAOImpl implements LessonDAO{
     }
     
     public List<Lesson> getLessonByTopicId(int tid) {
-
         List<Lesson> list = new ArrayList<>();
         try {
             String sql = "SELECT * FROM onlinelearn.lesson WHERE belongtotopic=?";
@@ -97,6 +96,23 @@ public class LessonDAOImpl implements LessonDAO{
         }
 
         return list;
+    }
+    
+    public int changeLessonStatus(int lesson_id, boolean lesson_status) {
+        try {
+            String sql = "UPDATE `onlinelearn`.`lesson`\n"
+                    + "SET\n"
+                    + "`status` = ? \n"
+                    + "WHERE `lesson_id` = ? ;";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setBoolean(1, lesson_status);
+            stm.setInt(2, lesson_id);
+            return stm.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Change lesson status err: ");
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
     
 }
