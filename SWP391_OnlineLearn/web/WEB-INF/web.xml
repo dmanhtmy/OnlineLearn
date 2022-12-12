@@ -116,6 +116,10 @@
         <servlet-name>AddUserController</servlet-name>
         <servlet-class>Controllers.AddUserController</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>AddSlider</servlet-name>
+        <servlet-class>Controllers.AddSlider</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
         <url-pattern>/login</url-pattern>
@@ -227,6 +231,10 @@
     <servlet-mapping>
         <servlet-name>LessonViewController</servlet-name>
         <url-pattern>/lessonview</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>AddSlider</servlet-name>
+        <url-pattern>/admin/addslider</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
