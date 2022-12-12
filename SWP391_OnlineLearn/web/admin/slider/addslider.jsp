@@ -14,7 +14,7 @@
 <aside class="right-side">
     <!-- Content Header (Page header) -->
     <!-- Main content -->
-    <section class="content">
+    <section class="content" style="padding: 20px;">
 
         <div class="row">
             <div class="col-md-12">
@@ -23,7 +23,7 @@
                         Add Slider
                     </h1>
                     <div class="panel-body">
-                        <form class="form-horizontal tasi-form" method="post" action="add-slider" enctype="multipart/form-data">
+                        <form class="form-horizontal tasi-form" method="post" action="addslider" enctype="multipart/form-data" >
 
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">Title</label>
@@ -46,9 +46,9 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">Status</label>
                                 <div class="col-sm-10">
-                                    <input type="radio" id="status" name="status" value="1" checked>
+                                    <input type="radio" id="status" name="status1" value="1" checked>
                                     <label for="html">Show</label><br>
-                                    <input type="radio" id="status" name="status" value="0" >
+                                    <input type="radio" id="status" name="status1" value="0" >
                                     <label for="css">Hide</label><br>
                                 </div>
                             </div>
@@ -60,7 +60,7 @@
                             </div>
                             <div style="margin-left: 40%; margin-top: 30px; padding-bottom: 30px">
                                 <button style="float: left" type="submit"  id="buu" class="btn btn-success btn-lg ">Add</button>
-                                <a href="slider"><div style="float: left; margin-left: 5px" id="buu" class="btn btn-danger btn-lg ">Cancel</div></a>
+                                <a href="sliders"><div style="float: left; margin-left: 5px" id="buu" class="btn btn-danger btn-lg ">Cancel</div></a>
                             </div>
                         </form>
                     </div>

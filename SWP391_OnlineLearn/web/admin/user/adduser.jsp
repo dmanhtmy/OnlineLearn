@@ -84,7 +84,7 @@
                         </div>
                         <div style="margin-left: 40%; margin-top: -30px; padding-bottom: 30px">
                             <button style="float: left" type="submit"  id="buu" class="btn btn-success btn-lg ">Add</button>
-                            <a href="user"><div style="float: left; margin-left: 5px" id="buu" class="btn btn-danger btn-lg ">Cancel</div></a>
+                            <a href="users"><div style="float: left; margin-left: 5px" id="buu" class="btn btn-danger btn-lg ">Cancel</div></a>
                         </div>
                     </form>
                 </div>
