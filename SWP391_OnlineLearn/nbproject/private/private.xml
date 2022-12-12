@@ -4,10 +4,13 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/lesson/subjectLesson.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/UserDAOImpl.java</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AddSettingsController.java</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/LessonDAOImpl.java</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/SubjectLessonController.java</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/CourseDAOImpl.java</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/layout/layout.jsp</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/ChangeLessonStatusController.java</file>
         </group>
     </open-files>

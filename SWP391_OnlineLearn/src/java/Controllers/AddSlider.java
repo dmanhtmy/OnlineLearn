@@ -21,7 +21,7 @@ import java.io.File;
  * @author hp
  */
 @MultipartConfig
-public class SliderDetail extends HttpServlet {
+public class AddSlider extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +40,10 @@ public class SliderDetail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SliderDetail</title>");
+            out.println("<title>Servlet AddSlider</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SliderDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddSlider at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,12 +61,7 @@ public class SliderDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idraw = request.getParameter("id");
-        int id = Integer.parseInt(idraw);
-        SliderDAOImpl sl = new SliderDAOImpl();
-        Slider s = sl.get(id);
-        request.setAttribute("sliderdetail", s);
-        request.getRequestDispatcher(request.getContextPath() + "slider/sliderdetail.jsp").forward(request, response);
+        request.getRequestDispatcher(request.getContextPath() + "slider/addslider.jsp").forward(request, response);
     }
 
     /**
@@ -95,16 +90,14 @@ public class SliderDetail extends HttpServlet {
         String statusraw = request.getParameter("status1");
         String note = request.getParameter("note");
         String title = request.getParameter("title");
-        String idraw = request.getParameter("id1");
         try {
-            int id = Integer.parseInt(idraw);
             int status = Integer.parseInt(statusraw);
             // Get image
-            s.updateSlider(id, title, image, backlink, status, note);
-            
+            Slider sl1 = new Slider(-1, title, image, backlink, status, note);
+            s.insert(sl1);
+
         } catch (NumberFormatException e) {
-             s.updateSlider(1, title, image, backlink, 0, note);
-             
+
         }
 //         s.updateSlider(1, title, image, backlink, 1, note);
         response.sendRedirect("sliders");

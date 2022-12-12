@@ -4,8 +4,11 @@
  */
 package Controllers;
 
-import DAO.Impl.SliderDAOImpl;
-import Models.Slider;
+import DAO.Impl.AdsDAOImpl;
+import Models.Ads;
+import Models.User;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -14,14 +17,16 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
-import java.io.File;
+import java.nio.file.Paths;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
- * @author hp
+ * @author MrTuan
  */
 @MultipartConfig
-public class SliderDetail extends HttpServlet {
+public class AdminAdsCreateController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -40,10 +45,10 @@ public class SliderDetail extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SliderDetail</title>");
+            out.println("<title>Servlet AdminAdsCreateController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet SliderDetail at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AdminAdsCreateController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -61,12 +66,16 @@ public class SliderDetail extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idraw = request.getParameter("id");
-        int id = Integer.parseInt(idraw);
-        SliderDAOImpl sl = new SliderDAOImpl();
-        Slider s = sl.get(id);
-        request.setAttribute("sliderdetail", s);
-        request.getRequestDispatcher(request.getContextPath() + "slider/sliderdetail.jsp").forward(request, response);
+//        processRequest(request, response);
+        User user = (User) request.getSession().getAttribute("user");
+        if (user == null) {
+            response.sendRedirect(request.getContextPath() + "/home");
+        } else {
+            AdsDAOImpl adsDAOImpl = new AdsDAOImpl();
+            List<Ads> listAds = adsDAOImpl.getAll();
+            request.setAttribute("listAds", listAds);
+            request.getRequestDispatcher(request.getContextPath() + "/admin/ads/adsCreate.jsp").forward(request, response);
+        }
     }
 
     /**
@@ -80,34 +89,29 @@ public class SliderDetail extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        SliderDAOImpl s = new SliderDAOImpl();
-        FileUploadHelper helper = new FileUploadHelper();
-        final String path = "C:\\Users\\hp\\Desktop";
-        Part filePart = request.getPart("image"); // Retrieves <input type="file" name="thumbnail">
-        String fileName = helper.getFileName(filePart); // getFilename from file part
-        String image = null;
-        helper.getFileContent(fileName, filePart, path);
-        File fileUpload = new File(path + "\\" + fileName);
-        if (!filePart.getSubmittedFileName().isEmpty()) {
-            image = helper.getUrlCloudinaryForEditSlide(fileUpload, fileName);
-        }
-        String backlink = request.getParameter("backlink");
-        String statusraw = request.getParameter("status1");
-        String note = request.getParameter("note");
-        String title = request.getParameter("title");
-        String idraw = request.getParameter("id1");
-        try {
-            int id = Integer.parseInt(idraw);
-            int status = Integer.parseInt(statusraw);
-            // Get image
-            s.updateSlider(id, title, image, backlink, status, note);
-            
-        } catch (NumberFormatException e) {
-             s.updateSlider(1, title, image, backlink, 0, note);
-             
-        }
-//         s.updateSlider(1, title, image, backlink, 1, note);
-        response.sendRedirect("sliders");
+//        processRequest(request, response);
+        AdsDAOImpl adsDAOImpl = new AdsDAOImpl();
+        Cloudinary cloudinary = new Cloudinary(ObjectUtils.asMap(
+                "cloud_name", "ddrjnfihc",
+                "api_key", "295827132792413",
+                "api_secret", "SyPzR-EcBnCG-BSQ5298s4MC9LE"));
+        cloudinary.config.secure = true;
+        String name_brand = request.getParameter("brand");
+        Part filePart = request.getPart("image");
+        String link = request.getParameter("link");
+        String fileName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+        filePart.write(request.getRealPath("image") + fileName);
+        Map path = ObjectUtils.asMap(
+                "public_id", "Admin/Ads/" + name_brand,
+                "overwrite", true,
+                "resource_type", "image"
+        );
+        Map uploadResult = cloudinary.uploader().upload(request.getRealPath("image") + fileName, path);
+        filePart.delete();
+        String geturl = uploadResult.get("secure_url").toString();
+        boolean status = adsDAOImpl.insert(new Ads(name_brand, geturl, link));
+        request.setAttribute("status", status);
+        response.sendRedirect(request.getContextPath() + "/admin/ads?status=" + status);
     }
 
     /**
