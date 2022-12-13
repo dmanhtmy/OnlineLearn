@@ -167,8 +167,7 @@
         <div class="container">
             <div class="blog-post">
                 <div class="blog-post_img">
-                    <img src="https://images.unsplash.com/photo-1562813733-b31f71025d54?ixid=MnwxMjA3fDB8MHxzZWFyY2h8Nnx8Y29kaW5nfGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                         alt="">
+                    <img src="${getdetail.getThumbnail()}"alt="">
                 </div>
                 <div class="blog-post_info">
                     <div class="blog-post_date">
