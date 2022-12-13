@@ -160,8 +160,7 @@
             <c:forEach items="${requestScope.getAll}" var="blog">
                 <div class="blog-post">
                     <div class="blog-post_img">
-                        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?ixid=MnwxMjA3fDB8MHxzZWFyY2h8MTU3fHx0ZWNobm9sb2d5fGVufDB8fDB8fA%3D%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60"
-                             alt="">
+                        <img src="${blog.getThumbnail()}"alt="">
                     </div>
                     <div class="blog-post_info">
                         <h1 class="blog-post_title">${blog.getTitle()}</h1>
