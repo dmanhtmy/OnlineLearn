@@ -378,7 +378,7 @@ public class UserDAOImpl implements UserDAO {
 
     public static void main(String[] args) {
         UserDAOImpl db = new UserDAOImpl();
-        List<User> u = db.getAll(1, "");
+        List<User> u = db.getAll(3, "");
         for (int i = 0; i < u.size(); i++) {
             System.out.println(u.get(i).getFullname());
         }

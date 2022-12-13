@@ -119,6 +119,8 @@
     <servlet>
         <servlet-name>AddSlider</servlet-name>
         <servlet-class>Controllers.AddSlider</servlet-class>
+    </servlet>
+    <servlet>
         <servlet-name>AdminAdsListController</servlet-name>
         <servlet-class>Controllers.AdminAdsListController</servlet-class>
     </servlet>
@@ -257,6 +259,8 @@
     <servlet-mapping>
         <servlet-name>AddSlider</servlet-name>
         <url-pattern>/admin/addslider</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
         <servlet-name>AdminAdsListController</servlet-name>
         <url-pattern>/admin/ads</url-pattern>
     </servlet-mapping>

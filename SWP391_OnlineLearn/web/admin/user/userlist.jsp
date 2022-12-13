@@ -38,7 +38,7 @@
                                 Status <select name="status" class="input-sm" onchange="change()" >
                                     <option value="-1" ${requestScope.cid eq -1?"selected=\"selected\"" : ""}>All</option>
                                     <option value="1" ${requestScope.cid eq 1?"selected=\"selected\"" : ""}>Active</option>
-                                    <option value="2" ${requestScope.cid eq 2?"selected=\"selected\"" : ""}>Deactive</option>
+                                    <option value="2" ${requestScope.cid eq 2?"selected=\"selected\"" : ""}>Inactive</option>
                                     <option value="3" ${requestScope.cid eq 3?"selected=\"selected\"" : ""}>Denied</option>
                                 </select>
 
@@ -56,9 +56,9 @@
                                 <th>Role</th>
                                 <th>Status</th>
                             </tr>
-                            <c:forEach items="${requestScope.listUser}" var="i" begin="1" varStatus="a">
+                            <c:forEach items="${requestScope.listUser}" var="i"  varStatus="a">
                                 <tr>
-                                    <td onclick="doEdit(${i.id})">${a.index}</td>
+                                    <td onclick="doEdit(${i.id})">${a.index + 1}</td>
                                     <td onclick="doEdit(${i.id})">${i.fullname}</td>
                                     <td onclick="doEdit(${i.id})"> 
                                         <c:if test="${i.gender == true}">
@@ -73,10 +73,10 @@
                                     <td onclick="doEdit(${i.id})">${i.role.role_name}</td>
                                     <td>
                                         <c:if test="${i.status eq '1'}">
-                                            Deactive
+                                            Active
                                         </c:if>
                                         <c:if test="${i.status eq '2'}">
-                                            Active
+                                            Inactive
                                         </c:if>
                                         <c:if test="${i.status eq '3'}">
                                             Denied
