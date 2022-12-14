@@ -11,20 +11,45 @@ import context.DBContext;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author HP
  */
-public class LessonDAOImpl implements LessonDAO{
+public class LessonDAOImpl implements LessonDAO {
+
     private DBContext dbContext = new DBContext();
     private Connection connection = dbContext.getConnection();
 
     @Override
     public Lesson get(int id) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        Lesson l = new Lesson();
+        try {
+            String sql = "SELECT * FROM onlinelearn.lesson WHERE lesson_id= ?";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, id);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                l.setLesson_id(rs.getInt("lesson_id"));
+                l.setTitle(rs.getString("title"));
+                l.setType(rs.getInt("type"));
+                l.setBelongToTopic(rs.getInt("belongtotopic"));
+                l.setOder(rs.getString("order"));
+                l.setStatus(rs.getBoolean("status"));
+                l.setContent(rs.getString("Content"));
+                l.setVideolink(rs.getString("videolink"));
+            }
+        } catch (Exception e) {
+            System.out.println("Error at getListTopicByCourseId");
+            System.out.println(e.getMessage());
+        }
+
+        return l;
     }
 
     @Override
@@ -46,7 +71,7 @@ public class LessonDAOImpl implements LessonDAO{
     public boolean delete(int id) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
-    
+
     public List<Topic> getListTopicByCourseId(int cid) {
         List<Topic> list = new ArrayList<>();
         try {
@@ -69,7 +94,7 @@ public class LessonDAOImpl implements LessonDAO{
 
         return list;
     }
-    
+
     public List<Lesson> getLessonByTopicId(int tid) {
         List<Lesson> list = new ArrayList<>();
         try {
@@ -97,7 +122,7 @@ public class LessonDAOImpl implements LessonDAO{
 
         return list;
     }
-    
+
     public int changeLessonStatus(int lesson_id, boolean lesson_status) {
         try {
             String sql = "UPDATE `onlinelearn`.`lesson`\n"
@@ -114,5 +139,40 @@ public class LessonDAOImpl implements LessonDAO{
         }
         return 0;
     }
-    
+
+    public void updateLesson(int id, String title, int type, int belongtotopic, String order,
+            boolean status, String videolink, String content) {
+        String query = "UPDATE `onlinelearn`.`lesson`\n"
+                + "SET\n"
+                + "`title` = ?,\n"
+                + "`type` = ?,\n"
+                + "`belongtotopic` = ?,\n"
+                + "`order` = ?,\n"
+                + "`status` = ?,\n"
+                + "`videolink` = ?,\n"
+                + "`content` = ?\n"
+                + "WHERE `lesson_id` = ?";
+        try {
+            PreparedStatement ps = connection.prepareStatement(query);
+            ps.setString(1, title);
+            ps.setInt(2, type);
+            ps.setInt(3, belongtotopic);
+            ps.setString(4, order);
+            ps.setBoolean(5, status);
+            ps.setString(6, videolink);
+            ps.setString(7, content);
+            ps.setInt(8, id);
+            ps.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(LessonDAO.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+        LessonDAOImpl l = new LessonDAOImpl();
+        l.updateLesson(1,"giai long",1,1,"1",true,"long","long");
+     
+    }
+
 }
