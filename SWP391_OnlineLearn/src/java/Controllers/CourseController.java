@@ -82,7 +82,7 @@ public class CourseController extends HttpServlet {
             request.setAttribute("title_value", title_value);
             request.getRequestDispatcher("/client/course/courseDetail.jsp").forward(request, response);
         } else {
-            final int PAGE_SIZE = 6;
+            final int PAGE_SIZE = 2;
             int page = 1;
             String name = "";
             int totalProducts;
@@ -107,7 +107,6 @@ public class CourseController extends HttpServlet {
             List<Course> list = dao.getAllCoursePagging(name, start, PAGE_SIZE);
             User user = (User) request.getSession().getAttribute("user");
 
-            System.out.println(list);
             //send data
             request.setAttribute("ListCourse", list);
             request.setAttribute("page", page);

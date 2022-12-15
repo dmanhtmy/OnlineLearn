@@ -9,27 +9,28 @@ import DAO.Impl.UserDAOImpl;
 import Models.Course;
 import Models.CourseCategory;
 import Models.User;
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
-import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  *
- * @author windc
+ * @author HP
  */
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 10, // 10 MB 
-        maxFileSize = 1024 * 1024 * 50, // 50 MB
-        maxRequestSize = 1024 * 1024 * 100)   	// 100 MB
-public class AddSubjectController extends HttpServlet {
+public class AddCourseController extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -48,10 +49,10 @@ public class AddSubjectController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet AddSubjectController</title>");
+            out.println("<title>Servlet AddCourseController</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet AddSubjectController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet AddCourseController at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -78,8 +79,7 @@ public class AddSubjectController extends HttpServlet {
         request.setAttribute("user", user);
         request.setAttribute("authors", authors);
         request.setAttribute("categorys", categorys);
-        request.getRequestDispatcher(request.getContextPath() + "/admin/subject/addsubject.jsp").forward(request, response);
-
+        request.getRequestDispatcher(request.getContextPath() + "/admin/course/addCourse.jsp").forward(request, response);
     }
 
     /**
@@ -114,7 +114,7 @@ public class AddSubjectController extends HttpServlet {
         Date updateDate = new Date(millis);
         //get thumbnail
         FileUploadHelper helper = new FileUploadHelper();
-        final String path = "C:\\Users\\HP\\Desktop\\OnlineLearn\\SWP391_OnlineLearn\\web\\course_img";
+        final String path = "C:\\Users\\windc\\OneDrive\\Documents\\GitHub\\OnlineLearn\\SWP391_OnlineLearn\\web\\course_img";
         Part filePart = request.getPart("thumbnail"); // Retrieves <input type="file" name="thumbnail">
         String fileName = helper.getFileName(filePart); // getFilename from file part
         helper.getFileContent(fileName, filePart, path);
@@ -145,15 +145,14 @@ public class AddSubjectController extends HttpServlet {
         int row = courseDAO.insertSubject(c, thumbnail, fileDocument);
 
         if (row == 0) {
-            message = "Add Unsuccessfull";
+            message = "Add Failed";
         } else {
             message = "Add Successfull";
         }
         User user = (User) request.getSession().getAttribute("user");
         request.setAttribute("user", user);
         request.getSession().setAttribute("message", message);
-        response.sendRedirect("addsubject");
-
+        response.sendRedirect("addCourse");
     }
 
     /**

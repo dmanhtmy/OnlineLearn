@@ -326,6 +326,47 @@ public class CourseDAOImpl implements CourseDAO {
         }
         return row;
     }
+    
+    public void insertCourse(Course c) {
+        try {
+            String sql = "INSERT INTO `onlinelearn`.`course`\n"
+                    + "(`title`,\n"
+                    + "`thumbnail`,\n"
+                    + "`briefinfo`,\n"
+                    + "`featureflag`,\n"
+                    + "`author`,\n"
+                    + "`introduction`,\n"
+                    + "`listprice`,\n"
+                    + "`saleprice`,\n"
+                    + "`status`,\n"
+                    + "category_id,"
+                    + "VALUES\n"
+                    + "(?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?,\n"
+                    + "?);";
+            PreparedStatement stm = connection.prepareCall(sql);
+            stm.setString(1, c.getTitle());
+            stm.setString(2, c.getThumbnail());
+            stm.setString(3, c.getBriefinfo());
+            stm.setBoolean(4, c.isFeatureflag());
+            stm.setInt(5, c.getAuthor().getId());
+            stm.setString(6, c.getIntroduction());
+            stm.setDouble(7, c.getListprice());
+            stm.setDouble(8, c.getSaleprice());
+            stm.setBoolean(9, c.isStatus());
+            stm.setInt(10, c.getCategory().getId());
+            stm.executeUpdate();
+        } catch (SQLException ex) {
+            Logger.getLogger(CourseDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     public Course getCourse(int course_id) {
         String sql_Course = "SELECT * FROM onlinelearn.course WHERE cid = ?";
@@ -437,7 +478,7 @@ public class CourseDAOImpl implements CourseDAO {
 
         return list;
     }
-    
+
     public List<Course> getAllCourse() {
         List<Course> list = new ArrayList<>();
         try {
@@ -445,6 +486,38 @@ public class CourseDAOImpl implements CourseDAO {
                     + "FROM onlinelearn.course as c join onlinelearn.user as u ON c.author = u.id "
                     + "AND c.status=1 ";
             PreparedStatement stm = connection.prepareStatement(sql);
+            ResultSet rs = stm.executeQuery();
+            while (rs.next()) {
+                Course c = new Course();
+                c.setCid(rs.getInt(1));
+                c.setTitle(rs.getString("title"));
+                c.setThumbnail(rs.getString("thumbnail"));
+                c.setBriefinfo(rs.getString("briefinfo"));
+                c.setFeatureflag(rs.getBoolean("featureflag"));
+                User u = new User();
+                u.setFullname(rs.getString("fullname"));
+                c.setAuthor(u);
+                c.setIntroduction(rs.getString("introduction"));
+                c.setListprice(rs.getDouble("listprice"));
+                c.setSaleprice(rs.getDouble("saleprice"));
+                c.setStatus(rs.getBoolean("status"));
+                list.add(c);
+            }
+        } catch (Exception e) {
+            System.out.println("Error at getAllCourse: ");
+            System.out.println(e.getMessage());
+        }
+
+        return list;
+    }
+
+    public List<Course> getAllCourseByPage(int page) {
+        List<Course> list = new ArrayList<>();
+        try {
+            String sql = "SELECT  c.cid, c.title, c.thumbnail , c.briefinfo, c.introduction, c.listprice, c.saleprice, c.status, c.featureflag, c.updatedate, u.fullname, c.status\n"
+                    + "FROM onlinelearn.course as c join onlinelearn.user as u ON c.author = u.id ";
+            PreparedStatement stm = connection.prepareStatement(sql);
+            stm.setInt(1, (page - 1) * 5);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
                 Course c = new Course();

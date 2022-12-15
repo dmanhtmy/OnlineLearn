@@ -637,7 +637,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="<%= request.getContextPath()%>/admin/courses">
+                    <a href="<%= request.getContextPath()%>/admin/course">
                         <i class='bx bxs-book' ></i>
                         <span class="text">Courses</span>
                     </a>

@@ -9,7 +9,7 @@
             <section class="panel">
                 <header class="panel-heading">
                     <c:if test="${user != null}">
-                        <a href="subjectlist">
+                        <a href="courseList">
                             <span>Course List</span>
                         </a>
                     </c:if>

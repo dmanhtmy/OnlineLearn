@@ -43,7 +43,19 @@ public class Course {
         this.updatedate = updatedate;
     }
 
-    
+    public Course(int cid, String title, String thumbnail, String briefinfo, User author, String introduction, double listprice, double saleprice, boolean status, boolean featureflag, int category_id) {
+        this.cid = cid;
+        this.title = title;
+        this.thumbnail = thumbnail;
+        this.briefinfo = briefinfo;
+        this.author = author;
+        this.introduction = introduction;
+        this.listprice = listprice;
+        this.saleprice = saleprice;
+        this.status = status;
+        this.featureflag = featureflag;
+        this.category = category;
+    }
 
     public int getCid() {
         return cid;
