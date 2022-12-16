@@ -82,7 +82,7 @@ public class BlogDAOImpl implements BlogDAO {
         List<BlogList> listBlog = new ArrayList<>();
         try {
             Connection connection = dbContext.getConnection();
-            String sql = "SELECT b.id, b.title,b.brief_info,b.postdate FROM onlinelearn.blog_list as b;";
+            String sql = "SELECT b.id, b.title,b.brief_info,b.thumbnail,b.postdate,b.post_content FROM onlinelearn.blog_list as b;";
             PreparedStatement stm = connection.prepareStatement(sql);
             ResultSet rs = stm.executeQuery();
             while (rs.next()) {
@@ -90,7 +90,9 @@ public class BlogDAOImpl implements BlogDAO {
                 blog.setId(rs.getInt("id"));
                 blog.setTitle(rs.getString("title"));
                 blog.setBrief_info(rs.getString("brief_info"));
+                blog.setThumbnail(rs.getString("thumbnail"));
                 blog.setPostdate(rs.getString("postdate"));
+                blog.setBlogdetail(rs.getString("post_content"));
                 listBlog.add(blog);
             }
             dbContext.closeConnection(connection, stm, rs);

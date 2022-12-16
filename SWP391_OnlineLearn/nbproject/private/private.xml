@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/home.jsp</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/LessonViewController.java</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/lessonView.jsp</file>
@@ -17,6 +18,14 @@
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Models/Lesson.java</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/course/userCourseList.jsp</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/subject/editSubject.jsp</file>
+=======
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/EditLesson.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/LessonDAOImpl.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/lesson/subjectLesson.jsp</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/user/userdetail.jsp</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/SubjectLessonController.java</file>
+            <file>file:/C:/Users/hp/Documents/GitHub/OnlineLearn/SWP391_OnlineLearn/web/admin/lesson/lessondetail.jsp</file>
+>>>>>>> 7fe474c9403587d1e59ba5416b28509c12d5f48b
         </group>
     </open-files>
 </project-private>

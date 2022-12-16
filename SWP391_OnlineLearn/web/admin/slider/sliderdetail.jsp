@@ -24,7 +24,7 @@
                             <div class="form-group">
                                 <label class="col-sm-2 col-sm-2 control-label">ID</label>
                                 <div class="col-sm-10">
-                                    <input disabled value="${requestScope.sliderdetail.id}" name ="id1" type="text" class="form-control">
+                                    <input readonly="" value="${requestScope.sliderdetail.id}" name ="id" type="text" class="form-control">
                                 </div>
                             </div>
                             <div class="form-group">
@@ -57,7 +57,7 @@
                                     <input type="radio" id="status" name="status1" value="1"
                                            ${requestScope.sliderdetail.status == 1 ? "checked=\"checked\"" : ""}>
                                     <label for="html">Show</label><br>
-                                    <input type="radio" id="status" name="statusslider" value="0"
+                                    <input type="radio" id="status" name="status1" value="0"
                                            ${requestScope.sliderdetail.status == 0 ? "checked=\"checked\"" : ""}>
                                     <label for="css">Hide</label><br>
                                 </div>

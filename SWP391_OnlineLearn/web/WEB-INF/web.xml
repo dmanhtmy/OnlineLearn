@@ -153,6 +153,7 @@
         <servlet-class>Controllers.DeleteSlider</servlet-class>
     </servlet>
     <servlet>
+<<<<<<< HEAD
         <servlet-name>AdminCourseListController</servlet-name>
         <servlet-class>Controllers.AdminCourseListController</servlet-class>
     </servlet>
@@ -163,6 +164,10 @@
     <servlet>
         <servlet-name>ChangeStatusSubjectController</servlet-name>
         <servlet-class>Controllers.ChangeStatusSubjectController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>EditLesson</servlet-name>
+        <servlet-class>Controllers.EditLesson</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>LoginController</servlet-name>
@@ -323,6 +328,10 @@
     <servlet-mapping>
         <servlet-name>ChangeStatusSubjectController</servlet-name>
         <url-pattern>/admin/changecoursesubjectstatus</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>EditLesson</servlet-name>
+        <url-pattern>/admin/editlesson</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

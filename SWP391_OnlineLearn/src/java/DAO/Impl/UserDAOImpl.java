@@ -248,13 +248,14 @@ public class UserDAOImpl implements UserDAO {
         return 0;
     }
 
-    public int updateProfileUser(int id, String username, String fullname, Boolean gender, String address, String phone) {
+    public int updateProfileUser(int id, String username, String fullname, Boolean gender,  String address,String email, String phone) {
         String sql = "UPDATE `onlinelearn`.`user`\n"
                 + "SET\n"
                 + "`username` = ?,\n"
                 + "`fullname` = ?,\n"
                 + "`gender` = ?,\n"
                 + "`address` = ?,\n"
+                + "`email` = ?,\n"
                 + "`phonenumber` = ?\n"
                 + "WHERE `id` = ?;";
         try {
@@ -264,8 +265,9 @@ public class UserDAOImpl implements UserDAO {
             ps.setString(2, fullname);
             ps.setBoolean(3, gender);
             ps.setString(4, address);
-            ps.setString(5, phone);
-            ps.setInt(6, id);
+            ps.setString(5, email);
+            ps.setString(6, phone);
+            ps.setInt(7, id);
             return ps.executeUpdate();
 
         } catch (SQLException ex) {

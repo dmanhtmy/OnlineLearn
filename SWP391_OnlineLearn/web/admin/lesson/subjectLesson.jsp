@@ -98,6 +98,6 @@
         }
     }
     function doEdit(id) {
-        window.location.href = "edit-lesson?id=" + id;
+        window.location.href = "editlesson?id=" + id;
     }
 </script>

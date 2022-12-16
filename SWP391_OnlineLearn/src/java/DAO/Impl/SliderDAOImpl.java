@@ -169,7 +169,7 @@ public class SliderDAOImpl implements SliderDAO {
         for (int i = 0; i < list.size(); i++) {
             System.out.println(list.get(i).getTitle());
         }
-        s.updateSlider(1, "a", "a", "a", 0, "a");
+        s.updateSlider(1, "Long", "a", "a", 0, "a");
         Slider t = new Slider(-1, "a1", "a1", "a1", 0, "a");
         s.insert(t);
         String[] list1 = {"20", "21"};

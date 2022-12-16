@@ -4,20 +4,23 @@
  */
 package Controllers;
 
-import DAO.Impl.UserDAOImpl;
-import Models.User;
+import DAO.Impl.CourseDAOImpl;
+import DAO.Impl.LessonDAOImpl;
+import Models.Course;
+import Models.Lesson;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.List;
 
 /**
  *
  * @author hp
  */
-public class UserDetailController extends HttpServlet {
+public class EditLesson extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -36,10 +39,10 @@ public class UserDetailController extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet UserDetailController</title>");
+            out.println("<title>Servlet EditLesson</title>");
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet UserDetailController at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet EditLesson at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -57,12 +60,22 @@ public class UserDetailController extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String idRaw = request.getParameter("id");
-        int id = Integer.parseInt(idRaw);
-        UserDAOImpl u = new UserDAOImpl();
-        User user = u.get(id);
-        request.setAttribute("user", user);
-        request.getRequestDispatcher(request.getContextPath() + "/admin/user/userdetail.jsp").forward(request, response);
+        LessonDAOImpl l = new LessonDAOImpl();
+        String idraw = request.getParameter("id");
+        CourseDAOImpl c = new CourseDAOImpl();
+        List<Course> CourseList = c.getAllCourse();
+        String title_value = "Subject Lesson";
+        request.setAttribute("title_value", title_value);
+        request.setAttribute("ListCourse1", CourseList);
+        try {
+            int id = Integer.parseInt(idraw);
+            Lesson lesson = l.get(id);
+            request.setAttribute("lesson", lesson);
+        } catch (Exception e) {
+            
+        }
+        
+        request.getRequestDispatcher(request.getContextPath() + "lesson/lessondetail.jsp").forward(request, response);
     }
 
     /**
@@ -76,18 +89,28 @@ public class UserDetailController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        UserDAOImpl u = new UserDAOImpl();
-        String idraw = (String) request.getParameter("id");
-        int id = Integer.parseInt(idraw);
-        String username = (String) request.getParameter("username");
-        String fullname = (String) request.getParameter("fullname");
-        String genderraw = request.getParameter("gender");
-        boolean gender = Boolean.valueOf(genderraw);
-        String address = (String) request.getParameter("address");
-        String phone = (String) request.getParameter("phone");
-        String email = request.getParameter("email");
-        u.updateProfileUser(id, username, fullname, gender, address, email, phone);
-        response.sendRedirect("/admin/users");
+        response.setContentType("text/html;charset=UTF-8");
+        PrintWriter out = response.getWriter();
+        
+        String lesson_idraw = request.getParameter("lesson_id");
+        String title = request.getParameter("title");
+        String typeraw = request.getParameter("type");
+        String belongtotopicraw = request.getParameter("belongtotopic");
+        String order = request.getParameter("order");
+        String statusraw = request.getParameter("status");
+        String videolink = request.getParameter("videolink");
+        String content = request.getParameter("content");
+        LessonDAOImpl ld = new LessonDAOImpl();
+        try {
+            int lesson_id = Integer.parseInt(lesson_idraw);
+            int type = Integer.parseInt(typeraw);
+            int belongtotopic = Integer.parseInt(belongtotopicraw);
+            boolean status = statusraw.equals("active");
+            ld.updateLesson(lesson_id, title, type, belongtotopic, order, status, videolink, content);
+        } catch (NumberFormatException e) {
+            
+        }
+        response.sendRedirect("subjectLesson");
     }
 
     /**
