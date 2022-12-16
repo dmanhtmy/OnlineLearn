@@ -3,18 +3,20 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/lesson/subjectLesson.jsp</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/EditSubjectController.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/CourseController.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AdminCourseListController.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/course/courseList.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/home.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/LessonViewController.java</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/lessonView.jsp</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AddCourseController.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/course/addCourse.jsp</file>
             <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/CourseDAOImpl.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/ChangeLessonStatusController.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/AddSubjectController.java</file>
-            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/subject/addsubject.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/UserDAOImpl.java</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Controllers/UserMylearningController.java</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/index.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/DAO/Impl/LessonDAOImpl.java</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/subject/subjectList.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/course/course.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/src/java/Models/Lesson.java</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/client/course/userCourseList.jsp</file>
+            <file>file:/C:/Users/HP/Desktop/OnlineLearn/SWP391_OnlineLearn/web/admin/subject/editSubject.jsp</file>
         </group>
     </open-files>
 </project-private>
