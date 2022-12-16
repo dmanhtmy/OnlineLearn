@@ -81,6 +81,8 @@ public class SliderDetail extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         SliderDAOImpl s = new SliderDAOImpl();
+         response.setContentType("text/html;charset=UTF-8");
+         PrintWriter out = response.getWriter();
         FileUploadHelper helper = new FileUploadHelper();
         final String path = "C:\\Users\\hp\\Desktop";
         Part filePart = request.getPart("image"); // Retrieves <input type="file" name="thumbnail">
@@ -95,15 +97,14 @@ public class SliderDetail extends HttpServlet {
         String statusraw = request.getParameter("status1");
         String note = request.getParameter("note");
         String title = request.getParameter("title");
-        String idraw = request.getParameter("id1");
+        String idraw = request.getParameter("id");
         try {
             int id = Integer.parseInt(idraw);
             int status = Integer.parseInt(statusraw);
-            // Get image
             s.updateSlider(id, title, image, backlink, status, note);
             
         } catch (NumberFormatException e) {
-             s.updateSlider(1, title, image, backlink, 0, note);
+            
              
         }
 //         s.updateSlider(1, title, image, backlink, 1, note);
