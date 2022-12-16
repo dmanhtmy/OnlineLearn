@@ -30,7 +30,7 @@ public class UserDAOImpl implements UserDAO {
     public DBContext dbContext = new DBContext();
     public Connection connection = dbContext.getConnection();
 
-    public int getTotalMyCourse(int id, String courseName) {
+    public int getTotalMyCourse(int id) {
         try {
             String sql = "SELECT COUNT(*) AS Total FROM onlinelearn.user AS u \n"
                     + "JOIN onlinelearn.user_registrations_course AS urc ON u.id = urc.user_id\n"
@@ -38,9 +38,9 @@ public class UserDAOImpl implements UserDAO {
                     + "LEFT JOIN onlinelearn.registrations_status AS rs ON r.status_id = rs.registration_status_id\n"
                     + "LEFT JOIN onlinelearn.course AS c ON r.course_id = c.cid \n"
                     + "WHERE (1=1) AND rs.registration_status_id = 1";
-            if (courseName != null) {
-                sql += "AND c.title LIKE '%" + courseName + "%'";
-            }
+//            if (courseName != null) {
+//                sql += "AND c.title LIKE '%" + courseName + "%'";
+//            }
             sql += " AND u.id = '" + id + "'";
             PreparedStatement stm = connection.prepareCall(sql);
             ResultSet rs = stm.executeQuery();

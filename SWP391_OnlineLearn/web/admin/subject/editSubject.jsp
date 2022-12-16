@@ -8,7 +8,7 @@
             <section class="panel">
                 <header class="panel-heading">
                     <a href="subjectlist">
-                        <span>Subject List</span>
+                        <span>Course List</span>
                     </a>
                 </header>
                 <div class="panel-body">

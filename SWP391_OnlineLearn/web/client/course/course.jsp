@@ -107,7 +107,7 @@
                                                     </c:choose>
                                                     <c:forEach items="${requestScope.ListStatusCourseRegisted}" var="cr">
                                                         <c:if test="${cr.getC().getCid() == c.cid && cr.getStatus() ==3}">
-                                                            <input disabled="" type="button" class="btn btn-primary" value="registrated">
+                                                            <input disabled="" type="button" class="btn btn-primary" value="Registrated">
                                                             <script>
                                                                 document.getElementById("joinbtn${c.cid}").style.display = "none";
                                                                 //console.log(btn);

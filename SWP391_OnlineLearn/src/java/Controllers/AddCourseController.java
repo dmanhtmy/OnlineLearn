@@ -9,8 +9,6 @@ import DAO.Impl.UserDAOImpl;
 import Models.Course;
 import Models.CourseCategory;
 import Models.User;
-import com.cloudinary.Cloudinary;
-import com.cloudinary.utils.ObjectUtils;
 import java.io.IOException;
 import java.io.PrintWriter;
 import jakarta.servlet.ServletException;
@@ -20,11 +18,8 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.Part;
 import java.io.File;
 import java.io.InputStream;
-import java.nio.file.Paths;
 import java.sql.Date;
 import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
 /**
  *
@@ -114,7 +109,7 @@ public class AddCourseController extends HttpServlet {
         Date updateDate = new Date(millis);
         //get thumbnail
         FileUploadHelper helper = new FileUploadHelper();
-        final String path = "C:\\Users\\windc\\OneDrive\\Documents\\GitHub\\OnlineLearn\\SWP391_OnlineLearn\\web\\course_img";
+        final String path = "C:\\Users\\HP\\Desktop\\OnlineLearn\\SWP391_OnlineLearn\\web\\course_img";
         Part filePart = request.getPart("thumbnail"); // Retrieves <input type="file" name="thumbnail">
         String fileName = helper.getFileName(filePart); // getFilename from file part
         helper.getFileContent(fileName, filePart, path);

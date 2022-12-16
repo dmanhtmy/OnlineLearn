@@ -37,7 +37,7 @@ public class ChangeLessonStatusController extends HttpServlet {
             boolean status = Boolean.parseBoolean(request.getParameter("status"));
             int check = lDao.changeLessonStatus(lid, status);
             System.out.println(check == 1 ? "Change lesson status successful" : "Change lesson status failed");
-//            response.sendRedirect("subjectLesson?cid="+cid);
+            response.sendRedirect("subjectLesson?cid="+cid);
         }
     }
 

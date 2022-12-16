@@ -94,7 +94,7 @@
     function doChangeStatusLesson(lesson_id, lesson_status, cid) {
         var c = confirm("Change Lesson Status ?");
         if (c) {
-            window.location.href = "subjectLesson?cid=" + cid;
+            window.location.href = "changeLessonStatus?lid=" + lesson_id + "&status=" + lesson_status + "&cid=" + cid;
         }
     }
     function doEdit(id) {

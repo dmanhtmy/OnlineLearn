@@ -120,7 +120,7 @@ public class EditSubjectController extends HttpServlet {
         //get thumbnail
        //get thumbnail
         FileUploadHelper helper = new FileUploadHelper();
-        final String path = "C:\\Users\\windc\\OneDrive\\Documents\\GitHub\\OnlineLearn\\SWP391_OnlineLearn\\web\\course_img";
+        final String path = "C:\\Users\\HP\\Desktop\\OnlineLearn\\SWP391_OnlineLearn\\web\\course_img";
         Part filePart = request.getPart("thumbnail"); // Retrieves <input type="file" name="thumbnail">
         String fileName = helper.getFileName(filePart); // getFilename from file part
         String thumbnail = null;

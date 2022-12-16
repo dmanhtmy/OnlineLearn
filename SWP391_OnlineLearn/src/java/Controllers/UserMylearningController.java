@@ -7,9 +7,6 @@ package Controllers;
 import DAO.Impl.UserDAOImpl;
 import Models.Registration;
 import Models.User;
-import jakarta.servlet.ServletException;
-import jakarta.servlet.http.HttpServletRequest;
-import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
 import jakarta.servlet.ServletException;
@@ -39,28 +36,27 @@ public class UserMylearningController extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         User user = (User) request.getSession().getAttribute("user");
         UserDAOImpl userCourseDAO = new UserDAOImpl();
-        String courseName = request.getParameter("coursename");
+//        String courseName = request.getParameter("coursename");
         String indexPage = request.getParameter("index");
         if (indexPage == null) {
             indexPage = "0";
         }
         int index = Integer.parseInt(indexPage);
-        //get course register by user
-        int count = userCourseDAO.getTotalMyCourse(user.getId(), courseName);
+//        get course register by user
+        int count = userCourseDAO.getTotalMyCourse(user.getId());
+        System.out.println(count);
         int endPage = count / 5;
         if (count % 5 != 0) {
             endPage++;
         }
         request.setAttribute("current_index", index);
         request.setAttribute("endPage", endPage);
-        ArrayList<Registration> list = userCourseDAO.getMyCourseBySearch(index, user.getId(), courseName);
+        ArrayList<Registration> list = userCourseDAO.getMyCourseBySearch(index, user.getId(), "");
         request.setAttribute("list", list);
-
+        System.out.println("list:" + list);
         request.setAttribute("user", user);
-        request.setAttribute("coursename", courseName);
-        String title_value = "ECOURSES - MY COURSES";
-        request.setAttribute("title_value", title_value);
-         request.getRequestDispatcher(request.getContextPath() + "/client/course/userCourseList.jsp").forward(request, response);
+//        request.setAttribute("coursename", courseName);
+        request.getRequestDispatcher(request.getContextPath() + "/client/course/userCourseList.jsp").forward(request, response);
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

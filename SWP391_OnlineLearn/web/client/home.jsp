@@ -69,7 +69,7 @@
     </head>
     <body>
         <!--Ads Start-->
-        <div id="overlay-ad" onclick="hideOverlay();">
+<!--        <div id="overlay-ad" onclick="hideOverlay();">
             <div class="wrap">
                 <div class="image">
                     <span style="font-family: Arial; font-size:12px;display:block;text-align:left;color:#ccc">Advertisement</span>
@@ -81,7 +81,7 @@
                     <i class="icon-close" onclick="hideOverlay();"><span>X</span></i>
                 </div>
             </div>
-        </div>
+        </div>-->
         <!--Ads End-->
         <!-- Carousel Start -->
         <div class="container-fluid p-0 pb-5 mb-5">

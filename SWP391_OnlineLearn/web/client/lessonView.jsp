@@ -53,7 +53,7 @@
                         <script>
                             var param_<%=lesson.getLesson_id()%> = "Lesson-<%=lesson.getLesson_id()%>"
                         </script>    
-                        <li><a href="#" onclick="loadcontent(param_<%=lesson.getLesson_id()%>)" ><%=lesson.getTitle()%></a></li>
+                        <li><a href="<%=lesson.getLesson_id()%>"><%=lesson.getTitle()%></a></li>
                             <%}%>
                             <%
                                 if(topic.getQuiz_id() != 0){

@@ -3,9 +3,9 @@
 <!-- Header Start -->
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <!--<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">-->
         <title>My learn</title>
-        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+        <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>-->
     </head>
      <%@include file="../components/header.jsp" %>
     <body>
@@ -23,7 +23,7 @@
             <div class="container">
                 <div class="nav-container">
                     <ul role="navigation" class="nav-slide nav nav-tabs">
-                        <li role="presentation" class="" style="margin-right: 20px"><a href="mylearning" style="color: white;">My Courses</a></li>
+                        <li role="presentation" class="" style="margin-right: 20px"><a href="#" style="color: white;">My Courses</a></li>
                         <li role="presentation" class="" style="margin-right: 20px"><a href="wishlist" style="color: white;">Wishlist</a></li>
                     </ul>
                 </div>
