@@ -58,9 +58,9 @@
                             <th>Status</th>
                             <th> </th>
                         </tr>
-                        <c:forEach items="${requestScope.list}" var="s" varStatus="a" begin="1">
+                        <c:forEach items="${requestScope.list}" var="s" varStatus="a" begin="0">
                             <tr>
-                                <td onclick="doEdit(${s.id})">${a.index}</td>
+                                <td onclick="doEdit(${s.id})">${a.index+1}</td>
                                 <td onclick="doEdit(${s.id})">${s.title}</td>
                                 <td onclick="doEdit(${s.id})"><img src="${s.image}" width="200px"></td>
                                 <td onclick="doEdit(${s.id})"><a href="${s.backlink}">${s.backlink}</a></td>
