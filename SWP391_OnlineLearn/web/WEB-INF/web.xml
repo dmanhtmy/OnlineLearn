@@ -153,7 +153,6 @@
         <servlet-class>Controllers.DeleteSlider</servlet-class>
     </servlet>
     <servlet>
-<<<<<<< HEAD
         <servlet-name>AdminCourseListController</servlet-name>
         <servlet-class>Controllers.AdminCourseListController</servlet-class>
     </servlet>
